@@ -1,27 +1,61 @@
 # CovidMoodBoard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.1.
-
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+FE: localhost:4200
 
-## Code scaffolding
+FE build
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# production
 
-## Build
+on frontend/
+`npm run build`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+on root
+`gcloud app deploy`
 
-## Running unit tests
+## stack
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+angular
+flask
+postgres server on digital ocean
+webserver on digital ocean
 
-## Running end-to-end tests
+- covid-mood.world
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+d3
 
-## Further help
+<!-- http://bl.ocks.org/tlfrd/df1f1f705c7940a6a7c0dca47041fec8 -->
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+deploy
+
+<!-- https://www.digitalocean.com/community/questions/how-to-use-the-postgresql-droplet-with-nodejs -->
+
+https://www.digitalocean.com/docs/databases/postgresql/how-to/import-databases/
+
+TIL:
+gunicorn
+diff between 0.0.0.0 host?
+ports?
+wsgi
+
+WorkingDirectory=/home/sung/covid-mood-board
+Environment="PATH=/home/sung/covid-mood-board/venv/bin"
+ExecStart=/home/sung/covid-mood-board/venv/bin/gunicorn --workers 3 --bind unix:covid-mood-board.sock -m 007 wsgi:app
+
+sudo vim /etc/nginx/sites-available/covid-mood-board
+
+sudo certbot --nginx -d covid-mood.world -d www.covid-mood.world
+sudo vim /etc/nginx/sites-available/covid-mood.world
+
+sudo mkdir -p /var/www/covid-mood.world/html
+
+sudo chown -R $USER:$USER /var/www/covid-mood.world/html
+sudo chmod -R 755 /var/www/covid-mood.world
+
+vi /var/www/covid-mood.world/html/index.html
+sudo vi /etc/nginx/sites-available/covid-mood.world
+
+        server_name covid-mood.world www.covid-mood.world;
+
+sudo certbot --nginx -d covid-mood.world -d www.covid-mood.world
