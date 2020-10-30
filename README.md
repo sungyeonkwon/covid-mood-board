@@ -60,4 +60,11 @@ sudo vi /etc/nginx/sites-available/covid-mood.world
 
 sudo certbot --nginx -d covid-mood.world -d www.covid-mood.world
 
+sudo systemctl restart nginx
 sudo systemctl restart covid-mood-board
+
+# TODO
+
+env: if local, use external ip for databse
+
+if prod, use interal ip for database
