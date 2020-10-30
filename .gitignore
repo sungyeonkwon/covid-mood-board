@@ -1,0 +1,20 @@
+# Flask - backend
+instance/*
+!instance/.gitignore
+.webassets-cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Venv
+venv/
+
+# VS code
+.vscode
+
+# Env variables
+.env
+
+# React - uncomplied playground files
+frontend/node_modules/
+frontend/package-lock.json

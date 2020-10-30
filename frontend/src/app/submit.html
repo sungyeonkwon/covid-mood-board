@@ -1,0 +1,43 @@
+{{ diagnostic}}
+
+<div class="form-group">
+  <label for="name">Name</label>
+  <input type="text" class="form-control" id="name" required [(ngModel)]="user.name" name="name">
+</div>
+
+<div class="form-group">
+  <label for="mood">mood</label>
+  <select class="form-control" id="mood" required [(ngModel)]="user.mood" name="mood">
+    <option *ngFor="let option of moodOptions" [value]="option">{{option}}</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="gender">Gender</label>
+  <select class="form-control" id="gender" [(ngModel)]="user.gender" name="gender">
+    <option *ngFor="let option of genderOptions" [value]="option">{{option}}</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="gender">age</label>
+  <select class="form-control" id="gender" [(ngModel)]="user.gender" name="gender">
+    <option *ngFor="let option of ageOptions" [value]="option">{{option}}</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="profession">profession</label>
+  <input type="text" class="form-control" id="profession" [(ngModel)]="user.profession" name="profession">
+</div>
+
+<div class="form-group">
+  <label for="message">message</label>
+  <textarea class="form-control" id="message" [(ngModel)]="user.message" name="message"></textarea>
+</div>
+
+<div class="form-group">
+  boolean option for is anoynymous
+</div>
+
+<button type="submit" (click)="submit()">submit</button>

@@ -1,0 +1,22 @@
+runtime: python37
+
+instance_class: F2
+
+env_variables:
+  FLASK_ENV: "production"
+
+handlers:
+  - url: /
+    secure: always
+    static_files: dist/index.html
+    upload: dist/index\.html
+    expiration: "5s"
+
+  - url: /static
+    static_dir: dist/static/
+    expiration: "5s"
+
+  - url: /.*
+    secure: always
+    redirect_http_response_code: 301
+    script: auto
