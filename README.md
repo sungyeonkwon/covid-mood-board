@@ -59,3 +59,5 @@ sudo vi /etc/nginx/sites-available/covid-mood.world
         server_name covid-mood.world www.covid-mood.world;
 
 sudo certbot --nginx -d covid-mood.world -d www.covid-mood.world
+
+sudo systemctl restart covid-mood-board

@@ -1,20 +1,7 @@
 import {Component} from '@angular/core';
 
-export interface User {
-  id: number;
-  isAnonymous: boolean;
-  mood: string;
-  message: string;
-  name?: string;
-  age?: number;
-  gender?: string;
-}
-
-const gender = [
-  'Female',
-  'Male',
-  'Other',
-];
+import {genderOptions, User} from '../constants/constants';
+import {UserService} from './user_service';
 
 @Component({
   selector: 'app-submit',
@@ -22,19 +9,30 @@ const gender = [
   styleUrls: ['./submit.scss']
 })
 export class SubmitComponent {
-  gender = gender;
+  gender = genderOptions;
+  // mood = moodOptions;
 
   user: User = {
     id: 1,
+    created_date: 'some date',
     isAnonymous: false,
-    mood: 'Joy',
-    message: 'skefnalwkfna alwkfalkna alkwnd',
+    age: 12,
+    mood: 'joy',
+    profession: 'profession',
+    gender: 'female',
+    name: 'name',
+    coords: 'some coords',
+    message: 'NEW MESSAGE',
   }
 
   submitted = false;
 
-  onSubmit() {
+  constructor(private readonly userService: UserService) {}
+
+  submit() {
+    console.log('post');
     this.submitted = true;
+    this.userService.addUser(this.user).subscribe(() => {console.log('??')});
   }
 
   // TODO: Remove this when we're done
