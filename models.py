@@ -1,17 +1,18 @@
 import datetime
 
+from flask import current_app as app
 from peewee import *
 from playhouse.db_url import connect
-from models import *
+from app import *
 
-# TODO: pw needs not to be exposed
+
 def get_db():
     db = PostgresqlDatabase(
-        "covid-mood-board",  # databsename
-        user="doadmin",
-        password="c03qirpg5l5jrk7p",
-        host="private-db-postgresql-nyc1-12975-do-user-6405713-0.b.db.ondigitalocean.com",  # remote host external ip
-        port=25060,
+        app.config["DB_NAME"],
+        user=app.config["DB_USER"],
+        password=app.config["DB_PASSWORD"],
+        host=app.config["DB_HOST"],
+        port=app.config["DB_PORT"],
     )
     db.connect()
     return db

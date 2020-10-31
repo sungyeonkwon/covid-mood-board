@@ -3,7 +3,6 @@
 ## Development server
 
 FE: localhost:4200
-
 FE build
 
 # production
@@ -11,8 +10,16 @@ FE build
 on frontend/
 `npm run build`
 
-on root
-`gcloud app deploy`
+`sudo systemctl restart nginx`
+`sudo systemctl restart covid-mood-board`
+
+# trouble shtting
+
+502 Bad Gateway
+
+# TODO
+
+FE TODO: change api so that it doesn'
 
 ## stack
 
@@ -21,7 +28,7 @@ flask
 postgres server on digital ocean
 webserver on digital ocean
 
-- covid-mood.world
+`https://covid-mood.world`
 
 d3
 
@@ -33,11 +40,11 @@ deploy
 
 https://www.digitalocean.com/docs/databases/postgresql/how-to/import-databases/
 
-TIL:
-gunicorn
+# TIL:
+
+gunicorn wsgi
 diff between 0.0.0.0 host?
 ports?
-wsgi
 
 WorkingDirectory=/home/sung/covid-mood-board
 Environment="PATH=/home/sung/covid-mood-board/venv/bin"
@@ -60,11 +67,13 @@ sudo vi /etc/nginx/sites-available/covid-mood.world
 
 sudo certbot --nginx -d covid-mood.world -d www.covid-mood.world
 
-sudo systemctl restart nginx
-sudo systemctl restart covid-mood-board
+# DIGITAL OCEAN DROPLET
 
-# TODO
+sudo reboot
+login: root
+pass: pass
 
-env: if local, use external ip for databse
+ssh sung@ip
 
-if prod, use interal ip for database
+trouble shotting
+sudo tail -30 /var/log/nginx/error.log
