@@ -1,7 +1,16 @@
 <section>
-  <div *ngIf="users$ | async as users">
-    <div *ngFor="let user of users">
-      {{user.name}}
-    </div>
-  </div>
+  <ng-container *ngIf="users$ | async as users">
+    <ng-container *ngFor="let user of users">
+      <div class="user">
+        <div class="circle"></div>
+        <p>{{user.message}}</p>
+        <span *ngIf="user.isAnonymous; else userInfo">
+          Anonymous
+        </span>
+        <ng-template #userInfo>
+          <span>{{user.name}}, {{user.gender}}, {{user.age}}, {{user.profession}}</span>
+        </ng-template>
+      </div>
+    </ng-container>
+  </ng-container>
 </section>
