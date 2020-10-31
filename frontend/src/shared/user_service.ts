@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {first, map, shareReplay} from 'rxjs/operators';
 import {User} from '../constants/constants';
+import {environment} from '../environments/environment';
 
 // api endpoints: [GET] request
 
@@ -23,7 +24,7 @@ export class UserService {
   ) {}
 
   addUser(user: User) {  // return type
-    return this.http.post<User>(`https://covid-mood.world/create`, user);
+    return this.http.post<User>(`${environment.baseApi}/create`, user);
   }
 
   getAllUsers(): Observable<User[]> {
@@ -32,7 +33,7 @@ export class UserService {
 
   // TODO: add filtering query with query params
   private fetchUsers(): Observable<User[]> {
-    return this.http.get<any>(`https://covid-mood.world/users`)
+    return this.http.get<any>(`${environment.baseApi}/users`)
         .pipe(first(), shareReplay(1));
   }
 }
