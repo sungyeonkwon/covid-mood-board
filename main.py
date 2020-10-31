@@ -8,10 +8,7 @@ from app import *
 
 @app.route("/submit", methods=["GET", "POST"])
 def submit():
-    print("??? submit 1")
     if request.method == "POST":
-        print("submit 2", User)
-        print("HERE")
         entry = User(
             isAnonymous=request.json["isAnonymous"],
             mood=request.json["mood"],
@@ -22,14 +19,9 @@ def submit():
             name=request.json["name"],
             profession=request.json["profession"],
         )
-        print("THERE")
-
-        print("submit entry 1", entry)
         entry.save()
-        print("submit entry 2", entry)
 
         return {}
-    print("@@submit 2", User)
     return "hello"
 
 
