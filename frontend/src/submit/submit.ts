@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 import {genderOptions, User} from '../constants/constants';
-import {UserService} from './user_service';
+import {UserService} from '../shared/user_service';
 
 @Component({
   selector: 'app-submit',

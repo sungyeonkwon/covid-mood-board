@@ -1,13 +1,14 @@
 from os import path, environ
 
-from flask import Flask, send_from_directory, render_template, request
+from flask import Flask, send_from_directory, render_template, request, json
+from playhouse.shortcuts import model_to_dict, dict_to_model
 
 from models import *
 from app import *
 
 
-@app.route("/submit", methods=["GET", "POST"])
-def submit():
+@app.route("/create", methods=["GET", "POST"])
+def create():
     if request.method == "POST":
         entry = User(
             isAnonymous=request.json["isAnonymous"],
@@ -22,13 +23,19 @@ def submit():
         entry.save()
 
         return {}
-    return "hello"
+    return send_from_directory("dist/", "index.html")
 
 
-# - filter can be: age, mood, gender
-@app.route("/users", methods=["GET"])
-def getUsers():
-    return send_from_directory("dist/static", path)
+@app.route("/users")
+def users():
+    query = User.select()
+    users = [model_to_dict(user) for user in query]
+    response = app.response_class(
+        response=json.dumps(users),
+        status=200,
+        mimetype="application/json",
+    )
+    return response
 
 
 ########## Serve frontend static files

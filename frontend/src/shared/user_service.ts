@@ -23,7 +23,7 @@ export class UserService {
   ) {}
 
   addUser(user: User) {  // return type
-    return this.http.post<User>(`https://covid-mood.world/submit`, user);
+    return this.http.post<User>(`https://covid-mood.world/create`, user);
   }
 
   getAllUsers(): Observable<User[]> {
@@ -32,7 +32,7 @@ export class UserService {
 
   // TODO: add filtering query with query params
   private fetchUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`https://covid-mood.world/users`)
+    return this.http.get<any>(`https://covid-mood.world/users`)
         .pipe(first(), shareReplay(1));
   }
 }

@@ -2,4 +2,13 @@ nav {
   display: flex;
   width: 100%;
   justify-content: space-between;
+  font-size: 18px;
+  align-items: center;
+  height: 50px;
+  background: yellow;
+  padding: 0 30px;
+
+  h1 {
+    font-size: 18px;
+  }
 }

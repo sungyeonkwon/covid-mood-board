@@ -1,0 +1,64 @@
+:host {
+  display: block;
+  background: orange;
+}
+
+.container {
+  max-width: 1000px;
+  background: rgb(77, 199, 158);
+  width: 90vw;
+  padding: 80px;
+  margin: 0 auto;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin: 20px 0;
+}
+
+label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px 20px;
+  border: 0;
+  height: 250px;
+}
+
+.grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+input {
+  border-radius: 0;
+  width: 100px;
+  border: 0;
+  padding: 10px 20px;
+}
+
+.circle {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: green;
+}
+
+button {
+  margin: 50px auto 0;
+  padding: 20px;
+}
+
+.mood {
+  display: flex;
+  justify-content: space-between;
+}

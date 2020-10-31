@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AppComponent} from './app';
-import {ListViewComponent} from './list-view';
-import {MapViewComponent} from './map-view';
-import {SubmitComponent} from './submit';
+
+import {SubmitComponent} from '../submit/submit';
+import {ListViewComponent} from '../view/list-view';
+import {MapViewComponent} from '../view/map-view';
 
 const routes: Routes = [
   {
@@ -15,6 +15,11 @@ const routes: Routes = [
     path: 'list',
     pathMatch: 'full',
     component: ListViewComponent,
+  },
+  {
+    path: 'map',
+    pathMatch: 'full',
+    component: MapViewComponent,
   },
   {
     path: 'submit',

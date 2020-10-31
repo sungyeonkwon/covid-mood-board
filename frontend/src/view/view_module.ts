@@ -2,27 +2,25 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
-import {SubmitModule} from '../submit/submit_module';
 
-import {ViewModule} from '../view/view_module';
-
-import {AppComponent} from './app';
-import {AppRoutingModule} from './app_routing_module';
+import {ListViewComponent} from './list-view';
+import {MapViewComponent} from './map-view';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    MapViewComponent,
+    ListViewComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ViewModule,
-    SubmitModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  exports: [
+    MapViewComponent,
+    ListViewComponent,
+  ]
 })
-export class AppModule {
+export class ViewModule {
 }

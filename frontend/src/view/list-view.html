@@ -1,0 +1,7 @@
+<section>
+  <div *ngIf="users$ | async as users">
+    <div *ngFor="let user of users">
+      {{user.name}}
+    </div>
+  </div>
+</section>
