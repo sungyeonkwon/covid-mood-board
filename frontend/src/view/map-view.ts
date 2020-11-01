@@ -1,4 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
+import {map, tap} from 'rxjs/operators';
+
+import {User} from '../constants/constants';
 
 declare global {
   let d3: any;
@@ -6,12 +11,37 @@ declare global {
   let topojson: any;
 }
 
+// function delayedHello(name, delay, callback) {
+//   setTimeout(function() {
+//     console.log('Hello, ' + name + '!');
+//     callback(null);
+//   }, delay);
+// }
+
 @Component({
   selector: 'app-map-view',
   templateUrl: './map-view.html',
   styleUrls: ['./map-view.scss']
 })
 export class MapViewComponent implements OnInit {
+  private users: User[];
+  readonly users$ =
+      (this.activatedRoute.data as Observable<User[]>)
+          .pipe(
+              map(data => data.users),
+              tap((users) => this.users =
+                      users));  // TODO: add interface for users data
+
+  constructor(
+      private readonly activatedRoute: ActivatedRoute,
+  ) {
+    this.users$.subscribe((users) => console.log('users', users));
+  }
+
+  ngOnInit() {
+    this.init();
+  }
+
   init() {
     d3.select(window).on('mousemove', mousemove).on('mouseup', mouseup);
 
@@ -36,7 +66,9 @@ export class MapViewComponent implements OnInit {
     queue()
         .defer(d3.json, 'assets/world-110m.json')
         .defer(d3.json, 'assets/places.json')
-        .await(ready);
+        // .defer(delayedHello, 'Alice', 250)
+        .await(ready);  // await callback to be called when all of the tasks
+                        // complete
 
     function ready(error, world, places) {
       var ocean_fill = svg.append('defs')
@@ -117,6 +149,15 @@ export class MapViewComponent implements OnInit {
           .attr('class', 'point')
           .attr('d', path);
 
+      // svg.append('g')
+      //     .attr('class', 'points')
+      //     .selectAll('text')
+      //     .data(this.users.features)
+      //     .enter()
+      //     .append('path')
+      //     .attr('class', 'point')
+      //     .attr('d', path);
+
       svg.append('g')
           .attr('class', 'labels')
           .selectAll('text')
@@ -130,7 +171,6 @@ export class MapViewComponent implements OnInit {
 
       position_labels();
     }
-
 
     function position_labels() {
       var centerPos = proj.invert([width / 2, height / 2]);
@@ -189,9 +229,5 @@ export class MapViewComponent implements OnInit {
       svg.selectAll('.point').attr('d', path);
       position_labels();
     }
-  }
-
-  ngOnInit() {
-    this.init();
   }
 }
