@@ -4,7 +4,7 @@
       <div class="user">
         <div class="circle {{user.mood}}"></div>
         <p>{{user.message}}</p>
-        <span *ngIf="user.isAnonymous; else userInfo">
+        <span *ngIf="user.is_anonymous; else userInfo">
           Anonymous
         </span>
         <ng-template #userInfo>

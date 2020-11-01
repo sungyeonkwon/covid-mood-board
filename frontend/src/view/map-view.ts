@@ -9,6 +9,10 @@ declare global {
   let d3: any;
   let queue: any;
   let topojson: any;
+  let versor: any;
+  let v0: any;
+  let r0: any;
+  let q0: any;
 }
 
 const feature = {
@@ -72,7 +76,7 @@ export class MapViewComponent implements OnInit {
   constructor(
       private readonly activatedRoute: ActivatedRoute,
   ) {
-    console.log('this.serialisedUsers', this.serialisedUsers);
+    // console.log('this.serialisedUsers', this.serialisedUsers);
     this.users$.subscribe((users) => console.log('users', users));
   }
 
@@ -82,24 +86,30 @@ export class MapViewComponent implements OnInit {
 
   init() {
     d3.select(window).on('mousemove', mousemove).on('mouseup', mouseup);
+    var time = Date.now();
 
+    var v0;
+    var r0;
+    var q0;
     var width = 1200, height = 800;
+    var rotate = [39.666666666666664, -30];
+    var velocity = [.005, -0];
 
-    var proj = d3.geo.orthographic()
-                   .scale(350)
+    var proj = d3.geoOrthographic()
+                   .scale(380)
                    .translate([width / 2, height / 2])
                    .clipAngle(90);
 
+    var path = d3.geoPath().projection(proj).pointRadius(1.5);
 
-    var path = d3.geo.path().projection(proj).pointRadius(1.5);
-
-    var graticule = d3.geo.graticule();
+    var graticule = d3.geoGraticule();
 
     var svg = d3.select('#map-container')
                   .append('svg')
                   .attr('width', width)
-                  .attr('height', height)
-                  .on('mousedown', mousedown);
+                  .attr('height', height);
+
+    svg.call(d3.drag().on('start', dragstarted).on('drag', dragged));
 
     queue()
         .defer(d3.json, 'assets/world-110m.json')
@@ -211,17 +221,17 @@ export class MapViewComponent implements OnInit {
           })
 
       position_labels();
+      refresh();
+      spin();
     }
 
     function position_labels() {
       var centerPos = proj.invert([width / 2, height / 2]);
 
-      var arc = d3.geo.greatArc();
-
       svg.selectAll('.label')
           .attr(
               'text-anchor',
-              function(d) {
+              (d) => {
                 var x = proj(d.geometry.coordinates)[0];
                 return x < width / 2 - 20 ?
                     'end' :
@@ -229,14 +239,13 @@ export class MapViewComponent implements OnInit {
               })
           .attr(
               'transform',
-              function(d) {
+              (d) => {
                 var loc = proj(d.geometry.coordinates), x = loc[0], y = loc[1];
                 var offset = x < width / 2 ? -5 : 5;
                 return 'translate(' + (x + offset) + ',' + (y - 2) + ')'
               })
-          .style('display', function(d) {
-            var d = arc.distance(
-                {source: d.geometry.coordinates, target: centerPos});
+          .style('display', (d) => {
+            var d = d3.geoDistance(d.geometry.coordinates, centerPos);
             return (d > 1.57) ? 'none' : 'inline';
           })
     }
@@ -247,6 +256,7 @@ export class MapViewComponent implements OnInit {
       m0 = [d3.event.pageX, d3.event.pageY];
       o0 = proj.rotate();
     }
+
     function mousemove() {
       if (m0) {
         var m1 = [d3.event.pageX, d3.event.pageY],
@@ -256,6 +266,7 @@ export class MapViewComponent implements OnInit {
         refresh();
       }
     }
+
     function mouseup() {
       if (m0) {
         mousemove();
@@ -263,12 +274,41 @@ export class MapViewComponent implements OnInit {
       }
     }
 
+
+
     function refresh() {
       svg.selectAll('.land').attr('d', path);
       svg.selectAll('.countries path').attr('d', path);
       svg.selectAll('.graticule').attr('d', path);
       svg.selectAll('.point').attr('d', path);
       position_labels();
+    }
+
+    var timer;
+    function spin() {
+      timer = d3.timer(function() {
+        var dt = Date.now() - time;
+
+        proj.rotate(
+            [rotate[0] + velocity[0] * dt, rotate[1] + velocity[1] * dt]);
+
+        refresh();
+      });
+    }
+
+    function dragstarted() {
+      timer.stop();
+      v0 = versor.cartesian(proj.invert(d3.mouse(this)));
+      r0 = proj.rotate();
+      q0 = versor(r0);
+    }
+
+    function dragged() {
+      var v1 = versor.cartesian(proj.rotate(r0).invert(d3.mouse(this))),
+          q1 = versor.multiply(q0, versor.delta(v0, v1)),
+          r1 = versor.rotation(q1);
+      proj.rotate(r1);
+      refresh();
     }
   }
 }
