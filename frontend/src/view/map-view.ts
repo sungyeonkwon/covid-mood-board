@@ -15,55 +15,36 @@ declare global {
   let q0: any;
 }
 
-const feature = {
-  type: 'Feature',
-  properties: {
-    'latitude': 33.830013854,
-    'longitude': -84.399949383299997,
-  },
-  geometry:
-      {'type': 'Point', 'coordinates': [-84.40189524187565, 33.831959712605851]}
-};
+const serialize =
+    (users) => {
+      return users.map((user) => {
+        return {
+          properties: {
+            message: user.message,
+          },
+              geometry: {
+                type: 'Point',
+                coordinates:
+                    [
+                      user.longitude,
+                      user.latitude,
+                    ]
+              },
+        }
+      });
+    }
 
-function delayedHello(name, delay, callback) {
-  setTimeout(function() {
-    console.log('Hello, ' + name + '!');
-    callback(null);
-  }, delay);
-}
-
-function delayedUsers(callback) {
-  const users = [
-    {
-      type: 'Feature',
-      properties: {
-        message: 'WOOOHOOOOOO welfkbwlekfnwleknf',
-        latitude: 33.830013854,
-        longitude: -84.399949383299997,
-      },
-      geometry:
-          {type: 'Point', coordinates: [-84.40189524187565, 33.831959712605851]}
-    },
-    {
-      type: 'Feature',
-      properties: {
-        message: 'WOOOHOOOOOO welfkbwlekfnwleknf',
-        latitude: 53.830013854,
-        longitude: -84.399949383299997,
-      },
-      geometry:
-          {type: 'Point', coordinates: [-84.40189524187565, 33.831959712605851]}
-    },
-  ]
-  callback(null, users);
+function
+delayedUsers(users, callback) {
+  const serializedUsers = serialize(users);
+  callback(null, serializedUsers);
 }
 
 @Component({
   selector: 'app-map-view',
   templateUrl: './map-view.html',
   styleUrls: ['./map-view.scss']
-})
-export class MapViewComponent implements OnInit {
+}) export class MapViewComponent implements OnInit {
   private users: User[];
 
   viewHeight = 0;
@@ -118,12 +99,13 @@ export class MapViewComponent implements OnInit {
     queue()
         .defer(d3.json, 'assets/world-110m.json')
         .defer(d3.json, 'assets/places.json')
-        .defer(delayedUsers)
+        .defer(delayedUsers, this.users)
         .await(ready);  // await callback to be called when all of the tasks
                         // complete
 
     function ready(error, world, places, users) {
-      console.log('users', users)
+      console.log('----world', world)
+      console.log('----places', places)
       var ocean_fill = svg.append('defs')
                            .append('radialGradient')
                            .attr('id', 'ocean_fill')

@@ -80,5 +80,7 @@ sudo tail -30 /var/log/nginx/error.log
 
 # TODO
 
-add zoom in / out
-connect db to map
+10-11 serialize / donnect db
+11-12 add zoom in / out
+12-1 if page scrolls, put .5 white to nav bar
+add info page

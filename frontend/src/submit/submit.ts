@@ -75,6 +75,7 @@ export class SubmitComponent implements OnInit {
       longitude: coords.longitude,  // check the order
     };
 
+    console.log('CHECK', user);
     this.userService.addUser(user).subscribe(() => {console.log('??')});
   }
 
