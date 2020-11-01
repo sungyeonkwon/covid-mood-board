@@ -1,17 +1,20 @@
 :host {
   display: block;
-  background: orange;
+  background: white;
 }
 
 .container {
   max-width: 1000px;
-  background: rgb(77, 199, 158);
   width: 90vw;
   padding: 80px;
   margin: 0 auto;
   justify-content: center;
   display: flex;
   flex-direction: column;
+}
+
+.instruction {
+  margin-bottom: 40px;
 }
 
 .form-group {
@@ -26,9 +29,11 @@ label {
 
 textarea {
   width: 100%;
-  padding: 10px 20px;
+  padding: 10px 15px;
   border: 0;
   height: 250px;
+  resize: none;
+  border: 1px solid rgba(black, 0.15);
 }
 
 .grid {
@@ -39,18 +44,36 @@ textarea {
 input {
   border-radius: 0;
   width: 100px;
-  border: 0;
-  padding: 10px 20px;
+  border: 1px solid rgba(black, 0.15);
+  padding: 10px 15px;
 }
 
 .circle {
   width: 100px;
   height: 100px;
   display: flex;
+  cursor: pointer;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background: green;
+  background: red;
+  filter: blur(10px);
+
+  .joy & {
+    background: yellow;
+  }
+
+  .fear & {
+    background: purple;
+  }
+
+  .disgust & {
+    background: green;
+  }
+
+  .sadness & {
+    background: blue;
+  }
 }
 
 button {
@@ -61,4 +84,18 @@ button {
 .mood {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
+
+  > div {
+    position: relative;
+  }
+
+  .text {
+    cursor: pointer;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    z-index: 9;
+  }
 }

@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
+import {BehaviorSubject, ReplaySubject, Subject} from 'rxjs';
+import {pairwise} from 'rxjs/operators';
 
-import {genderOptions, User} from '../constants/constants';
+import {genderOptions, Mood, User} from '../constants/constants';
 import {UserService} from '../shared/user_service';
 
 @Component({
@@ -9,8 +11,9 @@ import {UserService} from '../shared/user_service';
   styleUrls: ['./submit.scss']
 })
 export class SubmitComponent {
-  gender = genderOptions;
-  // mood = moodOptions;
+  genderOptions = genderOptions;
+  moodRef = Mood;
+  moods$ = new Subject<Mood>();
 
   user: User = {
     id: 1,
@@ -27,7 +30,19 @@ export class SubmitComponent {
 
   submitted = false;
 
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) {
+    this.moods$.pipe(pairwise()).subscribe((data) => {
+      console.log('Subscriber A:', data);
+    });
+  }
+
+  hasMoodAlready(currentMoodArray, mood) {}
+
+  addMood(mood: Mood) {
+    this.moods$.next(mood);
+
+    // console.log(this.moods$.getValue());
+  }
 
   submit() {
     console.log('post');

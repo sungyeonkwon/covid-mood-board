@@ -1,12 +1,27 @@
 <div class="container">
-  {{ diagnostic}}
-  <p>Choose your mood. You can select one or two.</p>
+  <!-- {{ diagnostic}} -->
+  <p class="instruction">Choose your mood. You can select one or two.</p>
   <div class="mood">
-    <span class="circle joy">Joy</span>
-    <span class="circle anger">Anger</span>
-    <span class="circle fear">Fear</span>
-    <span class="circle disgust">Disgust</span>
-    <span class="circle sadness">Sadness</span>
+    <div class="joy" (click)="addMood(moodRef.JOY)">
+      <div class="circle"></div>
+      <span class="text">{{moodRef.JOY}}</span>
+    </div>
+    <div class="anger" (click)="addMood(moodRef.ANGER)">
+      <div class="circle"></div>
+      <span class="text">{{moodRef.ANGER}}</span>
+    </div>
+    <div class="fear" (click)="addMood(moodRef.FEAR)">
+      <div class="circle"></div>
+      <span class="text">{{moodRef.FEAR}}</span>
+    </div>
+    <div class="disgust" (click)="addMood(moodRef.DISGUST)">
+      <div class="circle"></div>
+      <span class="text">{{moodRef.DISGUST}}</span>
+    </div>
+    <div class="sadness" (click)="addMood(moodRef.SADNESS)">
+      <div class="circle"></div>
+      <span class="text">{{moodRef.SADNESS}}</span>
+    </div>
   </div>
 
   <div class="form-group">
@@ -25,7 +40,20 @@
     </div>
     <div class="form-group">
       <label for="gender">Gender</label>
-      <input type="text" id="gender" [(ngModel)]="user.gender" name="gender">
+      <div>
+        <input type="radio" id="huey" name="drone" value="huey" checked>
+        <label for="huey">Huey</label>
+      </div>
+
+      <div>
+        <input type="radio" id="dewey" name="drone" value="dewey">
+        <label for="dewey">Dewey</label>
+      </div>
+
+      <div>
+        <input type="radio" id="louie" name="drone" value="louie">
+        <label for="louie">Louie</label>
+      </div>
     </div>
 
     <div class="form-group">
@@ -35,8 +63,8 @@
 
     <div class="form-group">
       <div>
-        <input type="checkbox" id="scales" name="anoynymous">
-        <label for="scales">anoynymous</label>
+        <input type="checkbox" id="isAnoynymous" [(ngModel)]="user.isAnoynymous" name="anoynymous">
+        <label for="anoynymous">Anoynymous</label>
       </div>
 
     </div>
