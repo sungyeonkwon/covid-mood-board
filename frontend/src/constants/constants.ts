@@ -33,13 +33,13 @@ export interface MoodOption {
 
 export interface User {
   id: number;
-  created_date: string;
-  isAnonymous: boolean;
-  mood: string;
-  coords: string;
-  message: string;
   age?: number;
+  coords: string;
+  created_by: string;
   gender?: string;
+  is_anonymous: boolean;
+  message: string;
+  mood: string;
   name?: string;
   profession?: string;
 }

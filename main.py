@@ -11,12 +11,12 @@ from app import *
 def create():
     if request.method == "POST":
         entry = User(
-            isAnonymous=request.json["isAnonymous"],
-            mood=request.json["mood"],
-            coords=request.json["coords"],
-            message=request.json["message"],
             age=request.json["age"],
+            coords=request.json["coords"],
             gender=request.json["gender"],
+            is_anonymous=request.json["is_anonymous"],
+            message=request.json["message"],
+            mood=request.json["mood"],
             name=request.json["name"],
             profession=request.json["profession"],
         )

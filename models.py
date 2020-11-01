@@ -31,10 +31,10 @@ class Base(Model):
 
 
 class User(Base):
-    created_date = DateTimeField(
+    created_by = DateTimeField(
         default=datetime.datetime.now, formats=["%Y-%m-%d %H:%M:%S"]
     )
-    isAnonymous = BooleanField(default=False)  # required
+    is_anonymous = BooleanField(default=False)  # required
     mood = CharField()  # required
     coords = CharField()  # required
     message = TextField()  # required
