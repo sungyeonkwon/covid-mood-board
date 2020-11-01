@@ -2,7 +2,7 @@
   <ng-container *ngIf="users$ | async as users">
     <ng-container *ngFor="let user of users">
       <div class="user">
-        <div class="circle"></div>
+        <div class="circle {{user.mood}}"></div>
         <p>{{user.message}}</p>
         <span *ngIf="user.isAnonymous; else userInfo">
           Anonymous

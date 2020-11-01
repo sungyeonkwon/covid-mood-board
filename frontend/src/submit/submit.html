@@ -1,71 +1,79 @@
-<div class="container">
-  <form [formGroup]="moodForm" (ngSubmit)="onSubmit(moodForm)">
-    <pre>{{moodForm.value | json}}</pre>
+<form class="container" [formGroup]="moodForm" (ngSubmit)="onSubmit(moodForm)" autocomplete="off">
 
-    <p class="instruction">Choose your mood. You can select one or two.</p>
+  <div class="form-group" *ngIf="selectedMood$ | async as selectedMood">
+    <h1 class="instruction">
+      How are you feeling?
+    </h1>
     <div class="mood">
-      <div class="joy" (click)="toggleMood(moodRef.JOY)">
+      <div class="joy" [class.selected]="selectedMood === moodRef.JOY" (click)="addMood(moodRef.JOY)">
         <div class="circle"></div>
         <span class="text">{{moodRef.JOY}}</span>
       </div>
-      <div class="anger" (click)="toggleMood(moodRef.ANGER)">
+      <div class="anger" [class.selected]="selectedMood === moodRef.ANGER" (click)="addMood(moodRef.ANGER)">
         <div class="circle"></div>
         <span class="text">{{moodRef.ANGER}}</span>
       </div>
-      <div class="fear" (click)="toggleMood(moodRef.FEAR)">
+      <div class="fear" [class.selected]="selectedMood === moodRef.FEAR" (click)="addMood(moodRef.FEAR)">
         <div class="circle"></div>
         <span class="text">{{moodRef.FEAR}}</span>
       </div>
-      <div class="disgust" (click)="toggleMood(moodRef.DISGUST)">
+      <div class="disgust" [class.selected]="selectedMood === moodRef.DISGUST" (click)="addMood(moodRef.DISGUST)">
         <div class="circle"></div>
         <span class="text">{{moodRef.DISGUST}}</span>
       </div>
-      <div class="sadness" (click)="toggleMood(moodRef.SADNESS)">
+      <div class="sadness" [class.selected]="selectedMood === moodRef.SADNESS" (click)="addMood(moodRef.SADNESS)">
         <div class="circle"></div>
         <span class="text">{{moodRef.SADNESS}}</span>
       </div>
-    </div>
-
-    <div class="form-group">
-      <label for="message">Message</label>
-      <textarea id="message" formControlName="message" name="message">some mes</textarea>
-    </div>
-
-    <div class="grid">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" required formControlName="name" name="name">
+      <div class="mixed" [class.selected]="selectedMood === moodRef.MIXED" (click)="addMood(moodRef.MIXED)">
+        <div class="circle"></div>
+        <span class="text">{{moodRef.MIXED}}</span>
       </div>
-      <div class="form-group">
-        <label for="age">Age</label>
-        <input type="text" id="age" formControlName="age" name="age">
-      </div>
-      <div class="form-group">
-        <label for="gender">Gender</label>
+    </div>
+  </div>
+
+  <div class="form-group message">
+    <h1 class="instruction">
+      What's your thought you want to let it out?
+    </h1>
+    <textarea id="message" formControlName="message" name="message" maxlength="600"></textarea>
+  </div>
+
+  <div class="grid">
+    <div class="form-group name">
+      <label for="name">Name</label>
+      <input type="text" id="name" formControlName="name" name="name" maxlength="30">
+    </div>
+    <div class="form-group age">
+      <label for="age">Age</label>
+      <input type="text" id="age" formControlName="age" name="age" maxlength="3">
+    </div>
+    <div class="form-group gender">
+      <div>
         <div *ngFor="let option of genderOptions">
-          <input type="radio" id="{{option}}" name="gender" value="{{option}}" formControlName="gender">
           <label for="{{option}}">{{option}}</label>
+          <input type="radio" id="{{option}}" name="gender" value="{{option}}" formControlName="gender">
         </div>
-      </div>
-
-      <div class="form-group">
-        <label for="profession">Profession</label>
-        <input type="text" id="profession" formControlName="profession" name="profession">
-      </div>
-
-      <div class="form-group">
-        <div>
-          <input type="checkbox" id="is_anonymous" formControlName="is_anonymous" name="is_anonymous">
-          <label for="is_anonymous">isAnonymous</label>
-        </div>
-
       </div>
     </div>
 
+    <div class="form-group profession">
+      <label for="profession">Profession</label>
+      <input type="text" id="profession" formControlName="profession" name="profession" maxlength="30">
+    </div>
 
-    <button type="submit">Submit your mood</button>
+  </div>
 
+  <div class="form-group anonymous">
+    <input type="checkbox" id="is_anonymous" formControlName="is_anonymous" name="is_anonymous">
+    <label for="is_anonymous">I would rather leave my mood anonymously.</label>
+  </div>
 
-  </form>
+  <p [class.show]="showErrorMessage" [class.normal]="moodForm.value.is_anonymous === true" class="error">
+    Please fill in the form correctly. Or if you'd like to stay anonymous, tick the box above.
+  </p>
+  <button type="submit" [disabled]="!(moodForm.status === 'VALID' && moodForm.value.mood !== 'undefined')">
+    Submit your mood
+  </button>
 
-</div>
+</form>

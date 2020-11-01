@@ -4,9 +4,9 @@
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 960px;
   width: 90vw;
-  padding: 80px;
+  padding: 0 0 100px;
   margin: 0 auto;
   justify-content: center;
   display: flex;
@@ -14,26 +14,33 @@
 }
 
 .instruction {
-  margin-bottom: 40px;
+  line-height: 35px;
+  margin: 90px 0 80px;
+  font-weight: 400;
+  text-align: center;
+  font-size: 36px;
+  font-family: "Frank Ruhl Libre", serif;
 }
 
-.form-group {
-  margin: 20px 0;
-}
-
-label {
-  font-size: 14px;
-  display: block;
-  margin-bottom: 5px;
+label:not(:last-child) {
+  color: rgba(black, 0.5);
+  font-size: 15px;
+  margin-bottom: 7px;
+  text-transform: capitalize;
 }
 
 textarea {
-  width: 100%;
   padding: 10px 15px;
+  margin: 0 auto;
+  font-size: 28px;
   border: 0;
-  height: 250px;
+  line-height: 38px;
+  width: 100%;
+  height: 200px;
   resize: none;
-  border: 1px solid rgba(black, 0.15);
+  background: rgba(black, 0.03);
+  border: none;
+  color: rgba(black, 0.6);
 }
 
 .grid {
@@ -43,14 +50,17 @@ textarea {
 
 input {
   border-radius: 0;
-  width: 100px;
-  border: 1px solid rgba(black, 0.15);
+  cursor: pointer;
+  width: 100%;
+  color: rgba(black, 0.6);
+  background: rgba(black, 0.03);
   padding: 10px 15px;
+  border: none;
 }
 
 .circle {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   display: flex;
   cursor: pointer;
   justify-content: center;
@@ -58,6 +68,8 @@ input {
   border-radius: 50%;
   background: red;
   filter: blur(10px);
+  opacity: 0.2;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 
   .joy & {
     background: yellow;
@@ -74,11 +86,32 @@ input {
   .sadness & {
     background: blue;
   }
+
+  .mixed & {
+    background: grey;
+  }
+
+  .selected & {
+    transform: translateY(-15px);
+    opacity: 1;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 button {
   margin: 50px auto 0;
-  padding: 20px;
+  background: black;
+  color: white;
+  border: 0;
+  padding: 10px 20px;
+  cursor: pointer;
+
+  &:disabled {
+    background: rgba(black, 0.2);
+  }
 }
 
 .mood {
@@ -91,11 +124,101 @@ button {
   }
 
   .text {
-    cursor: pointer;
+    opacity: 0.3;
+    pointer-events: none;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    bottom: 0;
+    font-size: 15px;
+    transform: translate(-50%, 40px);
     position: absolute;
     z-index: 9;
+    text-transform: capitalize;
+    transition: all 0.3s ease;
+    transform-origin: -50% center;
+  }
+}
+
+.selected {
+  .text {
+    opacity: 1;
+    font-size: 20px;
+  }
+}
+
+.form-group {
+  margin: 20px 0;
+
+  &.message {
+    label {
+      display: block;
+    }
+  }
+
+  &.name {
+    width: 20%;
+
+    label {
+      display: block;
+    }
+  }
+
+  &.age {
+    width: 8%;
+
+    label {
+      display: block;
+    }
+  }
+
+  &.profession {
+    width: 20%;
+
+    label {
+      display: block;
+    }
+  }
+
+  &.gender {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+
+    > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      > div {
+        width: 33%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    label {
+      display: block;
+    }
+  }
+
+  &.anonymous {
+    input {
+      width: unset;
+      margin-right: 10px;
+    }
+  }
+}
+
+.error {
+  visibility: hidden;
+
+  &.show {
+    visibility: visible;
+    color: red;
+  }
+
+  &.normal {
+    color: rgba(black, 0.4);
   }
 }

@@ -15,67 +15,64 @@ export class SubmitComponent implements OnInit {
   genderOptions = genderOptions;
 
   moodRef = Mood;
-  moodsource$ = new Subject<any>();  // type
-  moods$ = this.moodsource$.pipe(scan(([acc, item]) => [...acc, item], []));
-
-
-  submitted = false;
+  selectedMood$ = new BehaviorSubject<Mood>(Mood.UNDEFINED);  // type
 
   moodForm: FormGroup;
+
+  showErrorMessage = false;
 
   constructor(
       private readonly userService: UserService,
       private readonly fb: FormBuilder,
-  ) {
-    this.moods$.pipe().subscribe((data) => {
-      console.log('Subscriber A:', data);
-    });
-  }
+  ) {}
 
   ngOnInit() {
     this.moodForm = this.fb.group({
-      name: ['', Validators.required],
+      name: [
+        '',
+      ],
       age: [
         '',
         [
-          Validators.required,
-          Validators.pattern('^[0-9]\d*$'),
+          Validators.pattern('^[0-9]+$'),
+          Validators.min(5),
         ]
       ],
       gender: [''],
       profession: [''],
-      message: ['', [Validators.required]],  // Validators.minLength(15)
-      // mood: ['', Validators.required],
-      is_anonymous: [false],
+      message: ['', Validators.required],  // Validators.minLength(15)
+      mood: [this.selectedMood$.getValue(), Validators.required],
+      is_anonymous: [false, Validators.required],
     });
 
-    this.moodForm.valueChanges.subscribe(
-        val => {// console.log('val', val);
-                console.log('form', this.moodForm)});
+    this.moodForm.valueChanges.subscribe(val => {  // console.log('val', val);
+      console.log('@', this.moodForm);
+    });
   }
 
-  toggleMood(mood: Mood) {
-    // this.moodsource$.next(mood);
-    this.moods$.subscribe(moods => {
-      console.log('moods', moods)
-      if (moods.includes(mood)) {
-        this.moods$.next(mood.filter(item => item !== mood));
-        this.moodsource$.next(undefined);
-      }
-      else {
-        this.moodsource$.next(mood);
-      }
-    })
+  addMood(mood: Mood) {
+    this.selectedMood$.next(mood);
+    this.moodForm.patchValue({mood});
+  }
+
+  private isFormIncomplete(form) {
+    const isUserInfoIncomplete = !form.value.name || !form.value.age ||
+        !form.value.profession || !form.value.gender;
+    return !form.value.is_anonymous && isUserInfoIncomplete
   }
 
   async onSubmit(moodForm) {
+    if (this.isFormIncomplete(moodForm)) {
+      this.showErrorMessage = true;
+      return;
+    }
+
     const coords = await this.getGeolocation();
 
     const user = {
       ...moodForm.value,
       latitude: coords.latitude,    // check the order
       longitude: coords.longitude,  // check the order
-      mood: 'some mood',
     };
 
     this.userService.addUser(user).subscribe(() => {console.log('??')});

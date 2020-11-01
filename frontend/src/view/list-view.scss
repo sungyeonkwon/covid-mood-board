@@ -5,16 +5,21 @@ section {
 }
 
 p {
-  font-size: 18px;
+  font-size: 24px;
   z-index: 1;
+  font-family: "Frank Ruhl Libre", serif;
+  line-height: 36px;
 }
 
 span {
   z-index: 1;
+  font-size: 16px;
 }
-.user {
-  height: 200px;
 
+.user {
+  min-height: 200px;
+  padding: 100px 50px;
+  text-align: center;
   position: relative;
   display: flex;
   justify-content: center;
@@ -23,13 +28,37 @@ span {
 }
 
 .circle {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   background: orange;
-  filter: blur(10px);
+  filter: blur(20px);
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  &.joy {
+    background: yellow;
+  }
+
+  &.fear {
+    background: purple;
+  }
+
+  &.disgust {
+    background: green;
+  }
+
+  &.anger {
+    background: red;
+  }
+
+  &.sadness {
+    background: blue;
+  }
+
+  &.mixed {
+    background: grey;
+  }
 }

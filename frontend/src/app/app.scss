@@ -4,11 +4,25 @@ nav {
   justify-content: space-between;
   font-size: 18px;
   align-items: center;
-  height: 50px;
-  background: yellow;
+  height: 56px;
   padding: 0 30px;
 
   h1 {
     font-size: 18px;
   }
+}
+
+.submit {
+  border: 1px solid black;
+  padding: 5px 10px;
+  transition: background 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    color: white;
+    background: black;
+  }
+}
+
+.map {
+  margin-right: 20px;
 }

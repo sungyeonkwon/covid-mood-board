@@ -5,6 +5,7 @@ export const genderOptions = [
 ];
 
 export enum Mood {
+  UNDEFINED = 'undefined',
   ANGER = 'anger',
   DISGUST = 'disgust',
   FEAR = 'fear',
