@@ -11,6 +11,9 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     component: MapViewComponent,
+    resolve: {
+      users: UserResolver,
+    }
   },
   {
     path: 'list',

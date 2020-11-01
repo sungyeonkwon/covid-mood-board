@@ -72,7 +72,6 @@ delayedUsers(users, callback) {
   init() {
     d3.select(window).on('mousemove', mousemove).on('mouseup', mouseup);
     var time = Date.now();
-
     var v0;
     var r0;
     var q0;
@@ -129,20 +128,6 @@ delayedUsers(users, callback) {
           .attr('offset', '100%')
           .attr('stop-color', '#ba9')
           .attr('stop-opacity', '0.2');
-
-      var globe_shading = svg.append('defs')
-                              .append('radialGradient')
-                              .attr('id', 'globe_shading')
-                              .attr('cx', '50%')
-                              .attr('cy', '40%');
-      globe_shading.append('stop')
-          .attr('offset', '50%')
-          .attr('stop-color', '#9ab')
-          .attr('stop-opacity', '0')
-      globe_shading.append('stop')
-          .attr('offset', '100%')
-          .attr('stop-color', '#3e6184')
-          .attr('stop-opacity', '0.3')
 
       svg.append('circle')
           .attr('cx', width / 2)
