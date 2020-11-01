@@ -80,7 +80,22 @@ sudo tail -30 /var/log/nginx/error.log
 
 # TODO
 
-10-11 serialize / donnect db
-11-12 add zoom in / out
-12-1 if page scrolls, put .5 white to nav bar
-add info page
+## MUST
+
+<!-- - remove point for region
+- add point for emotion -->
+
+<!-- - revise colour scheme (15mins) -->
+
+- submit waiting
+- submit reloading
+- checkbox and radio button styling
+- Add google analytics
+
+## NICE TO HAVE
+
+add zoom in / out
+If page scrolls, put .5 white to nav bar
+clean place json
+
+http://bl.ocks.org/tlfrd/df1f1f705c7940a6a7c0dca47041fec8

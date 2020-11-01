@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 
-import {User} from '../constants/constants';
+import {MoodColourMap, User} from '../constants/constants';
 
 declare global {
   let d3: any;
@@ -18,9 +18,12 @@ declare global {
 const serialize =
     (users) => {
       return users.map((user) => {
+        console.log('user.mood', user.mood);
+        console.log('u', MoodColourMap[user.mood]);
         return {
-          properties: {
+          type: 'Feature', properties: {
             message: user.message,
+            color: MoodColourMap[user.mood],
           },
               geometry: {
                 type: 'Point',
@@ -51,7 +54,7 @@ delayedUsers(users, callback) {
   viewWidth = 0;
 
   readonly users$ =
-      (this.activatedRoute.data as Observable<User[]>)
+      (this.activatedRoute.data as Observable<any>)  // TODO: type
           .pipe(
               map(data => data.users),
               tap((users) => this.users =
@@ -70,7 +73,6 @@ delayedUsers(users, callback) {
   }
 
   init() {
-    d3.select(window).on('mousemove', mousemove).on('mouseup', mouseup);
     var time = Date.now();
     var v0;
     var r0;
@@ -80,11 +82,11 @@ delayedUsers(users, callback) {
     var velocity = [.005, -0];
 
     var proj = d3.geoOrthographic()
-                   .scale(530)
+                   .scale(730)
                    .translate([width / 2, height / 2])
                    .clipAngle(90);
 
-    var path = d3.geoPath().projection(proj).pointRadius(1.5);
+    var path = d3.geoPath().projection(proj).pointRadius(3);
 
     var graticule = d3.geoGraticule();
 
@@ -103,8 +105,6 @@ delayedUsers(users, callback) {
                         // complete
 
     function ready(error, world, places, users) {
-      console.log('----world', world)
-      console.log('----places', places)
       var ocean_fill = svg.append('defs')
                            .append('radialGradient')
                            .attr('id', 'ocean_fill')
@@ -163,22 +163,28 @@ delayedUsers(users, callback) {
       svg.append('g')
           .attr('class', 'points')
           .selectAll('text')
-          .data(places.features)
+          .data(users)
           .enter()
           .append('path')
           .attr('class', 'point')
-          .attr('d', path);
+          .attr('d', path)
+          .attr('fill', function(d) {
+            return d.properties.color;
+          });
 
-      svg.append('g')
-          .attr('class', 'messages')
-          .selectAll('text')
-          .data(users)
-          .enter()
-          .append('text')
-          .attr('class', 'label')
-          .text(function(data) {
-            return data.properties.message
-          })
+      // svg.append('g')
+      //     .attr('class', 'messages')
+      //     .selectAll('text')
+      //     .data(users)
+      //     .enter()
+      //     .append('text')
+      //     .attr('class', 'label')
+      //     .text(function(data) {
+      //       return data.properties.message
+      //     })
+      //     .attr('fill', function(d) {
+      //       return d.properties.color;
+      //     });
 
       svg.append('g')
           .attr('class', 'labels')
@@ -221,30 +227,6 @@ delayedUsers(users, callback) {
           })
     }
 
-    var m0, o0;
-    function mousedown() {
-      d3.event.preventDefault();
-      m0 = [d3.event.pageX, d3.event.pageY];
-      o0 = proj.rotate();
-    }
-
-    function mousemove() {
-      if (m0) {
-        var m1 = [d3.event.pageX, d3.event.pageY],
-            o1 = [o0[0] + (m1[0] - m0[0]) / 6, o0[1] + (m0[1] - m1[1]) / 6];
-        o1[1] = o1[1] > 30 ? 30 : o1[1] < -30 ? -30 : o1[1];
-        proj.rotate(o1);
-        refresh();
-      }
-    }
-
-    function mouseup() {
-      if (m0) {
-        mousemove();
-        m0 = null;
-      }
-    }
-
     function refresh() {
       svg.selectAll('.land').attr('d', path);
       svg.selectAll('.countries path').attr('d', path);
@@ -279,15 +261,5 @@ delayedUsers(users, callback) {
       proj.rotate(r1);
       refresh();
     }
-
-    // setTimeout(() => {
-    //   proj.scale(300);
-    //   svg.append('circle')
-    //       .attr('cx', width / 3)
-    //       .attr('cy', height / 3)
-    //       .attr('r', proj.scale())
-    //       .attr('class', 'noclicks')
-    //       .style('fill', 'url(#ocean_fill)');
-    // }, 2000);
   }
 }

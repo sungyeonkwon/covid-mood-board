@@ -1,3 +1,5 @@
+@import "variables";
+
 :host {
   display: block;
   background: white;
@@ -66,29 +68,32 @@ input {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background: red;
   filter: blur(10px);
   opacity: 0.2;
   transition: opacity 0.3s ease, transform 0.3s ease;
 
+  .anger & {
+    background: $red;
+  }
+
   .joy & {
-    background: yellow;
+    background: $yellow;
   }
 
   .fear & {
-    background: purple;
+    background: $purple;
   }
 
   .disgust & {
-    background: green;
+    background: $green;
   }
 
   .sadness & {
-    background: blue;
+    background: $blue;
   }
 
   .mixed & {
-    background: grey;
+    background: $grey;
   }
 
   .selected & {

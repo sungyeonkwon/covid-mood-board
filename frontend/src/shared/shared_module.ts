@@ -12,5 +12,5 @@ import {InfoComponent} from './info';
     InfoComponent,
   ]
 })
-export class InfoModule {
+export class SharedModule {
 }

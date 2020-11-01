@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {InfoComponent} from '../shared/info';
 import {UserResolver} from '../shared/user_resolver';
 
 import {SubmitComponent} from '../submit/submit';
@@ -35,6 +36,11 @@ const routes: Routes = [
     path: 'submit',
     pathMatch: 'full',
     component: SubmitComponent,
+  },
+  {
+    path: 'info',
+    pathMatch: 'full',
+    component: InfoComponent,
   },
 ];
 

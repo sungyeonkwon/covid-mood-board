@@ -1,3 +1,5 @@
+@import "variables";
+
 * {
   box-sizing: border-box;
 }
@@ -24,15 +26,8 @@ a {
 // map
 
 .land {
-  fill: orange;
+  fill: grey;
   stroke-opacity: 1;
-}
-
-.countries path {
-  stroke-linejoin: round;
-  stroke-width: 0.5;
-  fill: rgb(117, 87, 57);
-  opacity: 0.1;
 }
 
 .graticule {
@@ -50,7 +45,7 @@ a {
 }
 
 .point {
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 svg {
@@ -58,7 +53,8 @@ svg {
 }
 
 .messages {
-  font: 18px sans-serif;
-  fill: red;
-  opacity: 0.5;
+  font-family: "Lato", sans-serif;
+  fill: black;
+  font-size: 20px;
+  z-index: 10;
 }

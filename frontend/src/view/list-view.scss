@@ -1,5 +1,8 @@
+@import "variables";
+
 section {
   width: 100%;
+  padding-top: 100px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
@@ -39,26 +42,26 @@ span {
   transform: translate(-50%, -50%);
 
   &.joy {
-    background: yellow;
+    background: $yellow;
   }
 
   &.fear {
-    background: purple;
+    background: $purple;
   }
 
   &.disgust {
-    background: green;
+    background: $green;
   }
 
   &.anger {
-    background: red;
+    background: $red;
   }
 
   &.sadness {
-    background: blue;
+    background: $blue;
   }
 
   &.mixed {
-    background: grey;
+    background: $grey;
   }
 }

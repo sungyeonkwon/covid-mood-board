@@ -15,21 +15,21 @@ export enum Mood {
 }
 
 export enum MoodColour {
-  RED = 1,
-  GREEN,
-  PURPLE,
-  YELLOW,
-  MIXED,
-  BLUE,
+  RED = 'red',
+  GREEN = 'green',
+  PURPLE = 'purple',
+  YELLOW = 'yellow',
+  MIXED = 'grey',
+  BLUE = 'blue',
 }
 
-export interface MoodOption {
-  [Mood.ANGER]: MoodColour.RED;
-  [Mood.DISGUST]: MoodColour.GREEN;
-  [Mood.FEAR]: MoodColour.PURPLE;
-  [Mood.JOY]: MoodColour.YELLOW;
-  [Mood.MIXED]: MoodColour.MIXED;
-  [Mood.SADNESS]: MoodColour.BLUE;
+export const MoodColourMap = {
+  [Mood.ANGER]: MoodColour.RED,
+  [Mood.DISGUST]: MoodColour.GREEN,
+  [Mood.FEAR]: MoodColour.PURPLE,
+  [Mood.JOY]: MoodColour.YELLOW,
+  [Mood.MIXED]: MoodColour.MIXED,
+  [Mood.SADNESS]: MoodColour.BLUE,
 }
 
 export interface User {

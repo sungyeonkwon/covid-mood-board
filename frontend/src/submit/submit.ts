@@ -79,7 +79,7 @@ export class SubmitComponent implements OnInit {
     this.userService.addUser(user).subscribe(() => {console.log('??')});
   }
 
-  private getGeolocation() {
+  private getGeolocation(): any {
     const onSuccess = (position) => position.coords;
     // handle errors
     const onError = (error) => console.log('unble to retrive', error);
