@@ -36,7 +36,8 @@ class User(Base):
     )
     is_anonymous = BooleanField(default=False)  # required
     mood = CharField()  # required
-    coords = CharField()  # required
+    latitude = CharField()  # required
+    longitude = CharField()  # required
     message = TextField()  # required
     age = CharField(null=True)  # opt
     gender = CharField(null=True)  # opt

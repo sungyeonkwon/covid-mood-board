@@ -12,7 +12,8 @@ def create():
     if request.method == "POST":
         entry = User(
             age=request.json["age"],
-            coords=request.json["coords"],
+            latitude=request.json["latitude"],
+            longitude=request.json["longitude"],
             gender=request.json["gender"],
             is_anonymous=request.json["is_anonymous"],
             message=request.json["message"],
