@@ -1,75 +1,71 @@
 <div class="container">
-  <!-- {{ diagnostic}} -->
-  <p class="instruction">Choose your mood. You can select one or two.</p>
-  <div class="mood">
-    <div class="joy" (click)="addMood(moodRef.JOY)">
-      <div class="circle"></div>
-      <span class="text">{{moodRef.JOY}}</span>
-    </div>
-    <div class="anger" (click)="addMood(moodRef.ANGER)">
-      <div class="circle"></div>
-      <span class="text">{{moodRef.ANGER}}</span>
-    </div>
-    <div class="fear" (click)="addMood(moodRef.FEAR)">
-      <div class="circle"></div>
-      <span class="text">{{moodRef.FEAR}}</span>
-    </div>
-    <div class="disgust" (click)="addMood(moodRef.DISGUST)">
-      <div class="circle"></div>
-      <span class="text">{{moodRef.DISGUST}}</span>
-    </div>
-    <div class="sadness" (click)="addMood(moodRef.SADNESS)">
-      <div class="circle"></div>
-      <span class="text">{{moodRef.SADNESS}}</span>
-    </div>
-  </div>
+  <form [formGroup]="moodForm" (ngSubmit)="onSubmit(moodForm)">
+    <pre>{{moodForm.value | json}}</pre>
 
-  <div class="form-group">
-    <label for="message">Message</label>
-    <textarea id="message" [(ngModel)]="user.message" name="message"></textarea>
-  </div>
-
-  <div class="grid">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" id="name" required [(ngModel)]="user.name" name="name">
-    </div>
-    <div class="form-group">
-      <label for="age">Age</label>
-      <input type="text" id="age" [(ngModel)]="user.age" name="age">
-    </div>
-    <div class="form-group">
-      <label for="gender">Gender</label>
-      <div>
-        <input type="radio" id="huey" name="drone" value="huey" checked>
-        <label for="huey">Huey</label>
+    <p class="instruction">Choose your mood. You can select one or two.</p>
+    <div class="mood">
+      <div class="joy" (click)="toggleMood(moodRef.JOY)">
+        <div class="circle"></div>
+        <span class="text">{{moodRef.JOY}}</span>
       </div>
-
-      <div>
-        <input type="radio" id="dewey" name="drone" value="dewey">
-        <label for="dewey">Dewey</label>
+      <div class="anger" (click)="toggleMood(moodRef.ANGER)">
+        <div class="circle"></div>
+        <span class="text">{{moodRef.ANGER}}</span>
       </div>
-
-      <div>
-        <input type="radio" id="louie" name="drone" value="louie">
-        <label for="louie">Louie</label>
+      <div class="fear" (click)="toggleMood(moodRef.FEAR)">
+        <div class="circle"></div>
+        <span class="text">{{moodRef.FEAR}}</span>
+      </div>
+      <div class="disgust" (click)="toggleMood(moodRef.DISGUST)">
+        <div class="circle"></div>
+        <span class="text">{{moodRef.DISGUST}}</span>
+      </div>
+      <div class="sadness" (click)="toggleMood(moodRef.SADNESS)">
+        <div class="circle"></div>
+        <span class="text">{{moodRef.SADNESS}}</span>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="profession">Profession</label>
-      <input type="text" id="profession" [(ngModel)]="user.profession" name="profession">
+      <label for="message">Message</label>
+      <textarea id="message" formControlName="message" name="message">some mes</textarea>
     </div>
 
-    <div class="form-group">
-      <div>
-        <input type="checkbox" id="isAnoynymous" [(ngModel)]="user.isAnoynymous" name="anoynymous">
-        <label for="anoynymous">Anoynymous</label>
+    <div class="grid">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" required formControlName="name" name="name">
+      </div>
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="text" id="age" formControlName="age" name="age">
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <div *ngFor="let option of genderOptions">
+          <input type="radio" id="{{option}}" name="gender" value="{{option}}" formControlName="gender">
+          <label for="{{option}}">{{option}}</label>
+        </div>
       </div>
 
+      <div class="form-group">
+        <label for="profession">Profession</label>
+        <input type="text" id="profession" formControlName="profession" name="profession">
+      </div>
+
+      <div class="form-group">
+        <div>
+          <input type="checkbox" id="is_anonymous" formControlName="is_anonymous" name="is_anonymous">
+          <label for="is_anonymous">isAnonymous</label>
+        </div>
+
+      </div>
     </div>
-  </div>
 
 
-  <button type="submit" (click)="submit()">Submit your mood</button>
+    <button type="submit">Submit your mood</button>
+
+
+  </form>
+
 </div>
