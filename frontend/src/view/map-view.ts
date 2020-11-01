@@ -66,6 +66,9 @@ function delayedUsers(callback) {
 export class MapViewComponent implements OnInit {
   private users: User[];
 
+  viewHeight = 0;
+  viewWidth = 0;
+
   readonly users$ =
       (this.activatedRoute.data as Observable<User[]>)
           .pipe(
@@ -76,11 +79,12 @@ export class MapViewComponent implements OnInit {
   constructor(
       private readonly activatedRoute: ActivatedRoute,
   ) {
-    // console.log('this.serialisedUsers', this.serialisedUsers);
     this.users$.subscribe((users) => console.log('users', users));
   }
 
   ngOnInit() {
+    this.viewHeight = document.documentElement.clientHeight;
+    this.viewWidth = document.documentElement.clientWidth;
     this.init();
   }
 
@@ -91,12 +95,12 @@ export class MapViewComponent implements OnInit {
     var v0;
     var r0;
     var q0;
-    var width = 1200, height = 800;
+    var width = this.viewWidth, height = this.viewHeight;
     var rotate = [39.666666666666664, -30];
     var velocity = [.005, -0];
 
     var proj = d3.geoOrthographic()
-                   .scale(380)
+                   .scale(530)
                    .translate([width / 2, height / 2])
                    .clipAngle(90);
 
@@ -274,8 +278,6 @@ export class MapViewComponent implements OnInit {
       }
     }
 
-
-
     function refresh() {
       svg.selectAll('.land').attr('d', path);
       svg.selectAll('.countries path').attr('d', path);
@@ -310,5 +312,15 @@ export class MapViewComponent implements OnInit {
       proj.rotate(r1);
       refresh();
     }
+
+    // setTimeout(() => {
+    //   proj.scale(300);
+    //   svg.append('circle')
+    //       .attr('cx', width / 3)
+    //       .attr('cy', height / 3)
+    //       .attr('r', proj.scale())
+    //       .attr('class', 'noclicks')
+    //       .style('fill', 'url(#ocean_fill)');
+    // }, 2000);
   }
 }

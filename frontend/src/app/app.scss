@@ -6,6 +6,10 @@ nav {
   align-items: center;
   height: 56px;
   padding: 0 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
 
   h1 {
     font-size: 18px;

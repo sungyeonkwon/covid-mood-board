@@ -77,3 +77,8 @@ ssh sung@ip
 
 trouble shotting
 sudo tail -30 /var/log/nginx/error.log
+
+# TODO
+
+add zoom in / out
+connect db to map
