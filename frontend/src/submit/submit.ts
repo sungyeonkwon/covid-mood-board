@@ -73,7 +73,8 @@ export class SubmitComponent implements OnInit {
 
     const user = {
       ...moodForm.value,
-      coords: coords,  // check the order
+      latitude: coords.latitude,    // check the order
+      longitude: coords.longitude,  // check the order
       mood: 'some mood',
     };
 
@@ -81,12 +82,9 @@ export class SubmitComponent implements OnInit {
   }
 
   private getGeolocation() {
-    const onSuccess = (position) => {
-      const {latitude, longitude} = position.coords;
-      return `${latitude}, ${longitude}`;
-    };
-    const onError = (error) =>
-        console.log('unble to retrive', error);  // handle errors
+    const onSuccess = (position) => position.coords;
+    // handle errors
+    const onError = (error) => console.log('unble to retrive', error);
 
     return new Promise(function(resolve, reject) {
       navigator.geolocation.getCurrentPosition(

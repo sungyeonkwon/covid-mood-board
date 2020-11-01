@@ -34,7 +34,8 @@ export interface MoodOption {
 export interface User {
   id: number;
   age?: number;
-  coords: string;
+  latitude: string;
+  longitude: string;
   created_by: string;
   gender?: string;
   is_anonymous: boolean;

@@ -11,12 +11,48 @@ declare global {
   let topojson: any;
 }
 
-// function delayedHello(name, delay, callback) {
-//   setTimeout(function() {
-//     console.log('Hello, ' + name + '!');
-//     callback(null);
-//   }, delay);
-// }
+const feature = {
+  type: 'Feature',
+  properties: {
+    'latitude': 33.830013854,
+    'longitude': -84.399949383299997,
+  },
+  geometry:
+      {'type': 'Point', 'coordinates': [-84.40189524187565, 33.831959712605851]}
+};
+
+function delayedHello(name, delay, callback) {
+  setTimeout(function() {
+    console.log('Hello, ' + name + '!');
+    callback(null);
+  }, delay);
+}
+
+function delayedUsers(callback) {
+  const users = [
+    {
+      type: 'Feature',
+      properties: {
+        message: 'WOOOHOOOOOO welfkbwlekfnwleknf',
+        latitude: 33.830013854,
+        longitude: -84.399949383299997,
+      },
+      geometry:
+          {type: 'Point', coordinates: [-84.40189524187565, 33.831959712605851]}
+    },
+    {
+      type: 'Feature',
+      properties: {
+        message: 'WOOOHOOOOOO welfkbwlekfnwleknf',
+        latitude: 53.830013854,
+        longitude: -84.399949383299997,
+      },
+      geometry:
+          {type: 'Point', coordinates: [-84.40189524187565, 33.831959712605851]}
+    },
+  ]
+  callback(null, users);
+}
 
 @Component({
   selector: 'app-map-view',
@@ -25,6 +61,7 @@ declare global {
 })
 export class MapViewComponent implements OnInit {
   private users: User[];
+
   readonly users$ =
       (this.activatedRoute.data as Observable<User[]>)
           .pipe(
@@ -35,6 +72,7 @@ export class MapViewComponent implements OnInit {
   constructor(
       private readonly activatedRoute: ActivatedRoute,
   ) {
+    console.log('this.serialisedUsers', this.serialisedUsers);
     this.users$.subscribe((users) => console.log('users', users));
   }
 
@@ -66,11 +104,12 @@ export class MapViewComponent implements OnInit {
     queue()
         .defer(d3.json, 'assets/world-110m.json')
         .defer(d3.json, 'assets/places.json')
-        // .defer(delayedHello, 'Alice', 250)
+        .defer(delayedUsers)
         .await(ready);  // await callback to be called when all of the tasks
                         // complete
 
-    function ready(error, world, places) {
+    function ready(error, world, places, users) {
+      console.log('users', users)
       var ocean_fill = svg.append('defs')
                            .append('radialGradient')
                            .attr('id', 'ocean_fill')
@@ -149,14 +188,16 @@ export class MapViewComponent implements OnInit {
           .attr('class', 'point')
           .attr('d', path);
 
-      // svg.append('g')
-      //     .attr('class', 'points')
-      //     .selectAll('text')
-      //     .data(this.users.features)
-      //     .enter()
-      //     .append('path')
-      //     .attr('class', 'point')
-      //     .attr('d', path);
+      svg.append('g')
+          .attr('class', 'messages')
+          .selectAll('text')
+          .data(users)
+          .enter()
+          .append('text')
+          .attr('class', 'label')
+          .text(function(data) {
+            return data.properties.message
+          })
 
       svg.append('g')
           .attr('class', 'labels')
