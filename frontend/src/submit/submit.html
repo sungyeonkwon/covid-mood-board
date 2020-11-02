@@ -1,3 +1,7 @@
+<div class="loading" [class.show]="isLoading">
+  <h3>Please wait, your mood is being submmited. Please allow geolocation to ..</h3>
+</div>
+
 <form class="container" [formGroup]="moodForm" (ngSubmit)="onSubmit(moodForm)" autocomplete="off">
 
   <div class="form-group" *ngIf="selectedMood$ | async as selectedMood">

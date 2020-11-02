@@ -87,6 +87,8 @@ sudo tail -30 /var/log/nginx/error.log
 
 <!-- - revise colour scheme (15mins) -->
 
+- list view: order elements by created by (reverse)
+
 - add intial loading screen / drag around screen
 - submit waiting
 - disable multiple clicking

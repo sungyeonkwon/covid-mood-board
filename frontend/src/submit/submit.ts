@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {BehaviorSubject, ReplaySubject, Subject} from 'rxjs';
-import {pairwise, scan} from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {BehaviorSubject, of, ReplaySubject, Subject} from 'rxjs';
+import {catchError, finalize, pairwise, scan, tap, timeout} from 'rxjs/operators';
 
 import {genderOptions, Mood, User} from '../constants/constants';
 import {UserService} from '../shared/user_service';
@@ -21,9 +22,12 @@ export class SubmitComponent implements OnInit {
 
   showErrorMessage = false;
 
+  isLoading = false;
+
   constructor(
       private readonly userService: UserService,
       private readonly fb: FormBuilder,
+      private readonly router: Router,
   ) {}
 
   ngOnInit() {
@@ -45,10 +49,9 @@ export class SubmitComponent implements OnInit {
       is_anonymous: [false, Validators.required],
     });
 
-    // this.moodForm.valueChanges.subscribe(
-    //     val => {
-    //         // console.log('val', val);
-    //     });
+    this.moodForm.valueChanges.subscribe(val => {  // console.log('val', val);
+      console.log('@', this.moodForm);
+    });
   }
 
   addMood(mood: Mood) {
@@ -67,16 +70,31 @@ export class SubmitComponent implements OnInit {
       this.showErrorMessage = true;
       return;
     }
-
     const coords = await this.getGeolocation();
+
+    this.isLoading = true;
 
     const user = {
       ...moodForm.value,
-      latitude: coords.latitude,    // check the order
-      longitude: coords.longitude,  // check the order
+      latitude: coords.latitude,
+      longitude: coords.longitude,
     };
 
-    this.userService.addUser(user).subscribe(() => {console.log('??')});
+    this.userService.addUser(user)
+        .pipe(
+            tap(() => {
+              console.log('this.isLoading', this.isLoading);
+              this.isLoading = true;
+              console.log('this.isLoading', this.isLoading);
+            }),
+            catchError(error => {
+              console.log('Error while adding a mood: ', error);
+              return of([])
+            }),
+            finalize(() => this.isLoading = false))
+        .subscribe(() => {
+          this.router.navigate(['map']);
+        });
   }
 
   private getGeolocation(): any {
