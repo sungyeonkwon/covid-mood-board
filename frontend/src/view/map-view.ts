@@ -13,6 +13,10 @@ declare global {
   let v0: any;
   let r0: any;
   let q0: any;
+  let v1: any;
+  let r1: any;
+  let q1: any;
+  let proj: any;
 }
 
 const serialize =
@@ -37,21 +41,37 @@ const serialize =
       });
     }
 
-function
-delayedUsers(users, callback) {
+function delayedUsers(users, callback) {
   const serializedUsers = serialize(users);
   callback(null, serializedUsers);
 }
+
+const ROTATE = [39.666666666666664, -30];
+const VELOCITY = [.005, -0];
 
 @Component({
   selector: 'app-map-view',
   templateUrl: './map-view.html',
   styleUrls: ['./map-view.scss']
-}) export class MapViewComponent implements OnInit {
+})
+export class MapViewComponent implements OnInit {
   private users: User[];
+
+  projection: any;
 
   viewHeight = 0;
   viewWidth = 0;
+  svg: any;
+  path: any;
+  time = Date.now();
+  timer: any;
+
+  v0: any;
+  r0: any;
+  q0: any;
+  v1: any;
+  r1: any;
+  q1: any;
 
   readonly users$ =
       (this.activatedRoute.data as Observable<any>)  // TODO: type
@@ -72,50 +92,49 @@ delayedUsers(users, callback) {
     this.init();
   }
 
+  zoom(isZoomingIn = true) {
+    console.log('proj', this.projection);
+    if (isZoomingIn) {
+      // this.projection
+    } else {
+    }
+  }
+
   init() {
-    var time = Date.now();
-    var v0;
-    var r0;
-    var q0;
-    var width = this.viewWidth, height = this.viewHeight;
-    var rotate = [39.666666666666664, -30];
-    var velocity = [.005, -0];
+    var v0, r0, q0, v1, r1, q1;
 
-    var proj = d3.geoOrthographic()
-                   .scale(730)
-                   .translate([width / 2, height / 2])
-                   .clipAngle(90);
+    this.projection = d3.geoOrthographic()
+                          .scale(730)
+                          .translate([this.viewWidth / 2, this.viewHeight / 2])
+                          .clipAngle(90);
 
-    var path = d3.geoPath().projection(proj).pointRadius(3);
+    this.path = d3.geoPath().projection(this.projection).pointRadius(8);
 
     var graticule = d3.geoGraticule();
 
-    var svg = d3.select('#map-container')
-                  .append('svg')
-                  .attr('width', width)
-                  .attr('height', height);
+    this.svg = d3.select('#map-container')
+                   .append('svg')
+                   .attr('width', this.viewWidth)
+                   .attr('height', this.viewHeight);
 
-    svg.call(d3.drag().on('start', dragstarted).on('drag', dragged));
+    this.svg.call(d3.drag()
+                      .on('start', this.dragstarted.bind(this))
+                      .on('drag', this.dragged.bind(this)));
 
-    queue()
-        .defer(d3.json, 'assets/world-110m.json')
-        .defer(d3.json, 'assets/places.json')
-        .defer(delayedUsers, this.users)
-        .await(ready);  // await callback to be called when all of the tasks
-                        // complete
-
-    function ready(error, world, places, users) {
-      var ocean_fill = svg.append('defs')
+    const ready = (error, world, places, users) => {
+      var ocean_fill = this.svg.append('defs')
                            .append('radialGradient')
                            .attr('id', 'ocean_fill')
                            .attr('cx', '75%')
                            .attr('cy', '25%');
-      ocean_fill.append('stop').attr('offset', '5%').attr('stop-color', '#ddf');
+      ocean_fill.append('stop')
+          .attr('offset', '5%')
+          .attr('stop-color', 'lightgrey');
       ocean_fill.append('stop')
           .attr('offset', '100%')
           .attr('stop-color', '#9ab');
 
-      var globe_highlight = svg.append('defs')
+      var globe_highlight = this.svg.append('defs')
                                 .append('radialGradient')
                                 .attr('id', 'globe_highlight')
                                 .attr('cx', '75%')
@@ -129,45 +148,45 @@ delayedUsers(users, callback) {
           .attr('stop-color', '#ba9')
           .attr('stop-opacity', '0.2');
 
-      svg.append('circle')
-          .attr('cx', width / 2)
-          .attr('cy', height / 2)
-          .attr('r', proj.scale())
+      this.svg.append('circle')
+          .attr('cx', this.viewWidth / 2)
+          .attr('cy', this.viewHeight / 2)
+          .attr('r', this.projection.scale())  // here
           .attr('class', 'noclicks')
           .style('fill', 'url(#ocean_fill)');
 
-      svg.append('path')
+      this.svg.append('path')
           .datum(topojson.object(world, world.objects.land))
           .attr('class', 'land')
-          .attr('d', path);
+          .attr('d', this.path);
 
-      svg.append('path')
+      this.svg.append('path')
           .datum(graticule)
           .attr('class', 'graticule noclicks')
-          .attr('d', path);
+          .attr('d', this.path);
 
-      svg.append('circle')
-          .attr('cx', width / 2)
-          .attr('cy', height / 2)
-          .attr('r', proj.scale())
+      this.svg.append('circle')
+          .attr('cx', this.viewWidth / 2)
+          .attr('cy', this.viewHeight / 2)
+          .attr('r', this.projection.scale())
           .attr('class', 'noclicks')
           .style('fill', 'url(#globe_highlight)');
 
-      svg.append('circle')
-          .attr('cx', width / 2)
-          .attr('cy', height / 2)
-          .attr('r', proj.scale())
+      this.svg.append('circle')
+          .attr('cx', this.viewWidth / 2)
+          .attr('cy', this.viewHeight / 2)
+          .attr('r', this.projection.scale())
           .attr('class', 'noclicks')
           .style('fill', 'url(#globe_shading)');
 
-      svg.append('g')
+      this.svg.append('g')
           .attr('class', 'points')
           .selectAll('text')
           .data(users)
           .enter()
           .append('path')
           .attr('class', 'point')
-          .attr('d', path)
+          .attr('d', this.path)
           .attr('fill', function(d) {
             return d.properties.color;
           });
@@ -186,7 +205,7 @@ delayedUsers(users, callback) {
       //       return d.properties.color;
       //     });
 
-      svg.append('g')
+      this.svg.append('g')
           .attr('class', 'labels')
           .selectAll('text')
           .data(places.features)
@@ -197,69 +216,86 @@ delayedUsers(users, callback) {
             return d.properties.name
           })
 
-      position_labels();
-      refresh();
-      spin();
-    }
+              this.position_labels();
+      this.refresh();
+      this.spin();
+    };
 
-    function position_labels() {
-      var centerPos = proj.invert([width / 2, height / 2]);
-
-      svg.selectAll('.label')
-          .attr(
-              'text-anchor',
-              (d) => {
-                var x = proj(d.geometry.coordinates)[0];
-                return x < width / 2 - 20 ?
-                    'end' :
-                    x < width / 2 + 20 ? 'middle' : 'start'
-              })
-          .attr(
-              'transform',
-              (d) => {
-                var loc = proj(d.geometry.coordinates), x = loc[0], y = loc[1];
-                var offset = x < width / 2 ? -5 : 5;
-                return 'translate(' + (x + offset) + ',' + (y - 2) + ')'
-              })
-          .style('display', (d) => {
-            var d = d3.geoDistance(d.geometry.coordinates, centerPos);
-            return (d > 1.57) ? 'none' : 'inline';
-          })
-    }
-
-    function refresh() {
-      svg.selectAll('.land').attr('d', path);
-      svg.selectAll('.countries path').attr('d', path);
-      svg.selectAll('.graticule').attr('d', path);
-      svg.selectAll('.point').attr('d', path);
-      position_labels();
-    }
-
-    var timer;
-    function spin() {
-      timer = d3.timer(function() {
-        var dt = Date.now() - time;
-
-        proj.rotate(
-            [rotate[0] + velocity[0] * dt, rotate[1] + velocity[1] * dt]);
-
-        refresh();
-      });
-    }
-
-    function dragstarted() {
-      timer.stop();
-      v0 = versor.cartesian(proj.invert(d3.mouse(this)));
-      r0 = proj.rotate();
-      q0 = versor(r0);
-    }
-
-    function dragged() {
-      var v1 = versor.cartesian(proj.rotate(r0).invert(d3.mouse(this))),
-          q1 = versor.multiply(q0, versor.delta(v0, v1)),
-          r1 = versor.rotation(q1);
-      proj.rotate(r1);
-      refresh();
-    }
+    queue()
+        .defer(d3.json, 'assets/world-110m.json')
+        .defer(d3.json, 'assets/places.json')
+        .defer(delayedUsers, this.users)
+        .await(ready);  // await callback to be called when all of the tasks
+                        // complete
   }
+
+  spin = () => {
+    this.timer = d3.timer(() => {
+      var dt = Date.now() - this.time;
+
+      this.projection.rotate(
+          [ROTATE[0] + VELOCITY[0] * dt, ROTATE[1] + VELOCITY[1] * dt]);
+
+      this.refresh();
+    });
+  };
+
+  position_labels() {
+    var centerPos =
+        this.projection.invert([this.viewWidth / 2, this.viewHeight / 2]);
+
+    this.svg.selectAll('.label')
+        .attr(
+            'text-anchor',
+            (d) => {
+              var x = this.projection(d.geometry.coordinates)[0];
+              return x < this.viewWidth / 2 - 20 ?
+                  'end' :
+                  x < this.viewWidth / 2 + 20 ? 'middle' : 'start'
+            })
+        .attr(
+            'transform',
+            (d) => {
+              var loc = this.projection(d.geometry.coordinates), x = loc[0],
+                  y = loc[1];
+              var offset = x < this.viewWidth / 2 ? -5 : 5;
+              return 'translate(' + (x + offset) + ',' + (y - 2) + ')'
+            })
+        .style('display', (d) => {
+          var d = d3.geoDistance(d.geometry.coordinates, centerPos);
+          return (d > 1.57) ? 'none' : 'inline';
+        })
+  }
+
+  refresh = () => {
+    this.svg.selectAll('.land').attr('d', this.path);
+    this.svg.selectAll('.graticule').attr('d', this.path);
+    this.svg.selectAll('.point').attr('d', this.path);
+    this.position_labels();
+  };
+
+
+  dragstarted = () => {
+    console.log('dragstarted', this);
+
+    this.timer.stop();
+    console.log('1');
+    v0 = versor.cartesian(this.projection.invert(d3.mouse(this)));
+    console.log('2');
+    r0 = this.projection.rotate();
+    q0 = versor(r0);
+    console.log('v0', v0);
+    console.log('r0', r0);
+    console.log('q0', q0);
+  };
+
+  dragged = () => {
+    console.log('dragged');
+
+    v1 = versor.cartesian(this.projection.rotate(r0).invert(d3.mouse(this)));
+    q1 = versor.multiply(q0, versor.delta(v0, v1));
+    r1 = versor.rotation(q1);
+    this.projection.rotate(r1);
+    this.refresh();
+  };
 }

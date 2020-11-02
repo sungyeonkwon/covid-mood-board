@@ -5,3 +5,18 @@ section {
   justify-content: center;
   align-items: center;
 }
+
+.controls {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+}
+
+.zoom {
+  width: 60px;
+  height: 60px;
+  margin-top: 10px;
+  border: solid 1px black;
+  background: white;
+  display: block;
+}

@@ -87,14 +87,18 @@ sudo tail -30 /var/log/nginx/error.log
 
 <!-- - revise colour scheme (15mins) -->
 
+- add intial loading screen / drag around screen
 - submit waiting
-- submit reloading
+- disable multiple clicking
+- show message on hover / click
+- zoom in
+- /after submit view reloading
+
 - checkbox and radio button styling
 - Add google analytics
 
 ## NICE TO HAVE
 
-add zoom in / out
 If page scrolls, put .5 white to nav bar
 clean place json
 

@@ -45,9 +45,10 @@ export class SubmitComponent implements OnInit {
       is_anonymous: [false, Validators.required],
     });
 
-    this.moodForm.valueChanges.subscribe(val => {  // console.log('val', val);
-      console.log('@', this.moodForm);
-    });
+    // this.moodForm.valueChanges.subscribe(
+    //     val => {
+    //         // console.log('val', val);
+    //     });
   }
 
   addMood(mood: Mood) {
@@ -75,7 +76,6 @@ export class SubmitComponent implements OnInit {
       longitude: coords.longitude,  // check the order
     };
 
-    console.log('CHECK', user);
     this.userService.addUser(user).subscribe(() => {console.log('??')});
   }
 
