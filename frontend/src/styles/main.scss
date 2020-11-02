@@ -44,10 +44,6 @@ a {
   pointer-events: none;
 }
 
-.point {
-  opacity: 0.8;
-}
-
 svg {
   cursor: pointer;
 }
@@ -57,4 +53,27 @@ svg {
   fill: black;
   font-size: 20px;
   z-index: 10;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: left;
+  padding: 15px 15px;
+  max-width: 400px;
+  color: black;
+  font-family: "Lato", sans-serif;
+  border: 0px;
+  border-radius: 3px;
+  pointer-events: none;
+
+  p {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+
+  span {
+    font-size: 12px;
+    margin: 10px 0;
+    opacity: 0.5;
+  }
 }

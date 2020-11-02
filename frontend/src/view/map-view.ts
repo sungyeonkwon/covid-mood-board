@@ -22,11 +22,14 @@ declare global {
 const serialize =
     (users) => {
       return users.map((user) => {
-        console.log('user.mood', user.mood);
-        console.log('u', MoodColourMap[user.mood]);
         return {
           type: 'Feature', properties: {
             message: user.message,
+            name: user.name,
+            gender: user.gender,
+            age: user.age,
+            profession: user.profession,
+            is_anonymous: user.is_anonymous,
             color: MoodColourMap[user.mood],
           },
               geometry: {
@@ -48,6 +51,10 @@ function delayedUsers(users, callback) {
 
 const ROTATE = [39.666666666666664, -30];
 const VELOCITY = [.005, -0];
+const INITIAL_SCALE = 700;
+const SCALE_SPEED = 200;
+const MIN_SCALE = 100;
+const MAX_SCALE = 2500;
 
 @Component({
   selector: 'app-map-view',
@@ -65,6 +72,7 @@ export class MapViewComponent implements OnInit {
   path: any;
   time = Date.now();
   timer: any;
+  tooltip: any;
 
   v0: any;
   r0: any;
@@ -72,6 +80,8 @@ export class MapViewComponent implements OnInit {
   v1: any;
   r1: any;
   q1: any;
+
+  scale = INITIAL_SCALE;
 
   readonly users$ =
       (this.activatedRoute.data as Observable<any>)  // TODO: type
@@ -95,20 +105,35 @@ export class MapViewComponent implements OnInit {
   zoom(isZoomingIn = true) {
     console.log('proj', this.projection);
     if (isZoomingIn) {
-      // this.projection
+      console.log('in');
+      if (this.scale + SCALE_SPEED <= MAX_SCALE) {
+        this.scale += SCALE_SPEED;
+      }
     } else {
+      if (this.scale - SCALE_SPEED >= MIN_SCALE) {
+        this.scale -= SCALE_SPEED;
+      }
     }
+    this.projection.scale(this.scale);
+    this.svg.selectAll('circle').attr('r', this.projection.scale());
+    this.refresh();
   }
 
   init() {
     this.projection = d3.geoOrthographic()
-                          .scale(730)
+                          .scale(this.scale)
                           .translate([this.viewWidth / 2, this.viewHeight / 2])
                           .clipAngle(90);
 
     this.path = d3.geoPath().projection(this.projection).pointRadius(8);
 
     var graticule = d3.geoGraticule();
+
+
+    this.tooltip = d3.select('body')
+                       .append('div')
+                       .attr('class', 'tooltip')
+                       .style('opacity', 0);
 
     this.svg = d3.select('#map-container')
                    .append('svg')
@@ -118,7 +143,7 @@ export class MapViewComponent implements OnInit {
     this.svg.call(
         d3.drag().on('start', this.dragstarted).on('drag', this.dragged));
 
-    const ready = (error, world, places, users) => {
+    const ready = (_error, world, places, users) => {
       var ocean_fill = this.svg.append('defs')
                            .append('radialGradient')
                            .attr('id', 'ocean_fill')
@@ -184,23 +209,33 @@ export class MapViewComponent implements OnInit {
           .append('path')
           .attr('class', 'point')
           .attr('d', this.path)
-          .attr('fill', function(d) {
-            return d.properties.color;
-          });
+          .attr('fill', (d) => d.properties.color)
+          .on('mouseover',
+              (d) => {
+                const loc = this.projection(d.geometry.coordinates);
+                const x = loc[0];
+                const y = loc[1];
 
-      // svg.append('g')
-      //     .attr('class', 'messages')
-      //     .selectAll('text')
-      //     .data(users)
-      //     .enter()
-      //     .append('text')
-      //     .attr('class', 'label')
-      //     .text(function(data) {
-      //       return data.properties.message
-      //     })
-      //     .attr('fill', function(d) {
-      //       return d.properties.color;
-      //     });
+                const user = d.properties.is_anonymous ?
+                    'Anonymous' :
+                    `${d.properties.user}, ${d.properties.gender}, ${
+                        d.properties.age}, ${d.properties.profession}`;
+
+                this.tooltip.transition().duration(400).style('opacity', 1);
+                this.tooltip
+                    .html(`
+                <p>${d.properties.message}</p>
+                <span>${user}</span>
+                `)
+                    .style('left', x + 'px')
+                    .style('top', y + 'px')
+                    .style('background', d.properties.color)
+                    .style('opacity', 1);
+                console.log('mosueoverr');
+              })
+          .on('mouseout', (d) => {
+            this.tooltip.transition().duration(400).style('opacity', 0);
+          });
 
       this.svg.append('g')
           .attr('class', 'labels')
@@ -211,9 +246,9 @@ export class MapViewComponent implements OnInit {
           .attr('class', 'label')
           .text(function(d) {
             return d.properties.name
-          })
+          });
 
-              this.position_labels();
+      this.position_labels();
       this.refresh();
       this.spin();
     };
