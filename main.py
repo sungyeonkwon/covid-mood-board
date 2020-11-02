@@ -1,4 +1,5 @@
 from os import path, environ
+import datetime
 
 from flask import Flask, send_from_directory, render_template, request, json
 from playhouse.shortcuts import model_to_dict, dict_to_model
@@ -29,7 +30,7 @@ def create():
 
 @app.route("/users")
 def users():
-    query = User.select()
+    query = User.select().order_by(User.created_by.desc())
     users = [model_to_dict(user) for user in query]
     response = app.response_class(
         response=json.dumps(users),

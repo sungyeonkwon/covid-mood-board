@@ -82,16 +82,9 @@ sudo tail -30 /var/log/nginx/error.log
 
 ## MUST
 
-<!-- - remove point for region
-- add point for emotion -->
-
-<!-- - revise colour scheme (15mins) -->
-
-- list view: order elements by created by (reverse)
-
-- add intial loading screen / drag around screen
-- submit waiting
-- disable multiple clicking
+- handle geo location not getting the values -> use promise instead of await
+- add intial loading screen / disable multiple clicking
+- drag around instruction element
 - show message on hover / click
 - zoom in
 - /after submit view reloading

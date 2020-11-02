@@ -137,6 +137,7 @@ export class MapViewComponent implements OnInit {
 
     this.svg = d3.select('#map-container')
                    .append('svg')
+                   .style('fill', 'none')
                    .attr('width', this.viewWidth)
                    .attr('height', this.viewHeight);
 
