@@ -101,8 +101,6 @@ export class MapViewComponent implements OnInit {
   }
 
   init() {
-    var v0, r0, q0, v1, r1, q1;
-
     this.projection = d3.geoOrthographic()
                           .scale(730)
                           .translate([this.viewWidth / 2, this.viewHeight / 2])
@@ -117,9 +115,8 @@ export class MapViewComponent implements OnInit {
                    .attr('width', this.viewWidth)
                    .attr('height', this.viewHeight);
 
-    this.svg.call(d3.drag()
-                      .on('start', this.dragstarted.bind(this))
-                      .on('drag', this.dragged.bind(this)));
+    this.svg.call(
+        d3.drag().on('start', this.dragstarted).on('drag', this.dragged));
 
     const ready = (error, world, places, users) => {
       var ocean_fill = this.svg.append('defs')
@@ -240,7 +237,7 @@ export class MapViewComponent implements OnInit {
     });
   };
 
-  position_labels() {
+  position_labels = () => {
     var centerPos =
         this.projection.invert([this.viewWidth / 2, this.viewHeight / 2]);
 
@@ -265,7 +262,7 @@ export class MapViewComponent implements OnInit {
           var d = d3.geoDistance(d.geometry.coordinates, centerPos);
           return (d > 1.57) ? 'none' : 'inline';
         })
-  }
+  };
 
   refresh = () => {
     this.svg.selectAll('.land').attr('d', this.path);
@@ -274,28 +271,21 @@ export class MapViewComponent implements OnInit {
     this.position_labels();
   };
 
-
   dragstarted = () => {
-    console.log('dragstarted', this);
-
+    const svg = document.querySelector('svg');
     this.timer.stop();
-    console.log('1');
-    v0 = versor.cartesian(this.projection.invert(d3.mouse(this)));
-    console.log('2');
-    r0 = this.projection.rotate();
-    q0 = versor(r0);
-    console.log('v0', v0);
-    console.log('r0', r0);
-    console.log('q0', q0);
+    this.v0 = versor.cartesian(this.projection.invert(d3.mouse(svg)));
+    this.r0 = this.projection.rotate();
+    this.q0 = versor(this.r0);
   };
 
   dragged = () => {
-    console.log('dragged');
-
-    v1 = versor.cartesian(this.projection.rotate(r0).invert(d3.mouse(this)));
-    q1 = versor.multiply(q0, versor.delta(v0, v1));
-    r1 = versor.rotation(q1);
-    this.projection.rotate(r1);
+    const svg = document.querySelector('svg');
+    this.v1 =
+        versor.cartesian(this.projection.rotate(this.r0).invert(d3.mouse(svg)));
+    this.q1 = versor.multiply(this.q0, versor.delta(this.v0, this.v1));
+    this.r1 = versor.rotation(this.q1);
+    this.projection.rotate(this.r1);
     this.refresh();
   };
 }
