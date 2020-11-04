@@ -82,15 +82,17 @@ sudo tail -30 /var/log/nginx/error.log
 
 ## MUST
 
-- handle geo location not getting the values -> use promise instead of await
-- add intial loading screen / disable multiple clicking
+<!-- (o) Add google analytics -->
+- alert component making (not the page, but modal?) -> for different things
+  > initial map loading
+  > already submitted today. try again in 24 hours.
+  > when being submitted -> wait.
 - drag around instruction element
-- show message on hover / click
-- zoom in
-- /after submit view reloading
 
-- checkbox and radio button styling
-- Add google analytics
+- checkbox and radio button styling (use material)
+- get updatedUsers after submittion (new method?)
+- handle geo location not getting the values -> use promise instead of await
+- mobile view complete
 
 ## NICE TO HAVE
 
