@@ -103,9 +103,7 @@ export class MapViewComponent implements OnInit {
   }
 
   zoom(isZoomingIn = true) {
-    console.log('proj', this.projection);
     if (isZoomingIn) {
-      console.log('in');
       if (this.scale + SCALE_SPEED <= MAX_SCALE) {
         this.scale += SCALE_SPEED;
       }

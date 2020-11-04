@@ -1,18 +1,34 @@
 nav {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  font-size: 18px;
   align-items: center;
-  height: 56px;
-  padding: 0 30px;
+  background: rgba(white, 0.6);
+  color: white;
+  display: flex;
+  font-size: 18px;
+  justify-content: space-between;
+  left: 20px;
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 20px;
+  height: 56px;
   z-index: 9;
+  border: 3px solid black;
 
-  h1 {
-    font-size: 18px;
+  button {
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    width: 56px;
+    height: 56px;
+    background: none;
+
+    &:focus,
+    &:hover {
+      outline: none;
+      background: rgba(#d4d4d4, 0.6);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    top: 52px;
   }
 }
 
@@ -20,20 +36,66 @@ nav {
   border: 1px solid black;
   padding: 5px 10px;
   transition: background 0.2s ease, color 0.2s ease;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(white, 0.6);
+  border: 3px solid black;
+  font-size: 22px;
 
+  @media screen and (max-width: 749px) {
+    top: 52px;
+  }
+
+  @media screen and (min-width: 750px) {
+    padding: 0 20px 0 12px;
+  }
+
+  svg {
+    @media screen and (min-width: 750px) {
+      margin-right: 10px;
+    }
+  }
+
+  &:focus,
   &:hover {
-    color: white;
-    background: black;
+    outline: none;
+    background: rgba(#d4d4d4, 0.6);
   }
 }
 
-.margin {
-  margin-right: 30px;
+.logo {
+  font-size: 14px;
+  position: fixed;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  background: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  text-align: center;
+
+  @media screen and (min-width: 750px) {
+    font-size: 24px;
+    position: fixed;
+    top: 35px;
+    width: unset;
+    background: transparent;
+    color: black;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
-.logo {
-  position: fixed;
-  top: 18px;
-  left: 50%;
-  transform: translateX(-50%);
+svg {
+  fill: black;
+  width: 32px;
+  height: 32px;
 }

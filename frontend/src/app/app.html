@@ -1,11 +1,35 @@
 <nav>
-  <span>
-    <a class="margin" routerLink="/info">Info</a>
-    <a class="margin" routerLink="/map">Map View</a>
-    <a routerLink="/list">List View</a>
-  </span>
-  <a class="logo" routerLink>Covid-19 Mood Board</a>
-  <a class="submit" routerLink="/submit">Leave your mood</a>
+  <button routerLink="/info">
+    <svg viewBox="0 0 24 24">
+      <path d="M0 0h24v24H0V0z" fill="none" />
+      <path
+        d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+    </svg>
+  </button>
+  <button routerLink="/map">
+    <svg viewBox="0 0 24 24">
+      <path d="M0 0h24v24H0V0z" fill="none" />
+      <path
+        d="M12 7C6.48 7 2 9.24 2 12c0 2.24 2.94 4.13 7 4.77V20l4-4-4-4v2.73c-3.15-.56-5-1.9-5-2.73 0-1.06 3.04-3 8-3s8 1.94 8 3c0 .73-1.46 1.89-4 2.53v2.05c3.53-.77 6-2.53 6-4.58 0-2.76-4.48-5-10-5z" />
+    </svg>
+  </button>
+  <button routerLink="/list"><svg viewBox="0 0 24 24">
+      <path d="M0 0h24v24H0V0z" fill="none" />
+      <path
+        d="M4 5v13h17V5H4zm10 2v3.5h-3V7h3zM6 7h3v3.5H6V7zm0 9v-3.5h3V16H6zm5 0v-3.5h3V16h-3zm8 0h-3v-3.5h3V16zm-3-5.5V7h3v3.5h-3z" />
+    </svg>
+  </button>
 </nav>
+
+<a *ngIf="!hideLogo" class="logo" routerLink>Covid-19 Mood Board</a>
+
+<a class="submit" routerLink="/submit">
+  <svg viewBox="0 0 24 24">
+    <path d="M0 0h24v24H0V0z" fill="none" />
+    <path
+      d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" />
+  </svg>
+  <ng-container *ngIf="styleService.windowWidth >= breakpoint">Add Your Mood</ng-container>
+</a>
 
 <router-outlet></router-outlet>

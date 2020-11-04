@@ -82,17 +82,14 @@ export class SubmitComponent implements OnInit {
 
     this.userService.addUser(user)
         .pipe(
-            tap(() => {
-              console.log('this.isLoading', this.isLoading);
-              this.isLoading = true;
-              console.log('this.isLoading', this.isLoading);
-            }),
             catchError(error => {
               console.log('Error while adding a mood: ', error);
               return of([])
             }),
             finalize(() => this.isLoading = false))
         .subscribe(() => {
+          this.userService.getAllUsers().subscribe(
+              (users) => {console.log('got it? ', users)});
           this.router.navigate(['map']);
         });
   }
