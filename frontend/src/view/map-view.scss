@@ -18,6 +18,16 @@ section {
   cursor: pointer;
   margin-top: 10px;
   border: solid 1px black;
-  background: white;
+  background: black;
   display: block;
+}
+
+#map-container {
+  overflow: hidden;
+}
+
+svg {
+  width: 40px;
+  fill: white;
+  height: 40px;
 }

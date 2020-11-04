@@ -3,7 +3,15 @@
 </section>
 
 <div class="controls">
-  <!-- <button class="zoom in">spin</button> -->
-  <button class="zoom in" (click)="zoom()">+</button>
-  <button class="zoom out" (click)="zoom(false)"> - </button>
+  <button class="zoom in" (click)="zoom()">
+    <svg viewBox="0 0 24 24">
+      <path d="M0 0h24v24H0V0z" fill="none" />
+      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" /></svg>
+  </button>
+  <button class="zoom out" (click)="zoom(false)">
+
+    <svg viewBox="0 0 24 24">
+      <path d="M0 0h24v24H0V0z" fill="none" />
+      <path d="M19 13H5v-2h14v2z" /></svg>
+  </button>
 </div>
