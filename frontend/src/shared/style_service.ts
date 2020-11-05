@@ -1,7 +1,7 @@
 import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable} from '@angular/core';
 import {BehaviorSubject, fromEvent, ReplaySubject} from 'rxjs';
-import {takeUntil, throttleTime} from 'rxjs/operators';
+import {startWith, takeUntil, throttleTime} from 'rxjs/operators';
 
 export const BREAKPOINT = 750;
 

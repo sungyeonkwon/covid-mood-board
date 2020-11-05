@@ -5,6 +5,7 @@ section {
   justify-content: center;
   align-items: center;
   background-color: #e1e4e8;
+  overflow: hidden;
 }
 
 .controls {
@@ -21,10 +22,6 @@ section {
   border: solid 1px black;
   background: black;
   display: block;
-}
-
-#map-container {
-  overflow: hidden;
 }
 
 svg {

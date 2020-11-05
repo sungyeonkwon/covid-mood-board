@@ -82,6 +82,8 @@ sudo tail -30 /var/log/nginx/error.log
 
 ## MUST
 
+- fix mobile logo on submit
+
 Wednesday
 
 - dialog modal functionality

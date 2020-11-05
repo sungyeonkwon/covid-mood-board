@@ -4,7 +4,7 @@
 
 <form class="container" [formGroup]="moodForm" (ngSubmit)="onSubmit(moodForm)" autocomplete="off">
 
-  <div class="form-group" *ngIf="selectedMood$ | async as selectedMood">
+  <div class="form-group big" *ngIf="selectedMood$ | async as selectedMood">
     <h1 class="instruction">
       How are you feeling?
     </h1>
@@ -36,9 +36,9 @@
     </div>
   </div>
 
-  <div class="form-group message">
+  <div class="form-group big message">
     <h1 class="instruction">
-      What's your thought you want to let it out?
+      What this padamic has brought to you?
     </h1>
     <textarea id="message" formControlName="message" name="message" maxlength="600"></textarea>
   </div>

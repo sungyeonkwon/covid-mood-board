@@ -7,8 +7,8 @@
 
 .container {
   max-width: 960px;
-  width: 90vw;
-  padding: 0 0 100px;
+  width: 100vw;
+  padding: 0 20px 100px;
   margin: 0 auto;
   justify-content: center;
   display: flex;
@@ -16,19 +16,26 @@
 }
 
 .instruction {
-  line-height: 35px;
-  margin: 90px 0 80px;
+  line-height: 42px;
+  margin: 0 0 50px;
   font-weight: 400;
   text-align: center;
-  font-size: 36px;
+  font-size: 34px;
   // font-family: "Frank Ruhl Libre", serif;
+
+  @media screen and (max-width: 859px) {
+    font-size: 24px;
+    line-height: 36px;
+  }
 }
 
 label {
-  color: rgba(black, 0.5);
-  font-size: 15px;
-  margin-bottom: 7px;
-  text-transform: capitalize;
+  // color: rgba(black, 0.5);
+  font-size: 17px;
+  margin-bottom: 11px;
+  :not(:last-of-type) {
+    text-transform: capitalize;
+  }
 }
 
 textarea {
@@ -43,11 +50,21 @@ textarea {
   background: rgba(black, 0.03);
   border: none;
   color: rgba(black, 0.6);
+  border: 3px solid black;
 }
 
 .grid {
   display: flex;
   justify-content: space-between;
+
+  @media screen and (max-width: 859px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    .form-group {
+      width: 100%;
+    }
+  }
 }
 
 input {
@@ -57,7 +74,7 @@ input {
   color: rgba(black, 0.6);
   background: rgba(black, 0.03);
   padding: 10px 15px;
-  border: none;
+  border: 3px solid black;
 }
 
 .circle {
@@ -70,6 +87,11 @@ input {
   border-radius: 50%;
   opacity: 0.2;
   transition: opacity 0.3s ease, transform 0.3s ease;
+
+  @media screen and (max-width: 859px) {
+    width: 80px;
+    height: 80px;
+  }
 
   .anger & {
     background: $red;
@@ -130,8 +152,16 @@ button {
   justify-content: space-between;
   margin-bottom: 20px;
 
+  @media screen and (max-width: 859px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-row-gap: 50px;
+  }
+
   > div {
     position: relative;
+    display: flex;
+    justify-content: center;
   }
 
   .text {
@@ -139,13 +169,17 @@ button {
     pointer-events: none;
     left: 50%;
     bottom: 0;
-    font-size: 15px;
+    font-size: 17px;
     transform: translate(-50%, 40px);
     position: absolute;
     z-index: 9;
     text-transform: capitalize;
     transition: all 0.3s ease;
     transform-origin: -50% center;
+
+    @media screen and (max-width: 859px) {
+      transform: translate(-50%, 25px);
+    }
   }
 }
 
@@ -157,7 +191,11 @@ button {
 }
 
 .form-group {
-  margin: 20px 0;
+  margin: 50px 0 0;
+
+  &.big {
+    margin: 150px 0 0;
+  }
 
   &.message {
     label {
@@ -210,6 +248,7 @@ button {
 
     label {
       display: block;
+      text-transform: capitalize;
     }
   }
 

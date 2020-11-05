@@ -5,18 +5,29 @@ section {
   padding: 100px 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+
+  @media screen and (max-width: 749px) {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 p {
   font-size: 24px;
   z-index: 1;
-  // font-family: "Frank Ruhl Libre", serif;
   line-height: 36px;
+
+  @media screen and (max-width: 749px) {
+    font-size: 17px;
+    line-height: 28px;
+  }
 }
 
 span {
   z-index: 1;
   font-size: 16px;
+  @media screen and (max-width: 749px) {
+    font-size: 13px;
+  }
 }
 
 .user {
@@ -28,6 +39,10 @@ span {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  @media screen and (max-width: 749px) {
+    padding: 60px 20px;
+  }
 }
 
 .circle {
@@ -38,6 +53,11 @@ span {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media screen and (max-width: 749px) {
+    width: 150px;
+    height: 150px;
+  }
 
   &.joy {
     background: $yellow;

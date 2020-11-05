@@ -57,7 +57,7 @@ svg {
 }
 
 div.tooltip {
-  position: absolute;
+  position: fixed;
   text-align: left;
   padding: 15px 15px;
   max-width: 400px;
