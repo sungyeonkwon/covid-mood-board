@@ -149,11 +149,8 @@ export class MapViewComponent implements OnInit {
                            .attr('cx', '75%')
                            .attr('cy', '25%');
       ocean_fill.append('stop')
-          .attr('offset', '5%')
-          .attr('stop-color', 'lightgrey');
-      ocean_fill.append('stop')
           .attr('offset', '100%')
-          .attr('stop-color', '#9ab');
+          .attr('stop-color', '#c7ccd4');
 
       var globe_highlight = this.svg.append('defs')
                                 .append('radialGradient')
@@ -161,12 +158,12 @@ export class MapViewComponent implements OnInit {
                                 .attr('cx', '75%')
                                 .attr('cy', '25%');
       globe_highlight.append('stop')
-          .attr('offset', '5%')
-          .attr('stop-color', '#ffd')
-          .attr('stop-opacity', '0.6');
+          .attr('offset', '20%')
+          .attr('stop-color', '#fff')
+          .attr('stop-opacity', '0.5');
       globe_highlight.append('stop')
           .attr('offset', '100%')
-          .attr('stop-color', '#ba9')
+          .attr('stop-color', '#66687a')
           .attr('stop-opacity', '0.2');
 
       this.svg.append('circle')

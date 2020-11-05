@@ -14,6 +14,7 @@ body {
 a {
   text-decoration: none;
   color: black;
+  border-bottom: 1px solid transparent;
 
   &:visited {
     color: black;

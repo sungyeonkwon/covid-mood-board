@@ -1,3 +1,4 @@
+import {ViewportScroller} from '@angular/common';
 import {Component} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {BREAKPOINT, StyleService} from 'src/shared/style_service';
@@ -9,17 +10,21 @@ import {BREAKPOINT, StyleService} from 'src/shared/style_service';
 })
 export class AppComponent {
   hideLogo = false;
+  currentUrlPath = '';
   breakpoint = BREAKPOINT;
+
   constructor(
       private readonly router: Router,
-      private readonly styleService: StyleService,
+      readonly styleService: StyleService,
+      private readonly viewportScroller: ViewportScroller,
   ) {
-    this.router.events.subscribe((event) => {
+    this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
+        // Ensure the view to start from top in a new route.
+        this.viewportScroller.scrollToPosition([0, 0]);
+
         const urlDelimitators = new RegExp(/[?//,;&:#$+=]/);
-        let currentUrlPath = event.url.slice(1).split(urlDelimitators)[0];
-        this.hideLogo = currentUrlPath === 'submit' &&
-            this.styleService.innerWidth >= BREAKPOINT;
+        this.currentUrlPath = event.url.slice(1).split(urlDelimitators)[0];
       }
     });
   }
