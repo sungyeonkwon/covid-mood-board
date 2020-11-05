@@ -82,21 +82,41 @@ sudo tail -30 /var/log/nginx/error.log
 
 ## MUST
 
-<!-- (o) Add google analytics -->
-- alert component making (not the page, but modal?) -> for different things
-  > initial map loading
-  > already submitted today. try again in 24 hours.
-  > when being submitted -> wait.
-- drag around instruction element
+Wednesday
 
-- checkbox and radio button styling (use material)
-- get updatedUsers after submittion (new method?)
+- dialog modal functionality
+- alert component making (not the page, but modal?) -> for different things
+  > initial map loading [no click]
+  > already submitted today. try again in 24 hours. [ok button]
+  > when being submitted -> wait. [no click]
+  > geo location added: [ok to proceed] [not ok]
 - handle geo location not getting the values -> use promise instead of await
-- mobile view complete
+- drag around instruction element
+- get updatedUsers after submittion (new method?)
+
+Thursday
+
+- dialog modal design
+- mobile view design
+- checkbox and radio button styling (use material)
+
+Friday
+
+- All view complete
+- Deploy
+
+Satuday
+
+- Set up sungkwon.info on digital ocean (should be just an hour)
+- sungkwon github io take down? (secret)
+- 2 posts
+- Git pro / git alias sort out
+- linux journey book
+
+Sunday
+
+- birth and death of meaning
 
 ## NICE TO HAVE
-
-If page scrolls, put .5 white to nav bar
-clean place json
 
 http://bl.ocks.org/tlfrd/df1f1f705c7940a6a7c0dca47041fec8
