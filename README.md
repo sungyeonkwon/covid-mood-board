@@ -82,9 +82,10 @@ sudo tail -30 /var/log/nginx/error.log
 
 ## MUST
 
-- fix mobile logo on submit
+Thursday
 
-Wednesday
+- fix mobile logo on submit page
+- radio button / check styling (30 mins)
 
 - dialog modal functionality
 - alert component making (not the page, but modal?) -> for different things
@@ -96,14 +97,7 @@ Wednesday
 - drag around instruction element
 - get updatedUsers after submittion (new method?)
 
-Thursday
-
 - dialog modal design
-- mobile view design
-- checkbox and radio button styling (use material)
-
-Friday
-
 - All view complete
 - Deploy
 
