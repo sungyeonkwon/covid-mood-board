@@ -87,8 +87,8 @@ MVP
 [x] geo location added: -> use promise instead of await [ok to proceed, with no geo data -> only on list]
 [x] when being submitted -> wait. [no click]
 [x] fix mobile logo on submit/list page (scroll -> add class opacity 0)
+[x] Add class for info paragraph? or hard code it
 [ ] update map/list after submission
-[ ] Add class for info paragraph? or hard code it
 
 NICE TO HAVEs
 
