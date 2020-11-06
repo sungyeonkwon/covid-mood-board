@@ -21,7 +21,6 @@
   font-weight: 400;
   text-align: center;
   font-size: 34px;
-  // font-family: "Frank Ruhl Libre", serif;
 
   @media screen and (max-width: 859px) {
     font-size: 24px;
@@ -30,7 +29,6 @@
 }
 
 label {
-  // color: rgba(black, 0.5);
   font-size: 17px;
   margin-bottom: 11px;
   :not(:last-of-type) {
@@ -286,8 +284,22 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(grey, 0.9);
+  background: rgba(#595959, 0.95);
+  color: white;
   display: none;
+  z-index: 999;
+
+  p {
+    font-size: 28px;
+    max-width: 500px;
+
+    @media screen and (max-width: 749px) {
+      font-size: 24px;
+      max-width: 300px;
+      text-align: center;
+      line-height: 34px;
+    }
+  }
 
   &.show {
     display: flex;

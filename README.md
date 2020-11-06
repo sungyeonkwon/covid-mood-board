@@ -85,8 +85,8 @@ sudo tail -30 /var/log/nginx/error.log
 MVP
 
 [x] geo location added: -> use promise instead of await [ok to proceed, with no geo data -> only on list]
+[x] when being submitted -> wait. [no click]
 [ ] fix mobile logo on submit/list page (scroll -> add class opacity 0)
-[ ] when being submitted -> wait. [no click]
 [ ] update map/list after submission
 
 - dialog modal functionality
