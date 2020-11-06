@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 import {DialogComponent} from './dialog';
 
 import {InfoComponent} from './info';
@@ -8,7 +9,9 @@ import {InfoComponent} from './info';
     InfoComponent,
     DialogComponent,
   ],
-  imports: [],
+  imports: [
+    RouterModule,
+  ],
   providers: [],
   exports: [
     InfoComponent,

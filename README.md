@@ -91,7 +91,10 @@ MVP
 [x] submit button hover (10mins)
 [x] on mobile, start small (30mins)
 [x] zoom level adjustment (30mins)
-[ ] update map/list after submission
+[x] update map/list after submission
+[x] list view also use route data
+[x] remove console log
+[ ] add instruction for geolocation
 
 NICE TO HAVEs
 
