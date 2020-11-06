@@ -88,6 +88,8 @@ nav {
   height: 32px;
   text-align: center;
   z-index: 99;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 
   @media screen and (min-width: 750px) {
     font-size: 24px;
@@ -98,6 +100,10 @@ nav {
     color: black;
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  &.hide {
+    opacity: 0;
   }
 }
 

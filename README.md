@@ -86,21 +86,14 @@ MVP
 
 [x] geo location added: -> use promise instead of await [ok to proceed, with no geo data -> only on list]
 [x] when being submitted -> wait. [no click]
-[ ] fix mobile logo on submit/list page (scroll -> add class opacity 0)
+[x] fix mobile logo on submit/list page (scroll -> add class opacity 0)
 [ ] update map/list after submission
-
-- dialog modal functionality
-- alert component making (not the page, but modal?) -> for different things
-
-- when being submitted -> wait. [no click]
+[ ] Add class for info paragraph? or hard code it
 
 NICE TO HAVEs
 
 - already submitted today. try again in 24 hours. [ok button]
 - drag around instruction element
-
-- dialog modal design
-- All view complete
 
 - Deploy
 - reddit / twitter annoucement

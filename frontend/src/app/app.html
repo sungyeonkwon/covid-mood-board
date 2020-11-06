@@ -21,7 +21,8 @@
   </button>
 </nav>
 
-<a *ngIf="!hideLogo" class="logo" routerLink>Covid-19 Mood Board</a>
+<a *ngIf="!hideLogo" class="logo" [class.hide]="scrollHide && styleService.windowWidth >= breakpoint"
+  routerLink>Covid-19 Mood Board</a>
 
 <a class="submit" routerLink="/submit">
   <svg viewBox="0 0 24 24">
