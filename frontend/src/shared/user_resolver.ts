@@ -10,6 +10,11 @@ export class UserResolver implements Resolve<User[]|undefined> {
   constructor(private readonly userService: UserService) {}
 
   resolve(): Observable<User[]> {
-    return this.userService.getAllUsers();
+    if (this.userService.shouldFetchNew) {
+      this.userService.shouldFetchNew = false;
+      return this.userService.fetchUsers();
+    } else {
+      return this.userService.getAllUsers();
+    }
   }
 }

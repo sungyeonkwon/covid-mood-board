@@ -87,14 +87,14 @@ export class MapViewComponent implements OnInit, OnDestroy {
           .pipe(
               map(data => data.users.filter(
                       users => !!users.latitude && !!users.longitude)),
-              tap((users) => this.users =
-                      users));  // TODO: add interface for users data
+              tap((users) => this.users = users))
+          .subscribe();  // TODO: add interface for users data
   private readonly destroy$ = new ReplaySubject<void>(1);
 
   constructor(
       private readonly activatedRoute: ActivatedRoute,
   ) {
-    this.users$.subscribe((users) => console.log('users', users));
+    // this.users$.subscribe((users) => console.log('users', users));
   }
 
   ngOnDestroy() {
@@ -245,7 +245,6 @@ export class MapViewComponent implements OnInit, OnDestroy {
                     .style('top', y + 'px')
                     .style('background', d.properties.color)
                     .style('opacity', 1);
-                console.log('mosueoverr');
               })
           .on('mouseout', (d) => {
             this.tooltip.transition().duration(400).style('opacity', 0);
