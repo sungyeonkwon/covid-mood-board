@@ -49,9 +49,10 @@ export class SubmitComponent implements OnInit {
       is_anonymous: [false, Validators.required],
     });
 
-    this.moodForm.valueChanges.subscribe(val => {  // console.log('val', val);
-      console.log('@', this.moodForm);
-    });
+    // this.moodForm.valueChanges.subscribe(val => {  // console.log('val',
+    // val);
+    //   console.log('@', this.moodForm);
+    // });
   }
 
   addMood(mood: Mood) {
@@ -97,6 +98,7 @@ export class SubmitComponent implements OnInit {
               .subscribe(() => {
                 // this.userService.getAllUsers().subscribe(
                 //     (users) => {console.log('got it? ', users)});
+                this.userService.shouldFetchNew = true;
                 this.isLoading = false;
                 this.router.navigate(['map']);
               });
