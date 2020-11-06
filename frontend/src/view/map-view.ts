@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
@@ -55,6 +55,8 @@ const INITIAL_SCALE = 700;
 const SCALE_SPEED = 200;
 const MIN_SCALE = 100;
 const MAX_SCALE = 2500;
+const SCALE_POINTS =
+    [150, 200, 250, 350, 500, 700, 950, 1250, 1700, 2200, 2900];
 
 @Component({
   selector: 'app-map-view',
@@ -64,6 +66,7 @@ const MAX_SCALE = 2500;
 export class MapViewComponent implements OnInit {
   private users: User[];
 
+  scaleIndex = 5;
   projection: any;
 
   viewHeight = 0;
@@ -81,7 +84,7 @@ export class MapViewComponent implements OnInit {
   r1: any;
   q1: any;
 
-  scale = INITIAL_SCALE;
+  scale = SCALE_POINTS[this.scaleIndex];
 
   readonly users$ =
       (this.activatedRoute.data as Observable<any>)  // TODO: type
@@ -97,20 +100,32 @@ export class MapViewComponent implements OnInit {
     this.users$.subscribe((users) => console.log('users', users));
   }
 
+  private initScale() {
+    if (this.viewWidth < 400) {
+      this.scaleIndex = 0;
+    } else if (this.viewWidth < 800) {
+      this.scaleIndex = 2;
+    }
+    this.scale = SCALE_POINTS[this.scaleIndex];
+  }
+
   ngOnInit() {
     this.viewHeight = document.documentElement.clientHeight;
     this.viewWidth = document.documentElement.clientWidth;
+    this.initScale();
     this.init();
   }
 
   zoom(isZoomingIn = true) {
     if (isZoomingIn) {
-      if (this.scale + SCALE_SPEED <= MAX_SCALE) {
-        this.scale += SCALE_SPEED;
+      if (this.scaleIndex < SCALE_POINTS.length - 1) {
+        this.scaleIndex += 1;
+        this.scale = SCALE_POINTS[this.scaleIndex];
       }
     } else {
-      if (this.scale - SCALE_SPEED >= MIN_SCALE) {
-        this.scale -= SCALE_SPEED;
+      if (this.scaleIndex >= 1) {
+        this.scaleIndex -= 1;
+        this.scale = SCALE_POINTS[this.scaleIndex];
       }
     }
     this.projection.scale(this.scale);

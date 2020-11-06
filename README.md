@@ -88,6 +88,9 @@ MVP
 [x] when being submitted -> wait. [no click]
 [x] fix mobile logo on submit/list page (scroll -> add class opacity 0)
 [x] Add class for info paragraph? or hard code it
+[x] submit button hover (10mins)
+[x] on mobile, start small (30mins)
+[x] zoom level adjustment (30mins)
 [ ] update map/list after submission
 
 NICE TO HAVEs
