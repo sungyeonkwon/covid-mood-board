@@ -46,6 +46,7 @@ def users():
 @app.route("/")
 @app.route("/list")
 @app.route("/map")
+@app.route("/info")
 @app.route("/submit")
 def root():
     return send_from_directory("dist/", "index.html")
