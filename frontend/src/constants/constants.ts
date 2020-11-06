@@ -15,12 +15,12 @@ export enum Mood {
 }
 
 export enum MoodColour {
-  RED = 'red',
-  GREEN = 'green',
-  PURPLE = 'purple',
-  YELLOW = 'yellow',
+  RED = '#e33d3d',
+  GREEN = '#3d9c48',
+  PURPLE = '#9061c9',
+  YELLOW = '#fadd02',
   MIXED = 'grey',
-  BLUE = 'blue',
+  BLUE = '#6699ff',
 }
 
 export const MoodColourMap = {
