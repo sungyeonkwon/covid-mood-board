@@ -86,7 +86,8 @@ export class MapViewComponent implements OnInit {
   readonly users$ =
       (this.activatedRoute.data as Observable<any>)  // TODO: type
           .pipe(
-              map(data => data.users),
+              map(data => data.users.filter(
+                      users => !!users.latitude && !!users.longitude)),
               tap((users) => this.users =
                       users));  // TODO: add interface for users data
 

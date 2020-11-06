@@ -82,26 +82,30 @@ sudo tail -30 /var/log/nginx/error.log
 
 ## MUST
 
-Thursday
+MVP
 
-- fix mobile logo on submit page
-- radio button / check styling (30 mins)
+[x] geo location added: -> use promise instead of await [ok to proceed, with no geo data -> only on list]
+[ ] fix mobile logo on submit/list page (scroll -> add class opacity 0)
+[ ] when being submitted -> wait. [no click]
+[ ] update map/list after submission
 
 - dialog modal functionality
 - alert component making (not the page, but modal?) -> for different things
-  > initial map loading [no click]
-  > already submitted today. try again in 24 hours. [ok button]
-  > when being submitted -> wait. [no click]
-  > geo location added: [ok to proceed] [not ok]
-- handle geo location not getting the values -> use promise instead of await
+
+- when being submitted -> wait. [no click]
+
+NICE TO HAVEs
+
+- already submitted today. try again in 24 hours. [ok button]
 - drag around instruction element
-- get updatedUsers after submittion (new method?)
 
 - dialog modal design
 - All view complete
-- Deploy
 
-Satuday
+- Deploy
+- reddit / twitter annoucement
+
+Friday
 
 - Set up sungkwon.info on digital ocean (should be just an hour)
 - sungkwon github io take down? (secret)

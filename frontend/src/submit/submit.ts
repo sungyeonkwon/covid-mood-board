@@ -32,9 +32,7 @@ export class SubmitComponent implements OnInit {
 
   ngOnInit() {
     this.moodForm = this.fb.group({
-      name: [
-        '',
-      ],
+      name: [''],
       age: [
         '',
         [
@@ -43,6 +41,8 @@ export class SubmitComponent implements OnInit {
         ]
       ],
       gender: [''],
+      latitude: [''],
+      longitude: [''],
       profession: [''],
       message: ['', Validators.required],  // Validators.minLength(15)
       mood: [this.selectedMood$.getValue(), Validators.required],
@@ -70,27 +70,34 @@ export class SubmitComponent implements OnInit {
       this.showErrorMessage = true;
       return;
     }
-    const coords = await this.getGeolocation();
-
+    let user;
     this.isLoading = true;
 
-    const user = {
-      ...moodForm.value,
-      latitude: coords.latitude,
-      longitude: coords.longitude,
-    };
-
-    this.userService.addUser(user)
-        .pipe(
-            catchError(error => {
-              console.log('Error while adding a mood: ', error);
-              return of([])
-            }),
-            finalize(() => this.isLoading = false))
-        .subscribe(() => {
-          this.userService.getAllUsers().subscribe(
-              (users) => {console.log('got it? ', users)});
-          this.router.navigate(['map']);
+    this.getGeolocation()
+        .then(
+            (successResult) => {
+              user = {
+                ...moodForm.value,
+                latitude: successResult.latitude,
+                longitude: successResult.longitude,
+              };
+            },
+            (_errorResult) => {
+              user = moodForm.value;
+            })
+        .finally(() => {
+          this.userService.addUser(user)
+              .pipe(
+                  catchError(error => {
+                    console.log('Error while adding a mood: ', error);
+                    return of([])
+                  }),
+                  finalize(() => this.isLoading = false))
+              .subscribe(() => {
+                this.userService.getAllUsers().subscribe(
+                    (users) => {console.log('got it? ', users)});
+                this.router.navigate(['map']);
+              });
         });
   }
 
