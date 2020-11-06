@@ -137,7 +137,12 @@ button {
   line-height: 32px;
   font-size: 24px;
   cursor: pointer;
-  // font-family: "Frank Ruhl Libre", serif;
+
+  &:focus,
+  &:hover {
+    outline: none;
+    background: rgba(#d4d4d4, 0.6);
+  }
 
   &:disabled {
     cursor: not-allowed;
