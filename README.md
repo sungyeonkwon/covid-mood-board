@@ -95,6 +95,7 @@ MVP
 
 NICE TO HAVEs
 
+- update map on resize
 - already submitted today. try again in 24 hours. [ok button]
 - drag around instruction element
 
