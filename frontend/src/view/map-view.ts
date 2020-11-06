@@ -21,7 +21,7 @@ declare global {
 
 const serialize =
     (users) => {
-      return users.map((user) => {
+      return users.reverse().map((user) => {
         return {
           type: 'Feature', properties: {
             message: user.message,
