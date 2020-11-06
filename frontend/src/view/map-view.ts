@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
+import {Observable, ReplaySubject} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 
 import {MoodColourMap, User} from '../constants/constants';
@@ -51,10 +51,6 @@ function delayedUsers(users, callback) {
 
 const ROTATE = [39.666666666666664, -30];
 const VELOCITY = [.005, -0];
-const INITIAL_SCALE = 700;
-const SCALE_SPEED = 200;
-const MIN_SCALE = 100;
-const MAX_SCALE = 2500;
 const SCALE_POINTS =
     [150, 200, 250, 350, 500, 700, 950, 1250, 1700, 2200, 2900];
 
@@ -63,7 +59,7 @@ const SCALE_POINTS =
   templateUrl: './map-view.html',
   styleUrls: ['./map-view.scss']
 })
-export class MapViewComponent implements OnInit {
+export class MapViewComponent implements OnInit, OnDestroy {
   private users: User[];
 
   scaleIndex = 5;
@@ -93,11 +89,17 @@ export class MapViewComponent implements OnInit {
                       users => !!users.latitude && !!users.longitude)),
               tap((users) => this.users =
                       users));  // TODO: add interface for users data
+  private readonly destroy$ = new ReplaySubject<void>(1);
 
   constructor(
       private readonly activatedRoute: ActivatedRoute,
   ) {
     this.users$.subscribe((users) => console.log('users', users));
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   private initScale() {
