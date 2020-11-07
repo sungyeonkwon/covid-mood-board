@@ -51,8 +51,7 @@ function delayedUsers(users, callback) {
 
 const ROTATE = [39.666666666666664, -30];
 const VELOCITY = [.005, -0];
-const SCALE_POINTS =
-    [150, 200, 250, 350, 500, 700, 950, 1250, 1700, 2200, 2900];
+const SCALE_POINTS = [150, 200, 250, 350, 500, 700, 1000, 1500, 3000];
 
 @Component({
   selector: 'app-map-view',
@@ -62,7 +61,7 @@ const SCALE_POINTS =
 export class MapViewComponent implements OnInit, OnDestroy {
   private users: User[];
 
-  scaleIndex = 5;
+  scaleIndex = 4;
   projection: any;
 
   viewHeight = 0;
@@ -141,7 +140,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
                           .translate([this.viewWidth / 2, this.viewHeight / 2])
                           .clipAngle(90);
 
-    this.path = d3.geoPath().projection(this.projection).pointRadius(12);
+    this.path = d3.geoPath().projection(this.projection).pointRadius(10);
 
     var graticule = d3.geoGraticule();
 
@@ -224,6 +223,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
           .attr('class', 'point')
           .attr('d', this.path)
           .attr('fill', (d) => d.properties.color)
+          // .attr('stroke', 'black')
           .on('mouseover',
               (d) => {
                 const loc = this.projection(d.geometry.coordinates);
