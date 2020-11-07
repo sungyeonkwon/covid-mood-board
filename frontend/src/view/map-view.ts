@@ -141,7 +141,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
                           .translate([this.viewWidth / 2, this.viewHeight / 2])
                           .clipAngle(90);
 
-    this.path = d3.geoPath().projection(this.projection).pointRadius(8);
+    this.path = d3.geoPath().projection(this.projection).pointRadius(12);
 
     var graticule = d3.geoGraticule();
 
@@ -232,7 +232,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
                 const user = d.properties.is_anonymous ?
                     'Anonymous' :
-                    `${d.properties.user}, ${d.properties.gender}, ${
+                    `${d.properties.name}, ${d.properties.gender}, ${
                         d.properties.age}, ${d.properties.profession}`;
 
                 this.tooltip.transition().duration(400).style('opacity', 1);
