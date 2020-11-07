@@ -2,7 +2,7 @@
 
 section {
   width: 100%;
-  padding: 100px 0;
+  padding: 110px 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 
@@ -17,8 +17,8 @@ p {
   line-height: 36px;
 
   @media screen and (max-width: 749px) {
-    font-size: 17px;
-    line-height: 28px;
+    font-size: 16px;
+    line-height: 20px;
   }
 }
 
@@ -41,7 +41,7 @@ span {
   flex-direction: column;
 
   @media screen and (max-width: 749px) {
-    padding: 60px 20px;
+    padding: 20px;
   }
 }
 
