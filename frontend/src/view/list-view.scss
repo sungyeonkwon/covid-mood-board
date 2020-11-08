@@ -8,15 +8,15 @@
   padding: 0 $screen-margin $screen-margin;
   column-gap: $screen-margin;
 
-  @media screen and (max-width: $mobile) {
+  @media screen and (max-width: 1024px) {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 p {
-  font-size: 24px;
+  font-size: 22px;
   z-index: 1;
-  line-height: 36px;
+  line-height: 34px;
 
   @media screen and (max-width: $mobile) {
     font-size: 15px;
@@ -29,6 +29,7 @@ p {
   z-index: 1;
   font-size: 16px;
   text-transform: capitalize;
+  margin: 10px 0;
 
   @media screen and (max-width: $mobile) {
     font-size: 13px;
