@@ -1,3 +1,5 @@
+@import "variables";
+
 :host {
   display: block;
   height: 100%;
@@ -10,9 +12,9 @@ nav {
   display: flex;
   font-size: 18px;
   justify-content: space-between;
-  left: 20px;
+  left: $screen-margin;
   position: fixed;
-  top: 20px;
+  top: $screen-margin;
   height: 56px;
   z-index: 99;
   border: 3px solid black;
@@ -33,7 +35,7 @@ nav {
   }
 
   @media screen and (max-width: 749px) {
-    top: 52px;
+    top: $mobile-logo-height + $screen-margin;
   }
 }
 
@@ -42,8 +44,8 @@ nav {
   padding: 5px 10px;
   transition: background 0.2s ease, color 0.2s ease;
   position: fixed;
-  right: 20px;
-  top: 20px;
+  right: $screen-margin;
+  top: $screen-margin;
   height: 56px;
   display: flex;
   justify-content: center;
@@ -54,7 +56,7 @@ nav {
   z-index: 99;
 
   @media screen and (max-width: 749px) {
-    top: 52px;
+    top: $mobile-logo-height + $screen-margin;
   }
 
   @media screen and (min-width: 750px) {
@@ -85,7 +87,7 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 32px;
+  height: $mobile-logo-height;
   text-align: center;
   z-index: 99;
   opacity: 1;

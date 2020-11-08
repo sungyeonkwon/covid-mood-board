@@ -4,9 +4,9 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  row-gap: 20px;
-  padding: 0 20px 20px;
-  column-gap: 20px;
+  row-gap: $screen-margin;
+  padding: 0 $screen-margin $screen-margin;
+  column-gap: $screen-margin;
 
   @media screen and (max-width: $mobile) {
     grid-template-columns: 1fr 1fr;
@@ -43,6 +43,8 @@ p {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  min-width: 0;
+  min-height: 0;
 
   @media screen and (max-width: $mobile) {
     padding: 10px 15px;
