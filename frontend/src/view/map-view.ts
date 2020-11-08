@@ -325,6 +325,8 @@ export class MapViewComponent implements OnInit, OnDestroy {
     this.v0 = versor.cartesian(this.projection.invert(d3.mouse(svg)));
     this.r0 = this.projection.rotate();
     this.q0 = versor(this.r0);
+
+    this.tooltip.transition().duration(400).style('opacity', 0);
   };
 
   dragged = () => {
@@ -334,7 +336,6 @@ export class MapViewComponent implements OnInit, OnDestroy {
     this.q1 = versor.multiply(this.q0, versor.delta(this.v0, this.v1));
     this.r1 = versor.rotation(this.q1);
     this.projection.rotate(this.r1);
-    this.tooltip.transition().duration(400).style('opacity', 0);
     this.refresh();
   };
 }

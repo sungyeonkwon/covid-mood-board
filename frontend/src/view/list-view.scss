@@ -1,19 +1,15 @@
 @import "variables";
 
-section {
+.grid {
   width: 100%;
-  margin: 99px 0 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 20px;
   padding: 0 20px 20px;
-  // background: black;
   column-gap: 20px;
-  // border: 3px solid black;
 
   @media screen and (max-width: $mobile) {
     grid-template-columns: 1fr 1fr;
-    margin: 127px 0 0;
   }
 }
 
@@ -28,10 +24,11 @@ p {
   }
 }
 
-span {
+.info {
   opacity: 0.5;
   z-index: 1;
   font-size: 16px;
+  text-transform: capitalize;
 
   @media screen and (max-width: $mobile) {
     font-size: 13px;
@@ -39,7 +36,6 @@ span {
 }
 
 .user {
-  // min-height: 200px;
   padding: 30px 40px;
   text-align: center;
   position: relative;
@@ -81,15 +77,81 @@ span {
 }
 
 .filters {
-  position: fixed;
-  bottom: 0;
-  left: 0;
   width: 100%;
-  background: white;
-  height: 55px;
-  z-index: 99;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  margin: 120px 0 30px;
+  font-size: 22px;
+
+  @media screen and (max-width: 1200px) {
+    font-size: 18px;
+    flex-wrap: wrap;
+  }
+
+  @media screen and (max-width: $mobile) {
+    font-size: 14px;
+  }
+
+  .option {
+    margin: 0 10px;
+    cursor: pointer;
+    opacity: 0.5;
+
+    @media screen and (max-width: 1200px) {
+      margin: 4px 10px;
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.selected {
+      opacity: 1;
+      border-bottom: 1px solid black;
+    }
+  }
+
+  .circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+
+    &.joy {
+      background: $yellow;
+    }
+
+    &.fear {
+      background: $purple;
+    }
+
+    &.disgust {
+      background: $green;
+    }
+
+    &.anger {
+      background: $red;
+    }
+
+    &.sadness {
+      background: $blue;
+    }
+
+    &d.mixed {
+      background: $grey;
+    }
+  }
+}
+
+.percentage {
+  font-size: 16px;
+  padding-left: 5px;
+
+  @media screen and (max-width: $mobile) {
+    font-size: 12px;
+  }
 }

@@ -1,24 +1,71 @@
 <section>
-  <ng-container *ngIf="users$ | async as users">
-    <ng-container *ngFor="let user of users">
-      <div class="user circle {{user.mood}}">
-        <!-- <div class="circle {{user.mood}}"></div> -->
-        <p>{{user.message}}</p>
-        <span *ngIf="user.is_anonymous; else userInfo">
-          Anonymous
+  <ng-container *ngIf="moodFilter$ | async as moodFilter">
+    <div class="filters" *ngIf="users$ | async as users">
+      <span class="option" [class.selected]="moodFilter === moodRef.UNDEFINED"
+        (click)="moodFilter$.next(moodRef.UNDEFINED)">
+        Show All
+      </span>
+      <span class="option" (click)="moodFilter$.next(moodRef.JOY)" [class.selected]="moodFilter === moodRef.JOY">
+        <span class="circle joy"></span>
+        Joy
+        <span class="percentage">
+          ({{ getPercentage(users, moodRef.JOY)}})
         </span>
-        <ng-template #userInfo>
-          <span>{{user.name}}, {{user.gender}}, {{user.age}}, {{user.profession}}</span>
-        </ng-template>
-      </div>
-    </ng-container>
-  </ng-container>
-</section>
+      </span>
+      <span class="option" (click)="moodFilter$.next(moodRef.ANGER)" [class.selected]="moodFilter === moodRef.ANGER">
+        <span class="circle anger"></span>
+        Anger
+        <span class="percentage">
+          ({{ getPercentage(users, moodRef.ANGER)}})
+        </span>
+      </span>
+      <span class="option" (click)="moodFilter$.next(moodRef.FEAR)" [class.selected]="moodFilter === moodRef.FEAR">
+        <span class="circle fear"></span>
+        Fear
+        <span class="percentage">
+          ({{ getPercentage(users, moodRef.FEAR)}})
+        </span>
+      </span>
+      <span class="option" (click)="moodFilter$.next(moodRef.DISGUST)"
+        [class.selected]="moodFilter === moodRef.DISGUST">
+        <span class="circle disgust"></span>
+        Disgust
+        <span class="percentage">
+          ({{ getPercentage(users, moodRef.DISGUST)}})
+        </span>
+      </span>
+      <span class="option" (click)="moodFilter$.next(moodRef.SADNESS)"
+        [class.selected]="moodFilter === moodRef.SADNESS">
+        <span class="circle sadness"></span>
+        Sadness
+        <span class="percentage">
+          ({{ getPercentage(users, moodRef.SADNESS)}})
+        </span>
+      </span>
+      <span class="option" (click)="moodFilter$.next(moodRef.MIXED)" [class.selected]="moodFilter === moodRef.MIXED">
+        <span class="circle mixed"></span>
+        Mixed
+        <span class="percentage">
+          ({{ getPercentage(users, moodRef.MIXED)}})
+        </span>
+      </span>
+    </div>
 
-<!-- <div class="filters">
-  Filter by
-  <span>All</span>
-  <span>Ages 10-20</span>
-  <span>Mood Sadness (13/24, 50%)</span>
-  <span>Gender (13/24, 50%)</span>
-</div> -->
+  </ng-container>
+
+  <div class="grid">
+    <ng-container *ngIf="filteredUsers$ | async as users">
+      <ng-container *ngFor="let user of users">
+        <div class="user circle {{user.mood}}">
+          <p>{{user.message}}</p>
+          <span class="info" *ngIf="user.is_anonymous; else userInfo">
+            Anonymous
+          </span>
+          <ng-template #userInfo>
+            <span class="info">{{user.name}}, {{user.gender}}, {{user.age}}, {{user.profession}}</span>
+          </ng-template>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</section>

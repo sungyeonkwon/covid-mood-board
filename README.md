@@ -84,9 +84,18 @@ sudo tail -30 /var/log/nginx/error.log
 
 NICE TO HAVEs
 
-- make percentage info in list view
-- make filtering in list view
+[x] make percentage info in list view
+[x] make filtering in list view
+[x] make that mobile compatible
 
+- update social media picture
+- update point on zoom
+
+- spain, russia promotion
+
+----------\
+
+- mobile button size adjustment
 - update map on resize
 - already submitted today. try again in 24 hours. [ok button]
 - drag around instruction element
