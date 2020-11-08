@@ -82,21 +82,10 @@ sudo tail -30 /var/log/nginx/error.log
 
 ## MUST
 
-MVP
-
-[x] geo location added: -> use promise instead of await [ok to proceed, with no geo data -> only on list]
-[x] when being submitted -> wait. [no click]
-[x] fix mobile logo on submit/list page (scroll -> add class opacity 0)
-[x] Add class for info paragraph? or hard code it
-[x] submit button hover (10mins)
-[x] on mobile, start small (30mins)
-[x] zoom level adjustment (30mins)
-[x] update map/list after submission
-[x] list view also use route data
-[x] remove console log
-[ ] add instruction for geolocation
-
 NICE TO HAVEs
+
+- make percentage info in list view
+- make filtering in list view
 
 - update map on resize
 - already submitted today. try again in 24 hours. [ok button]

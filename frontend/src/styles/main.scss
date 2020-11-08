@@ -33,7 +33,9 @@ a {
 }
 
 .graticule {
+  stroke-opacity: 1;
   fill: none;
+  stroke: rgba(white, 0.3);
 }
 
 .labels {

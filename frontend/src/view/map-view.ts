@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable, ReplaySubject} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
@@ -50,7 +50,7 @@ function delayedUsers(users, callback) {
 }
 
 const ROTATE = [39.666666666666664, -30];
-const VELOCITY = [.005, -0];
+const VELOCITY = [.0065, -0];
 const SCALE_POINTS = [150, 200, 250, 350, 500, 700, 1000, 1500, 3000];
 
 @Component({
@@ -140,7 +140,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
                           .translate([this.viewWidth / 2, this.viewHeight / 2])
                           .clipAngle(90);
 
-    this.path = d3.geoPath().projection(this.projection).pointRadius(10);
+    this.path = d3.geoPath().projection(this.projection).pointRadius(15);
 
     var graticule = d3.geoGraticule();
 
@@ -223,7 +223,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
           .attr('class', 'point')
           .attr('d', this.path)
           .attr('fill', (d) => d.properties.color)
-          // .attr('stroke', 'black')
+          .attr('stroke', 'white')
           .on('mouseover',
               (d) => {
                 const loc = this.projection(d.geometry.coordinates);
@@ -334,6 +334,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
     this.q1 = versor.multiply(this.q0, versor.delta(this.v0, this.v1));
     this.r1 = versor.rotation(this.q1);
     this.projection.rotate(this.r1);
+    this.tooltip.transition().duration(400).style('opacity', 0);
     this.refresh();
   };
 }
