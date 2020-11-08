@@ -94,12 +94,13 @@ nav {
   transition: opacity 0.2s ease;
 
   @media screen and (min-width: 750px) {
-    font-size: 24px;
+    font-size: 20px;
     position: fixed;
-    top: 35px;
+    top: 23px;
     width: unset;
-    background: transparent;
-    color: black;
+    color: white;
+    padding: 20px 30px;
+    border-radius: 50px;
     left: 50%;
     transform: translateX(-50%);
   }

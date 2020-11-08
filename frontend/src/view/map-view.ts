@@ -167,7 +167,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
                            .attr('cy', '25%');
       ocean_fill.append('stop')
           .attr('offset', '100%')
-          .attr('stop-color', '#c7ccd4');
+          .attr('stop-color', '#292929');
 
       var globe_highlight = this.svg.append('defs')
                                 .append('radialGradient')

@@ -35,13 +35,14 @@ a {
 .graticule {
   stroke-opacity: 1;
   fill: none;
-  stroke: rgba(white, 0.3);
+  stroke: rgba(white, 0.1);
 }
 
 .labels {
-  font: 8px sans-serif;
+  font: 9px sans-serif;
+  letter-spacing: 0.04rem;
   fill: black;
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 .noclicks {
@@ -68,6 +69,7 @@ div.tooltip {
   font-family: "Lato", sans-serif;
   border: 0px;
   border-radius: 3px;
+  z-index: 999;
   pointer-events: none;
 
   @media screen and (max-width: $mobile) {
