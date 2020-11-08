@@ -38,9 +38,16 @@ p {
   }
 }
 
-.twitter {
-  opacity: 0;
-  // width: 10px;
-  // height: 10px;
-  // display: inline-block;
+svg {
+  width: 30px;
+  height: 30px;
+}
+
+.social {
+  text-align: center;
+  padding: 20px 0;
+
+  .twitter {
+    margin-right: 20px;
+  }
 }
