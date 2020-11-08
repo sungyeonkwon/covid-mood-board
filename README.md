@@ -84,18 +84,16 @@ sudo tail -30 /var/log/nginx/error.log
 
 NICE TO HAVEs
 
-[x] make percentage info in list view
-[x] make filtering in list view
-[x] make that mobile compatible
+[x] Make a sidebar update on desktop "Recent moods":
 
-- update social media picture
-- update point on zoom
+> key legend info
+> User submitted time (some time ago)
+> Make highlight on the map ( serialise-> include id, )
 
-- spain, russia promotion
+[ ] enable pinch to zoom (remove + -? )
 
-----------\
+---
 
-- mobile button size adjustment
 - update map on resize
 - already submitted today. try again in 24 hours. [ok button]
 - drag around instruction element
