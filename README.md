@@ -82,25 +82,21 @@ sudo tail -30 /var/log/nginx/error.log
 
 ## MUST
 
-NICE TO HAVEs
-
-[x] Make a sidebar update on desktop "Recent moods":
+[ ] social sharing icons (facebook / twitter)
+[ ] update map on resize
+[ ] on mobile, the recent panel opens and close (collapse)
 
 > key legend info
 > User submitted time (some time ago)
 > Make highlight on the map ( serialise-> include id, )
 
 [ ] enable pinch to zoom (remove + -? )
-[ ] on mobile, the recent panel opens and close (collapse)
-[ ] social sharing icons
 
 ---
 
-- update map on resize
 - already submitted today. try again in 24 hours. [ok button]
 - drag around instruction element
 
-- Deploy
 - reddit / twitter annoucement
 
 Friday
@@ -110,11 +106,5 @@ Friday
 - 2 posts
 - Git pro / git alias sort out
 - linux journey book
-
-Sunday
-
-- birth and death of meaning
-
-## NICE TO HAVE
 
 http://bl.ocks.org/tlfrd/df1f1f705c7940a6a7c0dca47041fec8

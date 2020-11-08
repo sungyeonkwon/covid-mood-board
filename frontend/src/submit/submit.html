@@ -6,7 +6,7 @@
 
   <div class="form-group big" *ngIf="selectedMood$ | async as selectedMood">
     <h1 class="instruction">
-      How are you feeling?
+      What has this pandemic brought to you?
     </h1>
     <div class="mood">
       <div class="joy" [class.selected]="selectedMood === moodRef.JOY" (click)="addMood(moodRef.JOY)">
@@ -38,7 +38,7 @@
 
   <div class="form-group big message">
     <h1 class="instruction">
-      What has this pandemic brought to you?
+      Share your thoughts and stories.
     </h1>
     <textarea id="message" formControlName="message" name="message" maxlength="600"></textarea>
     <p [class.show]="showErrorMessage" class="error">
