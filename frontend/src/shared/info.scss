@@ -20,11 +20,20 @@ p {
   a {
     border-bottom: 1px solid black;
   }
+
+  @media screen and (max-width: $mobile) {
+    font-size: 16px;
+    line-height: 26px;
+  }
 }
 
 .small {
   font-size: 14px;
   line-height: 22px;
+
+  @media screen and (max-width: $mobile) {
+    font-size: 13px;
+  }
 }
 
 .accent {
