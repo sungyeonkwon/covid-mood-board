@@ -51,7 +51,7 @@ function delayedUsers(users, callback) {
 
 const ROTATE = [39.666666666666664, -30];
 const VELOCITY = [.0065, -0];
-const SCALE_POINTS = [150, 200, 250, 350, 500, 700, 1000, 1500, 3000];
+const SCALE_POINTS = [150, 200, 250, 350, 500, 700, 1400, 2500, 4000];
 
 @Component({
   selector: 'app-map-view',
