@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable, ReplaySubject} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
+import {StyleService} from 'src/shared/style_service';
 
 import {MoodColourMap, User} from '../constants/constants';
 
@@ -92,6 +93,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
   constructor(
       private readonly activatedRoute: ActivatedRoute,
+      private readonly styleService: StyleService,
   ) {
     // this.users$.subscribe((users) => console.log('users', users));
   }
@@ -134,13 +136,19 @@ export class MapViewComponent implements OnInit, OnDestroy {
     this.refresh();
   }
 
+  getPointScale() {
+    return this.styleService.innerWidth <= 768 ? 7 : 12;
+  }
+
   init() {
     this.projection = d3.geoOrthographic()
                           .scale(this.scale)
                           .translate([this.viewWidth / 2, this.viewHeight / 2])
                           .clipAngle(90);
 
-    this.path = d3.geoPath().projection(this.projection).pointRadius(15);
+    this.path = d3.geoPath()
+                    .projection(this.projection)
+                    .pointRadius(this.getPointScale());
 
     var graticule = d3.geoGraticule();
 
