@@ -44,7 +44,13 @@ export class SubmitComponent implements OnInit {
       latitude: [''],
       longitude: [''],
       profession: [''],
-      message: ['', Validators.required],  // Validators.minLength(15)
+      message: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+        ]
+      ],  // Validators.minLength(15)
       mood: [this.selectedMood$.getValue(), Validators.required],
       is_anonymous: [false, Validators.required],
     });

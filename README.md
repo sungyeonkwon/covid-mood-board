@@ -91,6 +91,8 @@ NICE TO HAVEs
 > Make highlight on the map ( serialise-> include id, )
 
 [ ] enable pinch to zoom (remove + -? )
+[ ] on mobile, the recent panel opens and close (collapse)
+[ ] social sharing icons
 
 ---
 

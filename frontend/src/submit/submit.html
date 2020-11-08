@@ -41,6 +41,9 @@
       What has this pandemic brought to you?
     </h1>
     <textarea id="message" formControlName="message" name="message" maxlength="600"></textarea>
+    <p [class.show]="showErrorMessage" class="error">
+      Please fill in the form correctly. Or if you'd like to stay anonymous, tick the box above.
+    </p>
   </div>
 
   <div class="grid">
