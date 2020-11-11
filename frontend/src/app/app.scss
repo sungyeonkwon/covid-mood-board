@@ -115,3 +115,41 @@ svg {
   width: 32px;
   height: 32px;
 }
+
+.instruction {
+  background: rgba(black, 0.8);
+  min-height: 80px;
+  position: fixed;
+  width: 400px;
+  color: white;
+  left: 50%;
+  top: 50%;
+  flex-direction: column;
+  pointer-events: none;
+  display: flex;
+  padding: 15px 20px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  // margin: 20px;
+  transform: translate(-50%, -50%);
+  font-size: 22px;
+  line-height: 32px;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+
+  @media screen and (max-width: 749px) {
+    max-width: calc(100vw - 30px);
+    font-size: 15px;
+    line-height: 24px;
+    margin: unset;
+
+    p {
+      margin: 5px 0;
+    }
+  }
+
+  &.hide {
+    opacity: 0;
+  }
+}

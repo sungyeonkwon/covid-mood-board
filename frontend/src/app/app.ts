@@ -1,7 +1,7 @@
 import {DOCUMENT, ViewportScroller} from '@angular/common';
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
-import {fromEvent, ReplaySubject} from 'rxjs';
+import {BehaviorSubject, fromEvent, ReplaySubject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {BREAKPOINT, StyleService} from 'src/shared/style_service';
 
@@ -15,6 +15,8 @@ export class AppComponent implements OnDestroy {
   scrollHide = false;
   currentUrlPath = '';
   breakpoint = BREAKPOINT;
+  showInstruction = true;
+
   private readonly destroy$ = new ReplaySubject<void>(1);
 
   constructor(
@@ -34,7 +36,15 @@ export class AppComponent implements OnDestroy {
       }
     });
 
+    setTimeout(() => {
+      this.hideInstruction();
+    }, 4500);
+
     this.addScrollListener();
+  }
+
+  hideInstruction() {
+    this.showInstruction = false;
   }
 
   private addScrollListener() {
