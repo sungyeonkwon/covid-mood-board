@@ -14,3 +14,48 @@
       <path d="M19 13H5v-2h14v2z" /></svg>
   </button>
 </div>
+
+<a class="legend" routerLink="/list">
+  <span class="option">
+    <span class="circle joy"></span>
+    Joy
+    <span class="percentage">
+      ({{ getPercentage(users, moodRef.JOY)}})
+    </span>
+  </span>
+  <span class="option">
+    <span class="circle anger"></span>
+    Anger
+    <span class="percentage">
+      ({{ getPercentage(users, moodRef.ANGER)}})
+    </span>
+  </span>
+  <span class="option">
+    <span class="circle fear"></span>
+    Fear
+    <span class="percentage">
+      ({{ getPercentage(users, moodRef.FEAR)}})
+    </span>
+  </span>
+  <span class="option">
+    <span class="circle disgust"></span>
+    Disgust
+    <span class="percentage">
+      ({{ getPercentage(users, moodRef.DISGUST)}})
+    </span>
+  </span>
+  <span class="option">
+    <span class="circle sadness"></span>
+    Sadness
+    <span class="percentage">
+      ({{ getPercentage(users, moodRef.SADNESS)}})
+    </span>
+  </span>
+  <span class="option">
+    <span class="circle mixed"></span>
+    Mixed
+    <span class="percentage">
+      ({{ getPercentage(users, moodRef.MIXED)}})
+    </span>
+  </span>
+</a>

@@ -106,7 +106,7 @@ export class SubmitComponent implements OnInit {
                 //     (users) => {console.log('got it? ', users)});
                 this.userService.shouldFetchNew = true;
                 this.isLoading = false;
-                this.router.navigate(['map']);
+                this.router.navigate(['list']);
               });
         });
   }

@@ -36,3 +36,63 @@ svg {
   fill: white;
   height: 40px;
 }
+
+.legend {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  font-size: 18px;
+
+  .option {
+    padding: 4px 0;
+
+    @media screen and (max-width: $mobile) {
+      padding: 2px 0;
+    }
+  }
+
+  @media screen and (max-width: $mobile) {
+    font-size: 13px;
+  }
+}
+
+.circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+  border: 1px solid white;
+
+  @media screen and (max-width: $mobile) {
+    width: 10px;
+    height: 10px;
+  }
+
+  &.joy {
+    background: $yellow;
+  }
+
+  &.fear {
+    background: $purple;
+  }
+
+  &.disgust {
+    background: $green;
+  }
+
+  &.anger {
+    background: $red;
+  }
+
+  &.sadness {
+    background: $blue;
+  }
+
+  &d.mixed {
+    background: $grey;
+  }
+}

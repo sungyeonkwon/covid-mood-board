@@ -2,9 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable, ReplaySubject} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
-import {StyleService} from 'src/shared/style_service';
 
-import {MoodColourMap, User} from '../constants/constants';
+import {Mood, MoodColourMap, User} from '../constants/constants';
+import {getPercentage} from '../shared/helpers';
+import {StyleService} from '../shared/style_service';
 
 declare global {
   let d3: any;
@@ -60,7 +61,10 @@ const SCALE_POINTS = [150, 200, 250, 350, 500, 700, 1400, 2500, 4000];
   styleUrls: ['./map-view.scss']
 })
 export class MapViewComponent implements OnInit, OnDestroy {
-  private users: User[];
+  getPercentage = getPercentage;
+  moodRef = Mood;
+
+  users: User[];
 
   scaleIndex = 4;
   projection: any;
