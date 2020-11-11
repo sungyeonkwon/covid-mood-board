@@ -11,7 +11,9 @@ export class UserResolver implements Resolve<User[]|undefined> {
 
   resolve(): Observable<User[]> {
     if (this.userService.shouldFetchNew) {
-      this.userService.shouldFetchNew = false;
+      // this.userService.shouldFetchNew = false;
+      // TODO: put sessionStorage in that, if a map(or root) + list is visited,
+      // then this should be false;
       return this.userService.fetchUsers();
     } else {
       return this.userService.getAllUsers();
