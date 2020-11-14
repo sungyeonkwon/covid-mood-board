@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Observable, ReplaySubject} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
+import {fromEvent, Observable, ReplaySubject} from 'rxjs';
+import {map, tap, throttle, throttleTime} from 'rxjs/operators';
 
 import {Mood, MoodColourMap, User} from '../constants/constants';
 import {getPercentage} from '../shared/helpers';
@@ -121,6 +121,20 @@ export class MapViewComponent implements OnInit, OnDestroy {
     this.viewWidth = document.documentElement.clientWidth;
     this.initScale();
     this.init();
+
+    fromEvent(window, 'resize').pipe(throttleTime(30)).subscribe(() => {
+      console.log('resize?');
+      this.viewHeight = document.documentElement.clientHeight;
+      this.viewWidth = document.documentElement.clientWidth;
+
+      this.projection.translate([this.viewWidth / 2, this.viewHeight / 2]);
+      this.svg.attr('width', this.viewWidth).attr('height', this.viewHeight);
+      d3.selectAll('.noclicks')
+          .attr('cx', this.viewWidth / 2)
+          .attr('cy', this.viewHeight / 2);
+      this.position_labels();
+      this.refresh();
+    })
   }
 
   zoom(isZoomingIn = true) {
@@ -141,7 +155,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
   }
 
   getPointScale() {
-    return this.styleService.innerWidth <= 768 ? 7 : 12;
+    return this.styleService.innerWidth <= 768 ? 6 : 11;
   }
 
   init() {

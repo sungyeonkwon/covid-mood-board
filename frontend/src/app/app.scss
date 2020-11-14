@@ -131,7 +131,6 @@ svg {
   justify-content: center;
   align-items: center;
   text-align: center;
-  // margin: 20px;
   transform: translate(-50%, -50%);
   font-size: 22px;
   line-height: 32px;
@@ -151,5 +150,9 @@ svg {
 
   &.hide {
     opacity: 0;
+  }
+
+  &.destroy {
+    display: none;
   }
 }

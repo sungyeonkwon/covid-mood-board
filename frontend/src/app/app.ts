@@ -1,7 +1,7 @@
 import {DOCUMENT, ViewportScroller} from '@angular/common';
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
-import {BehaviorSubject, fromEvent, ReplaySubject} from 'rxjs';
+import {fromEvent, ReplaySubject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {BREAKPOINT, StyleService} from 'src/shared/style_service';
 
@@ -16,6 +16,7 @@ export class AppComponent implements OnDestroy {
   currentUrlPath = '';
   breakpoint = BREAKPOINT;
   showInstruction = true;
+  destroyInstruction = false;
 
   private readonly destroy$ = new ReplaySubject<void>(1);
 
@@ -26,6 +27,14 @@ export class AppComponent implements OnDestroy {
       private readonly viewportScroller: ViewportScroller,
   ) {
     this.router.events.subscribe((event: any) => {
+      if (event.url) {
+        const isNotMap =
+            event.url.includes('list') || event.url.includes('info');
+        if (isNotMap) {
+          this.destroyInstruction = true;
+        }
+      }
+
       if (event instanceof NavigationEnd) {
         this.scrollHide = false;
         // Ensure the view to start from top in a new route.
@@ -38,7 +47,7 @@ export class AppComponent implements OnDestroy {
 
     setTimeout(() => {
       this.hideInstruction();
-    }, 4500);
+    }, 3000);
 
     this.addScrollListener();
   }
