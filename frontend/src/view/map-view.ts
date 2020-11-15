@@ -273,12 +273,13 @@ export class MapViewComponent implements OnInit, OnDestroy {
                 // if it's on the right hand side reposition tooltip
                 const isRight = x >= this.viewWidth / 2;
                 const PADDING = 40;
+
                 if (isRight) {
                   this.tooltip.style('right', this.viewWidth - x + 'px')
-                      .style('min-width', x - PADDING + 'px');
+                      .style('width', x - PADDING + 'px');
                 } else {
                   this.tooltip.style('left', x + 'px')
-                      .style('min-width', this.viewWidth - x - PADDING + 'px');
+                      .style('width', this.viewWidth - x - PADDING + 'px');
                 }
 
                 const {height} = this.tooltip.node().getBoundingClientRect();
