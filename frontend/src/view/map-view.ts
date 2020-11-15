@@ -121,7 +121,6 @@ export class MapViewComponent implements OnInit, OnDestroy {
     this.init();
 
     fromEvent(window, 'resize').pipe(throttleTime(30)).subscribe(() => {
-      console.log('resize?');
       this.viewHeight = document.documentElement.clientHeight;
       this.viewWidth = document.documentElement.clientWidth;
 
@@ -276,9 +275,11 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
                 if (isRight) {
                   this.tooltip.style('right', this.viewWidth - x + 'px')
+                      .style('left', 'unset')
                       .style('width', x - PADDING + 'px');
                 } else {
                   this.tooltip.style('left', x + 'px')
+                      .style('right', 'unset')
                       .style('width', this.viewWidth - x - PADDING + 'px');
                 }
 
@@ -287,7 +288,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
                   this.tooltip.style('top', this.viewHeight - height + 'px');
                 }
               })
-          .on('mouseout', (d) => {
+          .on('mouseout', () => {
             this.tooltip.transition().duration(400).style('opacity', 0);
           });
 
