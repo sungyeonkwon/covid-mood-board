@@ -9,8 +9,8 @@ https://covid-mood.world/
 ### TODO
 
 - [ ] clean map view scripts
-- [ ] list view: Make child routes
+- [ ] list view: Make child routes (just just quary params)
 - [ ] list view: paginations
-- [ ] list view: filtering for age / gender / anonymous
+- [ ] list view: filtering for age / gender / anonymous / lengths
 - [ ] clean observables with unsubscriptions etc.
 - [ ] adjust dot sizes

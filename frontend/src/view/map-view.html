@@ -15,48 +15,50 @@
   </button>
 </div>
 
-<a class="legend" routerLink="/list">
-  <span class="option">
-    <span class="circle joy"></span>
-    Joy
-    <span class="percentage">
-      ({{ getPercentage(users, moodRef.JOY)}})
+<div class="legend">
+  <a routerLink="/list">
+    <span class="option">
+      <span class="circle joy"></span>
+      Joy
+      <span class="percentage">
+        ({{ getPercentage(users, moodRef.JOY)}})
+      </span>
     </span>
-  </span>
-  <span class="option">
-    <span class="circle anger"></span>
-    Anger
-    <span class="percentage">
-      ({{ getPercentage(users, moodRef.ANGER)}})
+    <span class="option">
+      <span class="circle anger"></span>
+      Anger
+      <span class="percentage">
+        ({{ getPercentage(users, moodRef.ANGER)}})
+      </span>
     </span>
-  </span>
-  <span class="option">
-    <span class="circle fear"></span>
-    Fear
-    <span class="percentage">
-      ({{ getPercentage(users, moodRef.FEAR)}})
+    <span class="option">
+      <span class="circle fear"></span>
+      Fear
+      <span class="percentage">
+        ({{ getPercentage(users, moodRef.FEAR)}})
+      </span>
     </span>
-  </span>
-  <span class="option">
-    <span class="circle disgust"></span>
-    Disgust
-    <span class="percentage">
-      ({{ getPercentage(users, moodRef.DISGUST)}})
+    <span class="option">
+      <span class="circle disgust"></span>
+      Disgust
+      <span class="percentage">
+        ({{ getPercentage(users, moodRef.DISGUST)}})
+      </span>
     </span>
-  </span>
-  <span class="option">
-    <span class="circle sadness"></span>
-    Sadness
-    <span class="percentage">
-      ({{ getPercentage(users, moodRef.SADNESS)}})
+    <span class="option">
+      <span class="circle sadness"></span>
+      Sadness
+      <span class="percentage">
+        ({{ getPercentage(users, moodRef.SADNESS)}})
+      </span>
     </span>
-  </span>
-  <span class="option">
-    <span class="circle mixed"></span>
-    Mixed
-    <span class="percentage">
-      ({{ getPercentage(users, moodRef.MIXED)}})
+    <span class="option">
+      <span class="circle mixed"></span>
+      Mixed
+      <span class="percentage">
+        ({{ getPercentage(users, moodRef.MIXED)}})
+      </span>
     </span>
-  </span>
+  </a>
   <span class="suffix">of all location-enabled user submissions</span>
-</a>
+</div>
