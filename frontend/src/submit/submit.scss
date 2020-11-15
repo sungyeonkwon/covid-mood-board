@@ -134,7 +134,10 @@ input {
 button {
   margin: 0 auto;
   background: white;
-  border: 3px solid black;
+  border: none;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302),
+    0 1px 3px 1px rgba(60, 64, 67, 0.149);
+
   padding: 20px;
   width: 220px;
   height: 220px;
@@ -149,9 +152,9 @@ button {
   }
 
   &:disabled {
+    box-shadow: none;
     cursor: not-allowed;
     background: rgba(black, 0.07);
-    border: 3px solid transparent;
   }
 
   p {

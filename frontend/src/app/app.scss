@@ -32,8 +32,8 @@ nav {
 
     &:focus,
     &:hover {
+      background: $button-hover;
       outline: none;
-      background: rgba(#d4d4d4, 0.6);
     }
   }
 
@@ -43,7 +43,7 @@ nav {
 }
 
 .submit {
-  border: 1px solid black;
+  border: 1px solid $black;
   padding: 5px 10px;
   transition: background 0.2s ease, color 0.2s ease;
   position: fixed;
@@ -77,7 +77,7 @@ nav {
   &:focus,
   &:hover {
     outline: none;
-    background: rgba(#d4d4d4, 0.6);
+    background: $button-hover;
   }
 }
 

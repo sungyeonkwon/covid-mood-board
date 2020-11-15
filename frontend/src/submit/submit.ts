@@ -37,7 +37,7 @@ export class SubmitComponent implements OnInit {
         '',
         [
           Validators.pattern('^[0-9]+$'),
-          Validators.min(5),
+          Validators.min(7),
         ]
       ],
       gender: [''],

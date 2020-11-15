@@ -53,7 +53,7 @@ function delayedUsers(users, callback) {
 
 const ROTATE = [39.666666666666664, -30];
 const VELOCITY = [.0065, -0];
-const SCALE_POINTS = [170, 200, 250, 350, 500, 690, 1400, 2500, 4000];
+const SCALE_POINTS = [150, 200, 250, 350, 500, 690, 1400, 2500, 4000];
 
 @Component({
   selector: 'app-map-view',
@@ -107,7 +107,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
   private initScale() {
     if (this.viewWidth < 400) {
-      this.scaleIndex = 0;
+      this.scaleIndex = 1;
     } else if (this.viewWidth < 800) {
       this.scaleIndex = 2;
     }
@@ -153,7 +153,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
   }
 
   getPointScale() {
-    return this.styleService.innerWidth <= 768 ? 6 : 12;
+    return this.styleService.innerWidth <= 768 ? 7 : 12;
   }
 
   init() {
@@ -266,15 +266,24 @@ export class MapViewComponent implements OnInit, OnDestroy {
                 <p>${d.properties.message}</p>
                 <span>${user}</span>
                 `)
-                    .style('left', x + 'px')
                     .style('top', y + 'px')
                     .style('background', d.properties.color)
                     .style('opacity', 1);
 
                 // if it's on the right hand side reposition tooltip
-                if (x >= this.viewWidth / 2) {
+                const isRight = x >= this.viewWidth / 2;
+                const PADDING = 40;
+                if (isRight) {
                   this.tooltip.style('right', this.viewWidth - x + 'px')
-                      .style('left', 'unset')
+                      .style('min-width', x - PADDING + 'px');
+                } else {
+                  this.tooltip.style('left', x + 'px')
+                      .style('min-width', this.viewWidth - x - PADDING + 'px');
+                }
+
+                const {height} = this.tooltip.node().getBoundingClientRect();
+                if (height > this.viewHeight - y) {
+                  this.tooltip.style('top', this.viewHeight - height + 'px');
                 }
               })
           .on('mouseout', (d) => {
