@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {fromEvent, Observable, ReplaySubject} from 'rxjs';
-import {map, tap, throttle, throttleTime} from 'rxjs/operators';
+import {map, tap, throttleTime} from 'rxjs/operators';
 
 import {Mood, MoodColourMap, User} from '../constants/constants';
 import {getPercentage} from '../shared/helpers';
@@ -53,7 +53,7 @@ function delayedUsers(users, callback) {
 
 const ROTATE = [39.666666666666664, -30];
 const VELOCITY = [.0065, -0];
-const SCALE_POINTS = [150, 200, 250, 350, 500, 700, 1400, 2500, 4000];
+const SCALE_POINTS = [170, 200, 250, 350, 500, 690, 1400, 2500, 4000];
 
 @Component({
   selector: 'app-map-view',
@@ -98,9 +98,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
   constructor(
       private readonly activatedRoute: ActivatedRoute,
       private readonly styleService: StyleService,
-  ) {
-    // this.users$.subscribe((users) => console.log('users', users));
-  }
+  ) {}
 
   ngOnDestroy() {
     this.destroy$.next();
@@ -155,7 +153,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
   }
 
   getPointScale() {
-    return this.styleService.innerWidth <= 768 ? 6 : 11;
+    return this.styleService.innerWidth <= 768 ? 6 : 12;
   }
 
   init() {

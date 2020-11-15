@@ -37,13 +37,13 @@ p {
 }
 
 .accent {
-  padding-top: 50px;
+  padding-top: 40px;
   text-align: center;
-  color: $green;
+  color: $purple;
 
   a {
-    color: $green;
-    border-bottom: 1px solid $green;
+    color: $purple;
+    border-bottom: 1px solid $purple;
   }
 }
 
@@ -54,7 +54,7 @@ svg {
 
 .social {
   text-align: center;
-  padding: 20px 0;
+  padding: 60px 0 0;
 
   .twitter {
     margin-right: 20px;

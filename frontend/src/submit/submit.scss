@@ -44,16 +44,16 @@ label {
 textarea {
   padding: 10px 15px;
   margin: 0 auto;
-  font-size: 28px;
+  font-size: 24px;
   border: 0;
-  line-height: 38px;
+  line-height: 35px;
   width: 100%;
   height: 250px;
   resize: none;
-  background: rgba(black, 0.03);
+  background: rgba(black, 0.07);
   border: none;
-  color: rgba(black, 0.6);
-  border: 3px solid black;
+  color: rgba(black, 0.7);
+  border: none;
 }
 
 .grid {
@@ -76,9 +76,9 @@ input {
   cursor: pointer;
   width: 100%;
   color: rgba(black, 0.6);
-  background: rgba(black, 0.03);
+  background: rgba(black, 0.07);
   padding: 10px 15px;
-  border: 3px solid black;
+  border: none;
 }
 
 .circle {
@@ -143,7 +143,6 @@ button {
   font-size: 24px;
   cursor: pointer;
 
-  &:focus,
   &:hover {
     outline: none;
     background: rgba(#d4d4d4, 0.6);
@@ -151,7 +150,7 @@ button {
 
   &:disabled {
     cursor: not-allowed;
-    background: rgba(black, 0.1);
+    background: rgba(black, 0.07);
     border: 3px solid transparent;
   }
 
@@ -357,11 +356,11 @@ button {
   background: #ccc;
 }
 .control input:checked ~ .control__indicator {
-  background: black;
+  background: $black;
 }
 .control:hover input:not([disabled]):checked ~ .control__indicator,
 .control input:checked:focus ~ .control__indicator {
-  background: black;
+  background: $black;
 }
 .control input:disabled ~ .control__indicator {
   background: #e6e6e6;

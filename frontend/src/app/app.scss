@@ -7,7 +7,7 @@
 
 nav {
   align-items: center;
-  background: rgba(white, 0.9);
+  background: white;
   color: white;
   display: flex;
   font-size: 18px;
@@ -17,17 +17,19 @@ nav {
   top: $screen-margin;
   height: 56px;
   z-index: 99;
-  border: 3px solid black;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.302),
+    0 1px 3px 1px rgba(60, 64, 67, 0.149);
 
   button {
     cursor: pointer;
     padding: 10px;
     border: none;
     width: 56px;
-    height: 50px;
+    height: 100%;
     background: none;
 
-    &:focus,
     &:hover {
       outline: none;
       background: rgba(#d4d4d4, 0.6);
@@ -45,15 +47,18 @@ nav {
   transition: background 0.2s ease, color 0.2s ease;
   position: fixed;
   right: $screen-margin;
+  border-radius: 3px;
   top: $screen-margin;
   height: 56px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(white, 0.6);
-  border: 3px solid black;
+  background: white;
+  border: none;
   font-size: 22px;
   z-index: 99;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302),
+    0 1px 3px 1px rgba(60, 64, 67, 0.149);
 
   @media screen and (max-width: 749px) {
     top: $mobile-logo-height + $screen-margin;
@@ -69,7 +74,6 @@ nav {
     }
   }
 
-  &:focus,
   &:hover {
     outline: none;
     background: rgba(#d4d4d4, 0.6);
@@ -82,7 +86,7 @@ nav {
   top: 0px;
   left: 0;
   width: 100%;
-  background: black;
+  background: $black;
   color: white;
   display: flex;
   justify-content: center;
@@ -111,7 +115,7 @@ nav {
 }
 
 svg {
-  fill: black;
+  fill: $black;
   width: 32px;
   height: 32px;
 }

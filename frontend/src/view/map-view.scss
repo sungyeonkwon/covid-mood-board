@@ -6,7 +6,7 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(lightgrey, grey);
+  background: linear-gradient(grey, lightgrey);
   overflow: hidden;
 }
 
@@ -21,8 +21,8 @@ section {
   height: 60px;
   cursor: pointer;
   margin-top: 10px;
-  border: solid 1px black;
-  background: black;
+  border: solid 1px $black;
+  background: $black;
   display: flex;
   justify-content: center;
   align-items: center;

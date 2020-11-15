@@ -28,8 +28,8 @@ export class AppComponent implements OnDestroy {
   ) {
     this.router.events.subscribe((event: any) => {
       if (event.url) {
-        const isNotMap =
-            event.url.includes('list') || event.url.includes('info');
+        const isNotMap = event.url.includes('list') ||
+            event.url.includes('info') || event.url.includes('submit');
         if (isNotMap) {
           this.destroyInstruction = true;
         }
