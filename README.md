@@ -1,110 +1,16 @@
-# CovidMoodBoard
+# Covid-19 Mood Board
 
-## Development server
+Recording and curating people's feelings across the globe during Covid-19 pandemic.
 
-FE: localhost:4200
-FE build
+https://covid-mood.world/
 
-# production
+- Made in a rush but that was EXTREMELY liberating. Will refactor if I'm in a refactoring mood later.
 
-on frontend/
-`npm run build`
+### TODO
 
-`sudo systemctl restart nginx`
-`sudo systemctl restart covid-mood-board`
-
-# trouble shtting
-
-502 Bad Gateway
-
-# TODO
-
-FE TODO: change api so that it doesn'
-
-## stack
-
-angular
-flask
-postgres server on digital ocean
-webserver on digital ocean
-
-`https://covid-mood.world`
-
-d3
-
-<!-- http://bl.ocks.org/tlfrd/df1f1f705c7940a6a7c0dca47041fec8 -->
-
-deploy
-
-<!-- https://www.digitalocean.com/community/questions/how-to-use-the-postgresql-droplet-with-nodejs -->
-
-https://www.digitalocean.com/docs/databases/postgresql/how-to/import-databases/
-
-# TIL:
-
-gunicorn wsgi
-diff between 0.0.0.0 host?
-ports?
-
-WorkingDirectory=/home/sung/covid-mood-board
-Environment="PATH=/home/sung/covid-mood-board/venv/bin"
-ExecStart=/home/sung/covid-mood-board/venv/bin/gunicorn --workers 3 --bind unix:covid-mood-board.sock -m 007 wsgi:app
-
-sudo vim /etc/nginx/sites-available/covid-mood-board
-
-sudo certbot --nginx -d covid-mood.world -d www.covid-mood.world
-sudo vim /etc/nginx/sites-available/covid-mood.world
-
-sudo mkdir -p /var/www/covid-mood.world/html
-
-sudo chown -R $USER:$USER /var/www/covid-mood.world/html
-sudo chmod -R 755 /var/www/covid-mood.world
-
-vi /var/www/covid-mood.world/html/index.html
-sudo vi /etc/nginx/sites-available/covid-mood.world
-
-        server_name covid-mood.world www.covid-mood.world;
-
-sudo certbot --nginx -d covid-mood.world -d www.covid-mood.world
-
-# DIGITAL OCEAN DROPLET
-
-sudo reboot
-login: root
-pass: pass
-
-ssh sung@ip
-
-trouble shotting
-sudo tail -30 /var/log/nginx/error.log
-
-# TODO
-
-## MUST
-
-[ ] social sharing icons (facebook / twitter)
-[ ] update map on resize
-[ ] on mobile, the recent panel opens and close (collapse)
-
-> key legend info
-> User submitted time (some time ago)
-> Make highlight on the map ( serialise-> include id, )
-
-[ ] enable pinch to zoom (remove + -? )
-
----
-
-- already submitted today. try again in 24 hours. [ok button]
-- drag around instruction element
-
-- reddit / twitter annoucement
-
-Friday
-
-- Set up sungkwon.info on digital ocean (should be just an hour)
-- sungkwon github io take down? (secret)
-- 2 posts
-- Git pro / git alias sort out
-- linux journey book
-
-http://bl.ocks.org/tlfrd/df1f1f705c7940a6a7c0dca47041fec8
+- [ ] clean map view scripts
+- [ ] list view: Make child routes
+- [ ] list view: paginations
+- [ ] list view: filtering for age / gender / anonymous
+- [ ] clean observables with unsubscriptions etc.
+- [ ] adjust dot sizes
