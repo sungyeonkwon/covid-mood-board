@@ -4,7 +4,7 @@ Recording and curating people's feelings across the globe during Covid-19 pandem
 
 https://covid-mood.world/
 
-- Made in a rush but that was EXTREMELY liberating. Will refactor if I'm in a refactoring mood later.
+- Made in a rush (very liberating), in a refactoring queue.
 
 ### TODO
 
