@@ -42,10 +42,16 @@ svg {
   left: 0;
   bottom: 0;
   padding: 20px;
+
   a {
     display: flex;
     flex-direction: column;
     font-size: 18px;
+
+    &:focus,
+    &:hover {
+      border-bottom: 1px solid transparent;
+    }
 
     @media screen and (max-width: $mobile) {
       font-size: 12px;
