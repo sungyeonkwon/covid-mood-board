@@ -30,6 +30,7 @@ nav {
     height: 100%;
     background: none;
 
+    &:focus,
     &:hover {
       outline: none;
       background: rgba(#d4d4d4, 0.6);
@@ -73,7 +74,7 @@ nav {
       margin-right: 10px;
     }
   }
-
+  &:focus,
   &:hover {
     outline: none;
     background: rgba(#d4d4d4, 0.6);
@@ -127,6 +128,7 @@ svg {
   width: 400px;
   color: white;
   left: 50%;
+  border-radius: 3px;
   top: 50%;
   flex-direction: column;
   pointer-events: none;

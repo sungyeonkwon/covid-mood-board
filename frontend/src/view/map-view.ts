@@ -260,6 +260,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
                         d.properties.age}, ${d.properties.profession}`;
 
                 this.tooltip.transition().duration(400).style('opacity', 1);
+
                 this.tooltip
                     .html(`
                 <p>${d.properties.message}</p>
@@ -269,6 +270,12 @@ export class MapViewComponent implements OnInit, OnDestroy {
                     .style('top', y + 'px')
                     .style('background', d.properties.color)
                     .style('opacity', 1);
+
+                // if it's on the right hand side reposition tooltip
+                if (x >= this.viewWidth / 2) {
+                  this.tooltip.style('right', this.viewWidth - x + 'px')
+                      .style('left', 'unset')
+                }
               })
           .on('mouseout', (d) => {
             this.tooltip.transition().duration(400).style('opacity', 0);
