@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {fromEvent, Observable, ReplaySubject} from 'rxjs';
-import {map, tap, throttleTime} from 'rxjs/operators';
+import {animationFrameScheduler, BehaviorSubject, fromEvent, Observable, of, ReplaySubject, timer} from 'rxjs';
+import {map, repeat, takeUntil, tap, throttleTime} from 'rxjs/operators';
 
 import {Mood, MoodColourMap, User} from '../constants/constants';
 import {getPercentage} from '../shared/helpers';
@@ -61,6 +61,8 @@ const SCALE_POINTS = [150, 200, 250, 350, 500, 690, 1400, 2500, 4000];
   styleUrls: ['./map-view.scss']
 })
 export class MapViewComponent implements OnInit, OnDestroy {
+  private readonly destroy$ = new ReplaySubject<void>(1);
+
   getPercentage = getPercentage;
   moodRef = Mood;
 
@@ -74,7 +76,9 @@ export class MapViewComponent implements OnInit, OnDestroy {
   svg: any;
   path: any;
   time = Date.now();
-  timer: any;
+  isSpinning$ = new ReplaySubject<void>(1)
+  timer$ = of(null, animationFrameScheduler)
+               .pipe(repeat(), takeUntil(this.isSpinning$))
   tooltip: any;
 
   v0: any;
@@ -83,6 +87,8 @@ export class MapViewComponent implements OnInit, OnDestroy {
   v1: any;
   r1: any;
   q1: any;
+
+  dt: number;
 
   scale = SCALE_POINTS[this.scaleIndex];
 
@@ -93,7 +99,6 @@ export class MapViewComponent implements OnInit, OnDestroy {
                       users => !!users.latitude && !!users.longitude)),
               tap((users) => this.users = users))
           .subscribe();  // TODO: add interface for users data
-  private readonly destroy$ = new ReplaySubject<void>(1);
 
   constructor(
       private readonly activatedRoute: ActivatedRoute,
@@ -103,6 +108,11 @@ export class MapViewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+    this.isSpinning$.next();
+    this.svg.on('mouseover', null);
+    this.svg.on('mouseout', null);
+    d3.drag().on('start', null);
+    d3.drag().on('drag', null);
   }
 
   private initScale() {
@@ -317,11 +327,12 @@ export class MapViewComponent implements OnInit, OnDestroy {
   }
 
   spin = () => {
-    this.timer = d3.timer(() => {
-      var dt = Date.now() - this.time;
+    this.timer$.subscribe(() => {
+      this.dt = Date.now() - this.time;
 
-      this.projection.rotate(
-          [ROTATE[0] + VELOCITY[0] * dt, ROTATE[1] + VELOCITY[1] * dt]);
+      this.projection.rotate([
+        ROTATE[0] + VELOCITY[0] * this.dt, ROTATE[1] + VELOCITY[1] * this.dt
+      ]);
 
       this.refresh();
     });
@@ -363,7 +374,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
   dragstarted = () => {
     const svg = document.querySelector('svg');
-    this.timer.stop();
+    this.isSpinning$.next();
     this.v0 = versor.cartesian(this.projection.invert(d3.mouse(svg)));
     this.r0 = this.projection.rotate();
     this.q0 = versor(this.r0);

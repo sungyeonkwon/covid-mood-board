@@ -1,13 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {DialogComponent} from './dialog';
 
 import {InfoComponent} from './info';
 
 @NgModule({
   declarations: [
     InfoComponent,
-    DialogComponent,
   ],
   imports: [
     RouterModule,
@@ -15,7 +13,6 @@ import {InfoComponent} from './info';
   providers: [],
   exports: [
     InfoComponent,
-    DialogComponent,
   ]
 })
 export class SharedModule {

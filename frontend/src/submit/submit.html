@@ -37,9 +37,11 @@
   </div>
 
   <div class="form-group big message">
-    <h1 class="instruction">
+    <h1 class="instruction story">
       Share your thoughts and stories.
     </h1>
+    <p class="warning">*Please use common courtesy, and refrain from using foul language.
+    </p>
     <textarea id="message" formControlName="message" name="message" maxlength="600"></textarea>
     <p [class.show]="showErrorMessage" class="error">
       Please fill in the form correctly. Or if you'd like to stay anonymous, tick the box above.
