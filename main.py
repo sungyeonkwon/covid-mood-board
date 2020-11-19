@@ -1,11 +1,84 @@
 from os import path, environ
 import datetime
+import collections
+from operator import itemgetter
 
 from flask import Flask, send_from_directory, render_template, request, json
 from playhouse.shortcuts import model_to_dict, dict_to_model
 
 from models import *
 from app import *
+
+# some manual checking required. meh
+merge_tuples = [
+    ("covid", "covid-19", ""),
+    ("day", "days", ""),
+    ("disgust", "disgusted", ""),
+    ("feel", "feeling", "feels"),
+    ("friend", "friends", ""),
+    ("fuck", "fucking", ""),
+    ("make", "makes", "making"),
+    ("mask", "masks", ""),
+    ("many", "much", ""),
+    ("people", "people’s", ""),
+    ("sad", "sadness", ""),
+    ("see", "seem", "seen"),
+    ("selfish", "selfishness", ""),
+    ("thing", "things", ""),
+    ("time", "times", ""),
+    ("try", "trying", ""),
+    ("wear", "wearing", ""),
+    ("work", "working", ""),
+    ("life", "lives", ""),
+    ("year", "years", ""),
+]
+
+# playground for text frequency
+def getTopFrequentWords():
+    query = User.select()
+    text = "".join([model_to_dict(user)["message"] for user in query])
+
+    stopwords = set(line.strip() for line in open("words/stopwords.txt"))
+    word_count = {}
+
+    for word in text.lower().split():
+        word = word.replace(".", "")
+        word = word.replace(",", "")
+        word = word.replace(":", "")
+        word = word.replace('"', "")
+        word = word.replace("'", "’")
+        word = word.replace("!", "")
+        word = word.replace("*", "")
+        if word not in stopwords:
+            if word not in word_count:
+                word_count[word] = 1
+            else:
+                word_count[word] += 1
+
+    counter = collections.Counter(word_count)
+
+    # get the merge list: if the word shares the first 3 letters
+    # for word, count in counter.most_common(200):
+    #     for word2, count2 in counter.most_common(200):
+    #         if word in word2 and len(word) >= 3 and len(word) != len(word2) and word[0] == word2[0]:
+    #             print(word, word2)
+
+    merged_counts = []
+    single_counts = []
+    for words in merge_tuples:
+        merged = (f"{words[0]} {words[1]} {words[2]}", 0)
+        for word, count in counter.most_common(222):
+            if word == words[0] or word == words[1] or word == words[2]:
+                merged = (merged[0], merged[1] + count)
+        merged_counts.append(merged)
+
+    flat_words = list(sum(merge_tuples, ()))
+    single_counts = [
+        item for item in counter.most_common(222) if item[0] not in flat_words
+    ]
+    total = merged_counts + single_counts
+    total.sort(key=itemgetter(1))
+    return total[::-1]
 
 
 @app.route("/create", methods=["GET", "POST"])
@@ -40,7 +113,20 @@ def users():
     return response
 
 
-########## Serve frontend static files
+@app.route("/words")
+def words():
+    words_list = getTopFrequentWords()
+    response = app.response_class(
+        response=json.dumps(words_list),
+        status=200,
+        mimetype="application/json",
+    )
+    return response
+
+
+##########
+#  Serve frontend static files
+##########
 
 
 @app.route("/")
