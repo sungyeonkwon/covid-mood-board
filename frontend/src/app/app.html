@@ -21,6 +21,15 @@
   </button>
 </nav>
 
+<div class="words" [class.show]="showWidget$ | async">
+  <h3>Most frequent words</h3>
+  <div class="wrapper">
+    <p *ngFor="let entry of words$ | async">
+      {{ entry[0] }} <span class="count">{{ entry[1] }}</span>
+    </p>
+  </div>
+</div>
+
 <a *ngIf="!hideLogo" class="logo" [class.hide]="scrollHide && styleService.innerWidth >= breakpoint" routerLink>Covid-19
   Mood Board</a>
 

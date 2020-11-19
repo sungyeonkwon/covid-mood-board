@@ -162,3 +162,46 @@ svg {
     display: none;
   }
 }
+
+.words {
+  position: fixed;
+  width: 224px;
+  height: calc(100% - 100px);
+  right: 15px;
+  top: 86px;
+  background: rgba(black, 0.75);
+  overflow-y: scroll;
+  padding: 20px;
+  color: white;
+  border-radius: 3px;
+  display: none;
+
+  &.show {
+    display: block;
+  }
+
+  @media screen and (max-width: 749px) {
+    font-size: 13px;
+    width: 160px;
+    padding: 15px;
+    top: unset;
+    bottom: 15px;
+    height: 30vh;
+  }
+
+  h3 {
+    font-weight: 400;
+    margin: 0 0 10px;
+    opacity: 0.5;
+    font-size: 15px;
+  }
+
+  p {
+    margin: 9px 0;
+  }
+
+  .count {
+    opacity: 0.5;
+    padding-left: 10px;
+  }
+}

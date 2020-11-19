@@ -12,8 +12,12 @@ section {
 
 .controls {
   position: fixed;
-  right: $screen-margin;
-  bottom: $screen-margin;
+  left: $screen-margin;
+  top: calc(#{$screen-margin} + 60px);
+
+  @media screen and (max-width: 749px) {
+    top: calc(#{$screen-margin} + 90px);
+  }
 }
 
 .zoom {
@@ -61,6 +65,11 @@ svg {
   .suffix {
     font-size: 13px;
     margin-top: 6px;
+
+    span {
+      line-height: 15px;
+      display: inline-block;
+    }
 
     @media screen and (max-width: $mobile) {
       font-size: 12px;

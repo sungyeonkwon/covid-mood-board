@@ -18,6 +18,7 @@ const HEADERS = new HttpHeaders({
 @Injectable({providedIn: 'root'})
 export class UserService {
   private readonly users$ = this.fetchUsers();
+  private readonly words$ = this.fetchWords();
   shouldFetchNew = false;
   constructor(
       private readonly http: HttpClient,
@@ -31,9 +32,19 @@ export class UserService {
     return this.users$;
   }
 
+  getWords(): Observable<User[]> {
+    return this.words$;
+  }
+
   // TODO: add filtering query with query params
   fetchUsers(): Observable<User[]> {
     return this.http.get<any>(`${environment.baseApi}/users`)
+        .pipe(first(), shareReplay(1));
+  }
+
+  // TODO: add filtering query with query params
+  fetchWords(): Observable<User[]> {
+    return this.http.get<any>(`${environment.baseApi}/words`)
         .pipe(first(), shareReplay(1));
   }
 }

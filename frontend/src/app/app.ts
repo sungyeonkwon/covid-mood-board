@@ -1,9 +1,10 @@
 import {DOCUMENT, ViewportScroller} from '@angular/common';
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
-import {fromEvent, ReplaySubject} from 'rxjs';
+import {BehaviorSubject, fromEvent, ReplaySubject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {BREAKPOINT, StyleService} from 'src/shared/style_service';
+import {UserService} from 'src/shared/user_service';
 
 @Component({
   selector: 'app-root',
@@ -18,12 +19,17 @@ export class AppComponent implements OnDestroy {
   showInstruction = true;
   destroyInstruction = false;
 
+  showWidget$ = new BehaviorSubject(true);
+
   private readonly destroy$ = new ReplaySubject<void>(1);
+
+  words$ = this.userService.fetchWords();
 
   constructor(
       @Inject(DOCUMENT) private readonly document: Document,
       private readonly router: Router,
       readonly styleService: StyleService,
+      readonly userService: UserService,
       private readonly viewportScroller: ViewportScroller,
   ) {
     this.router.events.subscribe((event: any) => {
@@ -33,6 +39,7 @@ export class AppComponent implements OnDestroy {
         if (isNotMap) {
           this.destroyInstruction = true;
         }
+        this.showWidget$.next(!isNotMap);
       }
 
       if (event instanceof NavigationEnd) {
