@@ -12,6 +12,7 @@ import {UserService} from 'src/shared/user_service';
   styleUrls: ['./app.scss']
 })
 export class AppComponent implements OnDestroy {
+  haveSeenAlready = localStorage.getItem('covid-mood-board');
   hideLogo = false;
   scrollHide = false;
   currentUrlPath = '';
@@ -54,6 +55,7 @@ export class AppComponent implements OnDestroy {
 
     setTimeout(() => {
       this.hideInstruction();
+      localStorage.setItem('covid-mood-board', 'true');
     }, 3000);
 
     this.addScrollListener();
