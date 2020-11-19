@@ -181,6 +181,7 @@ svg {
   }
 
   @media screen and (max-width: 749px) {
+    display: none !important;
     font-size: 13px;
     width: 160px;
     padding: 15px;
