@@ -11,26 +11,41 @@ from app import *
 
 # some manual checking required. meh
 merge_tuples = [
-    ("covid", "covid-19", ""),
-    ("day", "days", ""),
-    ("disgust", "disgusted", ""),
-    ("feel", "feeling", "feels"),
-    ("friend", "friends", ""),
-    ("fuck", "fucking", ""),
-    ("make", "makes", "making"),
-    ("mask", "masks", ""),
-    ("many", "much", ""),
-    ("people", "people’s", ""),
-    ("sad", "sadness", ""),
-    ("see", "seem", "seen"),
-    ("selfish", "selfishness", ""),
-    ("thing", "things", ""),
-    ("time", "times", ""),
-    ("try", "trying", ""),
-    ("wear", "wearing", ""),
-    ("work", "working", ""),
-    ("life", "lives", ""),
-    ("year", "years", ""),
+    ("anxiety", "anxious", "", ""),
+    ("covid", "covid-19", "", ""),
+    ("day", "days", "", ""),
+    ("die", "died", "dying", "dies"),
+    ("disgust", "disgusted", "disgusting","disgusts"),
+    ("distance", "distancing", "", ""),
+    ("fail", "failed", "failing", "fails"),
+    ("feel", "felt", "feeling", "feels"),
+    ("friend", "friends", "", ""),
+    ("fuck", "fucked", "fucking", ""),
+    ("get", "got", "gotten", "gets"),
+    ("kill", "killed", "killing", "kills"),
+    ("life", "lives", "", ""),
+    ("like", "liked", "liking", "likes"),
+    ("loneliness", "lonely", "alone", ""),
+    ("lose", "lost", "losing", "loses"),
+    ("love", "loved", "loving", "loves"),
+    ("make", "made", "making", "makes"),
+    ("many", "much", "", ""),
+    ("mask", "masks", "", ""),
+    ("care", "cared", "caring", "cares"),
+    ("people", "people’s", "", ""),
+    ("risk", "risks", "", ""),
+    ("sad", "sadness", "sadly", ""),
+    ("see", "saw", "seen", "seeing"),
+    ("selfish", "selfishness", "", ""),
+    ("take", "took", "taking", "takes"),
+    ("find", "found", "finding", "finds"),
+    ("thing", "things", "", ""),
+    ("time", "times", "", ""),
+    ("country", "countries", "", ""),
+    ("try", "tried", "trying", "tries"),
+    ("wear", "wore", "wearing", "wears"),
+    ("work", "wored", "working", "works"),
+    ("year", "years", "", ""),
 ]
 
 # playground for text frequency
@@ -66,9 +81,9 @@ def getTopFrequentWords():
     merged_counts = []
     single_counts = []
     for words in merge_tuples:
-        merged = (f"{words[0]} {words[1]} {words[2]}", 0)
+        merged = (f"{words[0]} {words[1]} {words[2]} {words[3]}", 0)
         for word, count in counter.most_common(222):
-            if word == words[0] or word == words[1] or word == words[2]:
+            if word == words[0] or word == words[1] or word == words[2] or word == words[3]:
                 merged = (merged[0], merged[1] + count)
         merged_counts.append(merged)
 

@@ -9,4 +9,4 @@ https://covid-mood.world/
 - [ ] list view: Make child routes (just query params)
 - [ ] list view: paginations
 - [ ] list view: filtering for age / gender / anonymous / lengths
-- [ ] adjust dot sizes
+- [x] adjust dot sizes

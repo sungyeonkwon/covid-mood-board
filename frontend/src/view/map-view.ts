@@ -53,7 +53,9 @@ function delayedUsers(users, callback) {
 
 const ROTATE = [39.666666666666664, -30];
 const VELOCITY = [.0065, -0];
-const SCALE_POINTS = [150, 200, 250, 350, 500, 690, 1400, 2500, 4000];
+const SCALE_POINTS = [150, 200, 250, 350, 500, 690, 1400, 2500, 3800];
+const POINT_MAX = 22;
+const POINT_MIN = 7;
 
 @Component({
   selector: 'app-map-view',
@@ -157,12 +159,16 @@ export class MapViewComponent implements OnInit, OnDestroy {
       }
     }
     this.projection.scale(this.scale);
+    this.path.pointRadius(this.getPointScale(this.scale));
     this.svg.selectAll('circle').attr('r', this.projection.scale());
     this.refresh();
   }
 
-  getPointScale() {
-    return this.styleService.innerWidth <= 768 ? 7 : 12;
+  getPointScale(x: number) {
+    const end = SCALE_POINTS[SCALE_POINTS.length - 1];
+    const start = SCALE_POINTS[0];
+    const pos = (x - start) / (end - start);
+    return Math.floor(pos * (POINT_MAX - POINT_MIN) + POINT_MIN);
   }
 
   init() {
@@ -173,7 +179,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
     this.path = d3.geoPath()
                     .projection(this.projection)
-                    .pointRadius(this.getPointScale());
+                    .pointRadius(this.getPointScale(this.scale));
 
     var graticule = d3.geoGraticule();
 
