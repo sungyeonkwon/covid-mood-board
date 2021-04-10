@@ -9,21 +9,21 @@
         <span class="circle joy"></span>
         Joy
         <span class="percentage">
-          ({{ getPercentage(users, moodRef.JOY)}})
+          {{ getPercentage(users, moodRef.JOY)}} %
         </span>
       </span>
       <span class="option" (click)="moodFilter$.next(moodRef.ANGER)" [class.selected]="moodFilter === moodRef.ANGER">
         <span class="circle anger"></span>
         Anger
         <span class="percentage">
-          ({{ getPercentage(users, moodRef.ANGER)}})
+          {{ getPercentage(users, moodRef.ANGER)}} %
         </span>
       </span>
       <span class="option" (click)="moodFilter$.next(moodRef.FEAR)" [class.selected]="moodFilter === moodRef.FEAR">
         <span class="circle fear"></span>
         Fear
         <span class="percentage">
-          ({{ getPercentage(users, moodRef.FEAR)}})
+          {{ getPercentage(users, moodRef.FEAR)}} %
         </span>
       </span>
       <span class="option" (click)="moodFilter$.next(moodRef.DISGUST)"
@@ -31,7 +31,7 @@
         <span class="circle disgust"></span>
         Disgust
         <span class="percentage">
-          ({{ getPercentage(users, moodRef.DISGUST)}})
+          {{ getPercentage(users, moodRef.DISGUST)}} %
         </span>
       </span>
       <span class="option" (click)="moodFilter$.next(moodRef.SADNESS)"
@@ -39,14 +39,14 @@
         <span class="circle sadness"></span>
         Sadness
         <span class="percentage">
-          ({{ getPercentage(users, moodRef.SADNESS)}})
+          {{ getPercentage(users, moodRef.SADNESS)}} %
         </span>
       </span>
       <span class="option" (click)="moodFilter$.next(moodRef.MIXED)" [class.selected]="moodFilter === moodRef.MIXED">
         <span class="circle mixed"></span>
         Mixed
         <span class="percentage">
-          ({{ getPercentage(users, moodRef.MIXED)}})
+          {{ getPercentage(users, moodRef.MIXED)}} %
         </span>
       </span>
     </div>

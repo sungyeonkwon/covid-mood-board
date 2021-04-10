@@ -76,11 +76,17 @@ svg {
 
     @media screen and (max-width: $mobile) {
       font-size: 12px;
+      line-height: 10px;
     }
   }
 
   .option {
     padding: 4px 0;
+
+    .percentage {
+      margin-left: 3px;
+      opacity: .5;
+    }
 
     @media screen and (max-width: $mobile) {
       padding: 1px 0;
@@ -88,16 +94,15 @@ svg {
   }
 }
 
-.circle {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
+.bar {
+  width: 100px;
+  height: 18px;
   display: inline-block;
   margin-right: 5px;
   border: 1px solid white;
 
   @media screen and (max-width: $mobile) {
-    width: 10px;
+    width: 50px;
     height: 10px;
   }
 
@@ -121,7 +126,7 @@ svg {
     background: $blue;
   }
 
-  &d.mixed {
+  &.mixed {
     background: $grey;
   }
 }

@@ -17,48 +17,15 @@
 
 <div class="legend">
   <a routerLink="/list">
-    <span class="option">
-      <span class="circle joy"></span>
-      Joy
-      <span class="percentage">
-        ({{ getPercentage(users, moodRef.JOY)}})
+    <ng-container *ngFor="let mood of moodList">
+      <span class="option">
+        <span [style.width.px]="getPercentage(users, mood) * BAR_SCALAR" class="bar {{mood}}"></span>
+        {{mood.charAt(0).toUpperCase() + mood.slice(1)}}
+        <span class="percentage">
+          {{ getPercentage(users, mood)}} %
+        </span>
       </span>
-    </span>
-    <span class="option">
-      <span class="circle anger"></span>
-      Anger
-      <span class="percentage">
-        ({{ getPercentage(users, moodRef.ANGER)}})
-      </span>
-    </span>
-    <span class="option">
-      <span class="circle fear"></span>
-      Fear
-      <span class="percentage">
-        ({{ getPercentage(users, moodRef.FEAR)}})
-      </span>
-    </span>
-    <span class="option">
-      <span class="circle disgust"></span>
-      Disgust
-      <span class="percentage">
-        ({{ getPercentage(users, moodRef.DISGUST)}})
-      </span>
-    </span>
-    <span class="option">
-      <span class="circle sadness"></span>
-      Sadness
-      <span class="percentage">
-        ({{ getPercentage(users, moodRef.SADNESS)}})
-      </span>
-    </span>
-    <span class="option">
-      <span class="circle mixed"></span>
-      Mixed
-      <span class="percentage">
-        ({{ getPercentage(users, moodRef.MIXED)}})
-      </span>
-    </span>
+    </ng-container>
   </a>
-  <!-- <span class="suffix">of all location-enabled <br>user submissions</span> -->
+  <span class="suffix">of all location-enabled user submissions</span>
 </div>

@@ -55,7 +55,8 @@ const ROTATE = [39.666666666666664, -30];
 const VELOCITY = [.0065, -0];
 const SCALE_POINTS = [150, 200, 250, 350, 500, 690, 1400, 2500, 3800];
 const POINT_MAX = 22;
-const POINT_MIN = 7;
+const POINT_MIN = 8;
+const BAR_SCALAR = 5; 
 
 @Component({
   selector: 'app-map-view',
@@ -64,13 +65,15 @@ const POINT_MIN = 7;
 })
 export class MapViewComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new ReplaySubject<void>(1);
+  readonly BAR_SCALAR = BAR_SCALAR;
+  readonly moodList = Object.values(Mood).filter((mood) => mood !== 'undefined');
 
   getPercentage = getPercentage;
   moodRef = Mood;
 
   users: User[];
 
-  scaleIndex = 4;
+  scaleIndex = 5;
   projection: any;
 
   viewHeight = 0;
