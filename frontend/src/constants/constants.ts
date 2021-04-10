@@ -37,7 +37,7 @@ export interface User {
   age?: number;
   latitude: string;
   longitude: string;
-  created_by: string;
+  created_by: string; // created.. 'AT' you racooon. 😂
   gender?: string;
   is_anonymous: boolean;
   message: string;

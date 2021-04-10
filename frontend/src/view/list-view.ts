@@ -5,6 +5,21 @@ import {map, takeUntil} from 'rxjs/operators';
 import {Mood} from 'src/constants/constants';
 import {getPercentage} from '../shared/helpers';
 
+const MONTH = [
+  'January',
+  'February',
+  'March',
+  'April' ,
+  'May',
+  'June', 
+  'July',
+  'August',
+  'September', 
+  'October',
+  'November', 
+  'December',
+];
+
 @Component({
   selector: 'app-list-view',
   templateUrl: './list-view.html',
@@ -39,6 +54,11 @@ export class ListViewComponent implements OnDestroy {
   constructor(
       private readonly activatedRoute: ActivatedRoute,
   ) {}
+
+  getDate(dateString: string) {
+    const date = new Date(dateString);
+    return `${date.getDate()} ${MONTH[date.getMonth()]} ${date.getFullYear()}`;
+  }
 
   ngOnDestroy() {
     this.destroy$.next();

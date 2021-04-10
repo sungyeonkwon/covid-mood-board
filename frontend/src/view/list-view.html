@@ -64,6 +64,7 @@
           <ng-template #userInfo>
             <span class="info">{{user.name}}, {{user.gender}}, {{user.age}}, {{user.profession}}</span>
           </ng-template>
+          <span class="date">{{getDate(user.created_by)}}</span>
         </div>
       </ng-container>
     </ng-container>

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {animationFrameScheduler, BehaviorSubject, fromEvent, Observable, of, ReplaySubject, timer} from 'rxjs';
+import {animationFrameScheduler, fromEvent, Observable, of, ReplaySubject} from 'rxjs';
 import {map, repeat, takeUntil, tap, throttleTime} from 'rxjs/operators';
 
 import {Mood, MoodColourMap, User} from '../constants/constants';
