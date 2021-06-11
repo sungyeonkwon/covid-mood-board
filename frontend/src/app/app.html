@@ -40,11 +40,11 @@
     <ng-container *ngIf="styleService.innerWidth >= breakpoint">Add your mood</ng-container>
   </a>
 
-  <div class="instruction" [class.hide]="!showInstruction || haveSeenAlready" [class.destroy]="destroyInstruction"
+  <!-- <div class="instruction" [class.hide]="!showInstruction || haveSeenAlready" [class.destroy]="destroyInstruction"
     (click)="hideInstruction()">
     <p>Tap or hover over the mood dots<br> to see each story. </p>
     <p>Drag to rotate the globe.</p>
-  </div>
+  </div> -->
 
   <router-outlet>
   </router-outlet>

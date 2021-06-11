@@ -1,13 +1,18 @@
-@import "variables";
+@import 'variables';
 
 :host {
   align-items: center;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  // height: 100%;
   justify-content: center;
   padding: 150px 30px;
   width: 100%;
+
+  @media screen and (max-width: $mobile) {
+    padding: 110px 30px;
+  }
 }
 
 p {
@@ -39,11 +44,11 @@ p {
 .accent {
   padding-top: 40px;
   text-align: center;
-  color: $purple;
+  color: black;
 
   a {
-    color: $purple;
-    border-bottom: 1px solid $purple;
+    color: black;
+    border-bottom: 1px solid black;
   }
 }
 

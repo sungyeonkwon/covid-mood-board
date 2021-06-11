@@ -38,10 +38,14 @@ export class AppComponent implements OnDestroy {
       readonly cdr: ChangeDetectorRef,
   ) {
     this.router.events.subscribe((event: any) => {
+      console.log('event.url', event.url);
       if (event.url) {
         const isNotMap = event.url.includes('list') ||
             event.url.includes('info') || event.url.includes('submit');
         if (isNotMap) {
+          if (event.url !== '/') {
+            this.userService.loaded$.next(true);
+          }
           this.destroyInstruction = true;
         }
         this.showWidget$.next(!isNotMap);

@@ -2,8 +2,8 @@
 
 :host {
   display: block;
-  height: 100vh;
-  background: linear-gradient(grey, lightgrey);
+  height: 100%;
+  min-height: 100vh;
   width: 100%;
 }
 
@@ -109,7 +109,7 @@ nav {
   z-index: 99;
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 15px;
   opacity: 1;
   transition: opacity 0.2s ease;
 
@@ -118,7 +118,7 @@ nav {
   }
 
   span {
-    width: 100px;
+    min-width: 80px;
   }
 }
 
@@ -129,7 +129,7 @@ svg {
 }
 
 .instruction {
-  background: rgba(black, 0.8);
+  background: rgba(black, 0.75);
   min-height: 80px;
   position: fixed;
   width: 400px;
@@ -144,7 +144,7 @@ svg {
   align-items: center;
   text-align: center;
   transform: translate(-50%, -50%);
-  font-size: 22px;
+  font-size: 20px;
   line-height: 32px;
   opacity: 1;
   transition: opacity 0.4s ease;
@@ -262,5 +262,6 @@ svg {
   justify-content: center;
   align-items: center;
   height: 100%;
+  min-height: 100vh;
   width: 100%;
 }
