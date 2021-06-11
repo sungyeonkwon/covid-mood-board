@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {animationFrameScheduler, fromEvent, Observable, of, ReplaySubject} from 'rxjs';
+import {animationFrameScheduler, BehaviorSubject, fromEvent, Observable, of, ReplaySubject} from 'rxjs';
 import {map, repeat, takeUntil, tap, throttleTime} from 'rxjs/operators';
+import {UserService} from 'src/shared/user_service';
 
 import {Mood, MoodColourMap, User} from '../constants/constants';
 import {getPercentage} from '../shared/helpers';
@@ -93,17 +94,22 @@ export class MapViewComponent implements OnInit, OnDestroy {
   v1: any;
   r1: any;
   q1: any;
-
   dt: number;
 
   scale = SCALE_POINTS[this.scaleIndex];
 
-  constructor(private readonly activatedRoute: ActivatedRoute) {
+  constructor(
+      private readonly activatedRoute: ActivatedRoute,
+      private readonly userService: UserService,
+  ) {
     (this.activatedRoute.data as Observable<any>)  // TODO: type
         .pipe(
             map(data => data.users.filter(
                     users => !!users.latitude && !!users.longitude)),
-            tap((users) => this.users = users))
+            tap((users) => {
+              this.users = users;
+              this.userService.loaded$.next(true);
+            }))
         .subscribe();  // TODO: add interface for users data
   }
 

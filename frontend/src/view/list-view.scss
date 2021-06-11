@@ -1,5 +1,10 @@
 @import 'variables';
 
+:host {
+  display: block;
+  background: white;
+}
+
 .grid {
   width: 100%;
   display: grid;

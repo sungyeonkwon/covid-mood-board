@@ -1,22 +1,23 @@
 import {Component, OnDestroy} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BehaviorSubject, combineLatest, Observable, ReplaySubject} from 'rxjs';
-import {map, takeUntil} from 'rxjs/operators';
+import {map, takeUntil, tap} from 'rxjs/operators';
 import {Mood} from 'src/constants/constants';
+import {UserService} from 'src/shared/user_service';
 import {getPercentage} from '../shared/helpers';
 
 const MONTH = [
   'January',
   'February',
   'March',
-  'April' ,
+  'April',
   'May',
-  'June', 
+  'June',
   'July',
   'August',
-  'September', 
+  'September',
   'October',
-  'November', 
+  'November',
   'December',
 ];
 
@@ -34,7 +35,9 @@ export class ListViewComponent implements OnDestroy {
 
   readonly users$ = (this.activatedRoute.data as Observable<any>)  // TODO: type
                         .pipe(
-                            map(data => data.users), takeUntil(this.destroy$)
+                            map(data => data.users),
+                            tap(() => this.userService.loaded$.next(true)),
+                            takeUntil(this.destroy$)
 
                         );
 
@@ -53,6 +56,7 @@ export class ListViewComponent implements OnDestroy {
 
   constructor(
       private readonly activatedRoute: ActivatedRoute,
+      private readonly userService: UserService,
   ) {}
 
   getDate(dateString: string) {

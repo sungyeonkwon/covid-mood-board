@@ -1,6 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {first, map, shareReplay} from 'rxjs/operators';
 import {User} from '../constants/constants';
 import {environment} from '../environments/environment';
@@ -19,6 +19,7 @@ const HEADERS = new HttpHeaders({
 export class UserService {
   private readonly users$ = this.fetchUsers();
   private readonly words$ = this.fetchWords();
+  readonly loaded$ = new BehaviorSubject(false);
 
   shouldFetchNew = false;
 

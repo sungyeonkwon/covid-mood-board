@@ -1,5 +1,5 @@
 import {DOCUMENT, ViewportScroller} from '@angular/common';
-import {Component, Inject, OnDestroy} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnDestroy} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {BehaviorSubject, fromEvent, Observable, ReplaySubject} from 'rxjs';
 import {map, takeUntil, tap} from 'rxjs/operators';
@@ -24,16 +24,18 @@ export class AppComponent implements OnDestroy {
 
   private readonly destroy$ = new ReplaySubject<void>(1);
 
+  loaded$ = this.userService.loaded$.pipe(map(loaded => loaded.toString()))
   words$ = this.userService.fetchWords();
-  count$ = this.userService.fetchCount();
+  count$ =
+      this.userService.fetchCount().pipe(map((value) => value + ' entries'));
 
   constructor(
       @Inject(DOCUMENT) private readonly document: Document,
       private readonly router: Router,
       readonly styleService: StyleService,
       readonly userService: UserService,
-      private readonly activatedRoute: ActivatedRoute,
       private readonly viewportScroller: ViewportScroller,
+      readonly cdr: ChangeDetectorRef,
   ) {
     this.router.events.subscribe((event: any) => {
       if (event.url) {
