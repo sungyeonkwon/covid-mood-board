@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 :host {
   display: block;
@@ -17,10 +17,7 @@ nav {
   top: $screen-margin;
   height: 56px;
   z-index: 99;
-  border: none;
-  border-radius: 3px;
-  box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.302),
-    0 1px 3px 1px rgba(60, 64, 67, 0.149);
+  border: 1px solid lightgrey;
 
   button {
     cursor: pointer;
@@ -29,16 +26,25 @@ nav {
     width: 56px;
     height: 100%;
     background: none;
+    transition: all 0.1s linear;
+
+    &:first-child {
+      border-right: 1px solid lightgrey;
+    }
 
     &:focus,
     &:hover {
       background: $button-hover;
       outline: none;
+
+      svg {
+        fill: white;
+      }
     }
   }
 
   @media screen and (max-width: 749px) {
-    top: $mobile-logo-height + $screen-margin;
+    top: $screen-margin;
   }
 }
 
@@ -48,7 +54,6 @@ nav {
   transition: background 0.2s ease, color 0.2s ease;
   position: fixed;
   right: $screen-margin;
-  border-radius: 3px;
   top: $screen-margin;
   height: 56px;
   display: flex;
@@ -58,11 +63,10 @@ nav {
   border: none;
   font-size: 22px;
   z-index: 99;
-  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302),
-    0 1px 3px 1px rgba(60, 64, 67, 0.149);
+  border: 1px solid lightgrey;
 
   @media screen and (max-width: 749px) {
-    top: $mobile-logo-height + $screen-margin;
+    top: $screen-margin;
   }
 
   @media screen and (min-width: 750px) {
@@ -74,17 +78,23 @@ nav {
       margin-right: 10px;
     }
   }
+
   &:focus,
   &:hover {
     outline: none;
     background: $button-hover;
+    color: white;
+
+    svg {
+      fill: white;
+    }
   }
 }
 
 .logo {
-  font-size: 14px;
+  font-size: 16px;
   position: fixed;
-  top: 0px;
+  bottom: 0px;
   left: 0;
   width: 100%;
   background: $black;
@@ -95,23 +105,14 @@ nav {
   height: $mobile-logo-height;
   text-align: center;
   z-index: 99;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
   opacity: 1;
   transition: opacity 0.2s ease;
 
-  @media screen and (min-width: 750px) {
-    font-size: 20px;
-    position: fixed;
-    top: 23px;
-    width: unset;
+  a {
     color: white;
-    padding: 20px 30px;
-    border-radius: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  &.hide {
-    opacity: 0;
   }
 }
 
@@ -128,7 +129,6 @@ svg {
   width: 400px;
   color: white;
   left: 50%;
-  border-radius: 3px;
   top: 50%;
   flex-direction: column;
   pointer-events: none;
@@ -166,14 +166,15 @@ svg {
 .words {
   position: fixed;
   width: 224px;
-  height: calc(100% - 100px);
+  height: calc(
+    100% - #{$nav-button-height} - #{$screen-margin * 3} - #{$mobile-logo-height}
+  );
   right: 15px;
   top: 86px;
   background: rgba(black, 0.75);
   overflow-y: scroll;
   padding: 20px;
   color: white;
-  border-radius: 3px;
   display: none;
 
   &.show {
@@ -199,6 +200,11 @@ svg {
 
   p {
     margin: 9px 0;
+    padding-bottom: 9px;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(white, 0.3);
+    }
   }
 
   .word {

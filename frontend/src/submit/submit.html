@@ -60,7 +60,7 @@
     <div class="form-group gender">
       <div>
         <div *ngFor="let option of genderOptions">
-          <label for="{{option}}" class="control control--radio">{{option}}
+          <label for="{{option}}" class="control control--radio"><span>{{option}}</span>
             <input type="radio" name="gender" id="{{option}}" value="{{option}}" formControlName="gender" />
             <div class="control__indicator"></div>
           </label>
@@ -76,7 +76,7 @@
   </div>
 
   <div class="form-group anonymous">
-    <label for="is_anonymous" class="control control--checkbox">I would rather leave my mood anonymously.
+    <label for="is_anonymous" class="control control--checkbox"><span>I would rather leave my mood anonymously.</span>
       <input type="checkbox" id="is_anonymous" formControlName="is_anonymous" name="is_anonymous" />
       <div class="control__indicator"></div>
     </label>

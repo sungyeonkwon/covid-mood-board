@@ -53,10 +53,10 @@ function delayedUsers(users, callback) {
 
 const ROTATE = [39.666666666666664, -30];
 const VELOCITY = [.0065, -0];
-const SCALE_POINTS = [150, 200, 250, 350, 500, 690, 1400, 2500, 3800];
+const SCALE_POINTS = [150, 200, 250, 350, 500, 630, 1400, 2500, 3800];
 const POINT_MAX = 22;
-const POINT_MIN = 8;
-const BAR_SCALAR = 5; 
+const POINT_MIN = 10;
+const BAR_SCALAR = 5;
 
 @Component({
   selector: 'app-map-view',
@@ -66,7 +66,8 @@ const BAR_SCALAR = 5;
 export class MapViewComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new ReplaySubject<void>(1);
   readonly BAR_SCALAR = BAR_SCALAR;
-  readonly moodList = Object.values(Mood).filter((mood) => mood !== 'undefined');
+  readonly moodList =
+      Object.values(Mood).filter((mood) => mood !== 'undefined');
 
   getPercentage = getPercentage;
   moodRef = Mood;
@@ -97,18 +98,14 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
   scale = SCALE_POINTS[this.scaleIndex];
 
-  readonly users$ =
-      (this.activatedRoute.data as Observable<any>)  // TODO: type
-          .pipe(
-              map(data => data.users.filter(
-                      users => !!users.latitude && !!users.longitude)),
-              tap((users) => this.users = users))
-          .subscribe();  // TODO: add interface for users data
-
-  constructor(
-      private readonly activatedRoute: ActivatedRoute,
-      private readonly styleService: StyleService,
-  ) {}
+  constructor(private readonly activatedRoute: ActivatedRoute) {
+    (this.activatedRoute.data as Observable<any>)  // TODO: type
+        .pipe(
+            map(data => data.users.filter(
+                    users => !!users.latitude && !!users.longitude)),
+            tap((users) => this.users = users))
+        .subscribe();  // TODO: add interface for users data
+  }
 
   ngOnDestroy() {
     this.destroy$.next();
@@ -209,7 +206,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
                            .attr('cy', '25%');
       ocean_fill.append('stop')
           .attr('offset', '100%')
-          .attr('stop-color', '#292929');
+          .attr('stop-color', 'black');
 
       var globe_highlight = this.svg.append('defs')
                                 .append('radialGradient')
@@ -219,7 +216,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
       globe_highlight.append('stop')
           .attr('offset', '20%')
           .attr('stop-color', '#fff')
-          .attr('stop-opacity', '0.5');
+          .attr('stop-opacity', '0.4');
       globe_highlight.append('stop')
           .attr('offset', '100%')
           .attr('stop-color', '#66687a')

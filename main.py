@@ -15,7 +15,7 @@ merge_tuples = [
     ("covid", "covid-19", "", ""),
     ("day", "days", "", ""),
     ("die", "died", "dying", "dies"),
-    ("disgust", "disgusted", "disgusting","disgusts"),
+    ("disgust", "disgusted", "disgusting", "disgusts"),
     ("distance", "distancing", "", ""),
     ("fail", "failed", "failing", "fails"),
     ("feel", "felt", "feeling", "feels"),
@@ -83,7 +83,12 @@ def getTopFrequentWords():
     for words in merge_tuples:
         merged = (f"{words[0]} {words[1]} {words[2]} {words[3]}", 0)
         for word, count in counter.most_common(222):
-            if word == words[0] or word == words[1] or word == words[2] or word == words[3]:
+            if (
+                word == words[0]
+                or word == words[1]
+                or word == words[2]
+                or word == words[3]
+            ):
                 merged = (merged[0], merged[1] + count)
         merged_counts.append(merged)
 
@@ -122,6 +127,17 @@ def users():
     users = [model_to_dict(user) for user in query]
     response = app.response_class(
         response=json.dumps(users),
+        status=200,
+        mimetype="application/json",
+    )
+    return response
+
+
+@app.route("/count")
+def count():
+    query = User.select()
+    response = app.response_class(
+        response=json.dumps(len(query)),
         status=200,
         mimetype="application/json",
     )

@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 :host {
   display: block;
@@ -7,7 +7,7 @@
 
 .container {
   max-width: 960px;
-  width: 100vw;
+  width: 100%;
   padding: 0 $screen-margin 100px;
   margin: 0 auto;
   justify-content: center;
@@ -51,6 +51,7 @@
 label {
   font-size: 17px;
   margin-bottom: 11px;
+
   :not(:last-of-type) {
     text-transform: capitalize;
   }
@@ -150,8 +151,7 @@ button {
   margin: 0 auto;
   background: white;
   border: none;
-  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302),
-    0 1px 3px 1px rgba(60, 64, 67, 0.149);
+  border: 1px solid lightgrey;
 
   padding: 20px;
   width: 220px;
@@ -159,11 +159,13 @@ button {
   border-radius: 50%;
   line-height: 32px;
   font-size: 24px;
+  transition: all 0.2 ease;
   cursor: pointer;
 
-  &:hover {
+  &:hover:not(:disabled) {
     outline: none;
-    background: rgba(#d4d4d4, 0.6);
+    background: $button-hover;
+    color: white;
   }
 
   &:disabled {
@@ -387,7 +389,7 @@ button {
   pointer-events: none;
 }
 .control__indicator:after {
-  content: "";
+  content: '';
   position: absolute;
   display: none;
 }
@@ -417,4 +419,9 @@ button {
 }
 .control--radio input:disabled ~ .control__indicator:after {
   background: #7b7b7b;
+}
+
+label span {
+  transform: translateY(3px);
+  display: block;
 }

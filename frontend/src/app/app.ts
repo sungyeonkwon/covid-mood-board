@@ -1,8 +1,8 @@
 import {DOCUMENT, ViewportScroller} from '@angular/common';
 import {Component, Inject, OnDestroy} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
-import {BehaviorSubject, fromEvent, ReplaySubject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {BehaviorSubject, fromEvent, Observable, ReplaySubject} from 'rxjs';
+import {map, takeUntil, tap} from 'rxjs/operators';
 import {BREAKPOINT, StyleService} from 'src/shared/style_service';
 import {UserService} from 'src/shared/user_service';
 
@@ -25,12 +25,14 @@ export class AppComponent implements OnDestroy {
   private readonly destroy$ = new ReplaySubject<void>(1);
 
   words$ = this.userService.fetchWords();
+  count$ = this.userService.fetchCount();
 
   constructor(
       @Inject(DOCUMENT) private readonly document: Document,
       private readonly router: Router,
       readonly styleService: StyleService,
       readonly userService: UserService,
+      private readonly activatedRoute: ActivatedRoute,
       private readonly viewportScroller: ViewportScroller,
   ) {
     this.router.events.subscribe((event: any) => {

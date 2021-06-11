@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 section {
   width: 100%;
@@ -16,7 +16,7 @@ section {
   top: calc(#{$screen-margin} + 60px);
 
   @media screen and (max-width: 749px) {
-    bottom: $screen-margin;
+    bottom: $mobile-logo-height + $screen-margin;
     left: unset;
     top: unset;
     right: $screen-margin;
@@ -28,7 +28,7 @@ section {
   height: 50px;
   cursor: pointer;
   margin-top: 10px;
-  border: solid 1px $black;
+  border: none;
   background: $black;
   display: flex;
   justify-content: center;
@@ -36,6 +36,14 @@ section {
   padding: 0;
   touch-action: manipulation;
   border-radius: 50%;
+
+  &:hover {
+    background: white;
+
+    svg {
+      fill: $black;
+    }
+  }
 }
 
 svg {
@@ -47,7 +55,7 @@ svg {
 .legend {
   position: fixed;
   left: 0;
-  bottom: 0;
+  bottom: $mobile-logo-height;
   padding: 20px;
 
   a {
@@ -85,7 +93,7 @@ svg {
 
     .percentage {
       margin-left: 3px;
-      opacity: .5;
+      opacity: 0.5;
     }
 
     @media screen and (max-width: $mobile) {

@@ -19,7 +19,9 @@ const HEADERS = new HttpHeaders({
 export class UserService {
   private readonly users$ = this.fetchUsers();
   private readonly words$ = this.fetchWords();
+
   shouldFetchNew = false;
+
   constructor(
       private readonly http: HttpClient,
   ) {}
@@ -45,6 +47,11 @@ export class UserService {
   // TODO: add filtering query with query params
   fetchWords(): Observable<User[]> {
     return this.http.get<any>(`${environment.baseApi}/words`)
+        .pipe(first(), shareReplay(1));
+  }
+
+  fetchCount(): Observable<User[]> {
+    return this.http.get<any>(`${environment.baseApi}/count`)
         .pipe(first(), shareReplay(1));
   }
 }
