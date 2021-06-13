@@ -4,6 +4,8 @@
   display: block;
   height: 100%;
   min-height: 100vh;
+  /* Mobile viewport bug fix on iOS. */
+  min-height: -webkit-fill-available;
   width: 100%;
 }
 
